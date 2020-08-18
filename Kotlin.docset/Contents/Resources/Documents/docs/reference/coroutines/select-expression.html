@@ -1,0 +1,1902 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=1000, initial-scale=1">
+
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-5W8DZRW');</script>
+<!-- End Google Tag Manager -->
+
+<link rel="dns-prefetch" href="http://fonts.googleapis.com/">
+<link rel="dns-prefetch" href="http://fonts.gstatic.com/">
+<link rel="dns-prefetch" href="http://resources.jetbrains.com/">
+
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<link rel="Shortcut Icon" href="../../../assets/images/favicon.ico" type="image/x-icon"/>
+<link rel="apple-touch-icon" href="http://www.kotlincn.net/assets/images/apple-touch-icon.png"/>
+<link rel="apple-touch-icon" sizes="72x72"
+      href="http://www.kotlincn.net/assets/images/apple-touch-icon-72x72.png"/>
+<link rel="apple-touch-icon" sizes="114x114"
+      href="http://www.kotlincn.net/assets/images/apple-touch-icon-114x114.png"/>
+<link rel="apple-touch-icon" sizes="144x144"
+      href="http://www.kotlincn.net/assets/images/apple-touch-icon-144x144.png"/>
+
+<!-- Social Media tag Starts -->
+<!-- Place this data between the <head> tags of your website -->
+<!-- Open Graph data -->
+<meta property="og:title" content=""/>
+<meta property="og:type" content="website"/>
+<meta property="og:url" content="https://www.kotlincn.net/docs/reference/coroutines/select-expression.html"/>
+<meta property="og:image" content="https://www.kotlincn.net/assets/images/open-graph/kotlin_250x250.png"/>
+    <meta property="og:description" content="">
+<meta property="og:site_name" content="Kotlin"/>
+
+<!-- Twitter Card data -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@kotlin">
+<meta name="twitter:title" content="">
+    <meta name="twitter:description" content="">
+<meta name="twitter:image:src" content="https://www.kotlincn.net/assets/images/twitter-card/kotlin_800x320.png">
+<!-- Social Media tag Ends -->
+
+
+<link rel="stylesheet" href="../../../_assets/styles.css?&amp;v=e44e3d4fd9246ec9985fe88b4baf2a72">    <link rel="stylesheet" href="../../../_assets/reference.css?&amp;v=9377ef31169c8f79145bb4c173c29b34">
+
+
+    <title>Select 表达式（实验性的） - Kotlin 语言中文站</title>
+
+    <link rel="stylesheet" href="../../../_assets/common.css?&amp;v=9e6fbfc1663315f135a0fd5e146c021a"/>
+</head>
+<body class=" page-old-styled ">
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5W8DZRW" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+<div class="global-layout">
+    <div class="global-header-panel banner-nav">
+        <div class="g-layout">
+<div class="global-nav banner-container">
+    <a class="banner-text" href="https://item.jd.com/12898592.html" target="_blank">
+        <div class="banner-item title">
+            新书上架：《深入理解Kotlin协程》（中文社区负责人霍丙乾著）
+        </div>
+        <div class="banner-item underline">
+            立即购买
+        </div>
+    </a>
+    <div class="close-head-banner"></div>
+</div>        </div>
+    </div>
+<header class="global-header">
+    <div class="global-header-panel">
+        <div class="g-layout" data-nosnippet="true">
+            <a class="global-header-logo" href="http://www.kotlincn.net/">Kotlin</a> <a href="https://github.com/JetBrains/kotlin/releases/tag/v1.3.72" target="_blank" class="global-header-logo__version">v1.3.72</a>
+<nav class="global-nav">
+    <div class="nav-links">
+            <a href="https://www.kotliner.cn/" class="nav-item  nav-item-external" target="_blank" >
+                博客
+            </a>
+            <a href="https://discuss.kotliner.cn/" class="nav-item  nav-item-external" target="_blank" >
+                论坛
+            </a>
+            <a href="../index.html" class="nav-item ">
+                学习
+            </a>
+            <a href="http://www.kotlincn.net/community/" class="nav-item ">
+                社区
+            </a>
+            <a href="http://www.kotlincn.net/education/" class="nav-item ">
+                教学
+            </a>
+            <a href="https://play.kotlinlang.org" class="nav-item  nav-item-external" target="_blank" >
+                演练
+            </a>
+    </div>
+    <div class="search-button">
+        <div class="icon"></div>
+    </div>
+</nav>        </div>
+    </div>
+</header>        <div class="g-layout global-content">
+            <nav class="docs-nav-new">
+                <div class="kto-tabs">
+                        <a class="kto-tabs__item kto-tabs__item_active" href="../index.html">语言指南</a>
+                        <a class="kto-tabs__item" href="http://www.kotlincn.net/docs/tutorials/">教程</a>
+                        <a class="kto-tabs__item" href="http://www.kotlincn.net/docs/books.html">图书</a>
+                </div>
+            </nav>
+
+    <div class="g-grid">
+
+        <aside class="g-3">
+            <div class="js-side-tree-nav">
+                    <nav class="side-tree-nav">
+                <div class="tree-item tree-branch js-item js-branch _opened"
+         data-id="概述">
+
+        <div class="tree-item-title tree-branch-title js-item-title js-branch-title is_active">
+            <div class="marker"></div>
+            <div class="text">概述</div>
+        </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../server-overview.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">Kotlin 用于服务器端开发</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../android-overview.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">Kotlin 用于 Android 开发</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../js-overview.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">Kotlin 用于 JavaScript 开发</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../native-overview.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">Kotlin 用于原生开发</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../data-science-overview.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">Kotlin 用于数据科学</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../coroutines-overview.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">协程</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../multiplatform.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">多平台</span>
+            </a>
+    </div>
+
+    </div>
+
+                <div class="tree-item tree-branch js-item js-branch _opened"
+         data-id="新特性">
+
+        <div class="tree-item-title tree-branch-title js-item-title js-branch-title is_active">
+            <div class="marker"></div>
+            <div class="text">新特性</div>
+        </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../whatsnew13.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">1.3 的新特性</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../whatsnew12.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">1.2 的新特性</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../whatsnew11.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">1.1 的新特性</span>
+            </a>
+    </div>
+
+    </div>
+
+                <div class="tree-item tree-branch js-item js-branch _opened"
+         data-id="开始">
+
+        <div class="tree-item-title tree-branch-title js-item-title js-branch-title is_active">
+            <div class="marker"></div>
+            <div class="text">开始</div>
+        </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../basic-syntax.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">基本语法</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../idioms.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">习惯用法</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../coding-conventions.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">编码规范</span>
+            </a>
+    </div>
+
+    </div>
+
+                <div class="tree-item tree-branch js-item js-branch _opened"
+         data-id="基础">
+
+        <div class="tree-item-title tree-branch-title js-item-title js-branch-title is_active">
+            <div class="marker"></div>
+            <div class="text">基础</div>
+        </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../basic-types.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">基本类型</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../packages.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">包与导入</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../control-flow.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">控制流</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../returns.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">返回与跳转</span>
+            </a>
+    </div>
+
+    </div>
+
+                <div class="tree-item tree-branch js-item js-branch _opened"
+         data-id="类与对象">
+
+        <div class="tree-item-title tree-branch-title js-item-title js-branch-title is_active">
+            <div class="marker"></div>
+            <div class="text">类与对象</div>
+        </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../classes.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">类与继承</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../properties.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">属性与字段</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../interfaces.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">接口</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../visibility-modifiers.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">可见性修饰符</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../extensions.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">扩展</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../data-classes.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">数据类</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../sealed-classes.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">密封类</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../generics.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">泛型</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../nested-classes.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">嵌套类</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../enum-classes.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">枚举类</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../object-declarations.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">对象</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../type-aliases.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">类型别名</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../inline-classes.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">内联类</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../delegation.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">委托</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../delegated-properties.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">委托属性</span>
+            </a>
+    </div>
+
+    </div>
+
+                <div class="tree-item tree-branch js-item js-branch _opened"
+         data-id="函数与 Lambda 表达式">
+
+        <div class="tree-item-title tree-branch-title js-item-title js-branch-title is_active">
+            <div class="marker"></div>
+            <div class="text">函数与 Lambda 表达式</div>
+        </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../functions.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">函数</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../lambdas.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">Lambda 表达式</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../inline-functions.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">内联函数</span>
+            </a>
+    </div>
+
+    </div>
+
+                <div class="tree-item tree-branch js-item js-branch _opened"
+         data-id="集合">
+
+        <div class="tree-item-title tree-branch-title js-item-title js-branch-title is_active">
+            <div class="marker"></div>
+            <div class="text">集合</div>
+        </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../collections-overview.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">集合概述</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../constructing-collections.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">构造集合</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../iterators.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">迭代器</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../ranges.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">区间与数列</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../sequences.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">序列</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../collection-operations.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">操作概述</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../collection-transformations.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">转换</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../collection-filtering.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">过滤</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../collection-plus-minus.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">加减操作符</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../collection-grouping.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">分组</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../collection-parts.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">取集合的一部分</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../collection-elements.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">取单个元素</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../collection-ordering.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">排序</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../collection-aggregate.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">聚合操作</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../collection-write.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">集合写操作</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../list-operations.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">List 相关操作</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../set-operations.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">Set 相关操作</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../map-operations.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">Map 相关操作</span>
+            </a>
+    </div>
+
+    </div>
+
+                <div class="tree-item tree-branch js-item js-branch _opened"
+         data-id="协程">
+
+        <div class="tree-item-title tree-branch-title js-item-title js-branch-title is_active">
+            <div class="marker"></div>
+            <div class="text">协程</div>
+        </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="coroutines-guide.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">协程指南</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="basics.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">基础</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="cancellation-and-timeouts.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">取消与超时</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="composing-suspending-functions.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">组合挂起函数</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="coroutine-context-and-dispatchers.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">协程上下文与调度器</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="flow.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">异步流</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="channels.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">通道</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="exception-handling.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">异常处理与监督</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="shared-mutable-state-and-concurrency.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">共享的可变状态与并发</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <div class="tree-item-title tree-leaf-title js-item-title js-leaf-title is_active ">
+                <div class="marker"></div>
+                <div class="text">Select 表达式（实验性的）</div>
+            </div>
+    </div>
+
+    </div>
+
+                <div class="tree-item tree-branch js-item js-branch _opened"
+         data-id="多平台程序设计">
+
+        <div class="tree-item-title tree-branch-title js-item-title js-branch-title is_active">
+            <div class="marker"></div>
+            <div class="text">多平台程序设计</div>
+        </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../platform-specific-declarations.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">平台相关声明</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../building-mpp-with-gradle.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">以 Gradle 构建</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../mpp-dsl-reference.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">多平台 Gradle DSL 参考</span>
+            </a>
+    </div>
+
+    </div>
+
+                <div class="tree-item tree-branch js-item js-branch _opened"
+         data-id="更多语言结构">
+
+        <div class="tree-item-title tree-branch-title js-item-title js-branch-title is_active">
+            <div class="marker"></div>
+            <div class="text">更多语言结构</div>
+        </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../multi-declarations.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">解构声明</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../typecasts.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">类型检测与转换</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../this-expressions.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">This 表达式</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../equality.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">相等性</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../operator-overloading.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">操作符重载</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../null-safety.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">空安全</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../exceptions.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">异常</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../annotations.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">注解</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../reflection.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">反射</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../scope-functions.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">作用域函数</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../type-safe-builders.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">类型安全的构建器</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../opt-in-requirements.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">Opt-in Requirements</span>
+            </a>
+    </div>
+
+    </div>
+
+                <div class="tree-item tree-branch js-item js-branch _opened"
+         data-id="核心库">
+
+        <div class="tree-item-title tree-branch-title js-item-title js-branch-title is_active">
+            <div class="marker"></div>
+            <div class="text">核心库</div>
+        </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="https://kotlinlang.org/api/latest/jvm/stdlib/index.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">标准库</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="https://kotlinlang.org/api/latest/kotlin.test/index.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">kotlin.test</span>
+            </a>
+    </div>
+
+    </div>
+
+                <div class="tree-item tree-branch js-item js-branch _opened"
+         data-id="参考">
+
+        <div class="tree-item-title tree-branch-title js-item-title js-branch-title is_active">
+            <div class="marker"></div>
+            <div class="text">参考</div>
+        </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../keyword-reference.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">关键字与操作符</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../grammar.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">语法</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../code-style-migration-guide.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">编码风格约定</span>
+            </a>
+    </div>
+
+    </div>
+
+                <div class="tree-item tree-branch js-item js-branch _opened"
+         data-id="Java 互操作">
+
+        <div class="tree-item-title tree-branch-title js-item-title js-branch-title is_active">
+            <div class="marker"></div>
+            <div class="text">Java 互操作</div>
+        </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../java-interop.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">Kotlin 中调用 Java</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../java-to-kotlin-interop.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">Java 中调用 Kotlin</span>
+            </a>
+    </div>
+
+    </div>
+
+                <div class="tree-item tree-branch js-item js-branch _opened"
+         data-id="JavaScript">
+
+        <div class="tree-item-title tree-branch-title js-item-title js-branch-title is_active">
+            <div class="marker"></div>
+            <div class="text">JavaScript</div>
+        </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../js-project-setup.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">搭建项目</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../dynamic-type.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">动态类型</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../js-interop.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">Kotlin 中调用 JavaScript</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../js-to-kotlin-interop.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">JavaScript 中调用 Kotlin</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../js-modules.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">JavaScript 模块</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../js-reflection.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">JavaScript 反射</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../javascript-dce.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">JavaScript DCE</span>
+            </a>
+    </div>
+
+    </div>
+
+                <div class="tree-item tree-branch js-item js-branch _opened"
+         data-id="原生">
+
+        <div class="tree-item-title tree-branch-title js-item-title js-branch-title is_active">
+            <div class="marker"></div>
+            <div class="text">原生</div>
+        </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../native/concurrency.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">并发</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../native/immutability.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">不可变性</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../native/libraries.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">Kotlin 库</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../native/platform_libs.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">平台库</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../native/c_interop.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">与 C 语言互操作</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../native/objc_interop.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">与 Objective-C 及 Swift 互操作</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../native/cocoapods.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">CocoaPods 集成</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../native/gradle_plugin.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">Gradle 插件</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../native/debugging.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">调试</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../native/faq.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">FAQ</span>
+            </a>
+    </div>
+
+    </div>
+
+                <div class="tree-item tree-branch js-item js-branch _opened"
+         data-id="工具">
+
+        <div class="tree-item-title tree-branch-title js-item-title js-branch-title is_active">
+            <div class="marker"></div>
+            <div class="text">工具</div>
+        </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../using-gradle.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">Gradle</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../using-maven.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">Maven</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../using-ant.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">Ant</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../compiler-reference.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">编译器选项</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../compiler-plugins.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">编译器插件</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../kapt.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">Kapt</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../kotlin-doc.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">Dokka</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../kotlin-osgi.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">OSGi</span>
+            </a>
+    </div>
+
+    </div>
+
+                <div class="tree-item tree-branch js-item js-branch _opened"
+         data-id="演进">
+
+        <div class="tree-item-title tree-branch-title js-item-title js-branch-title is_active">
+            <div class="marker"></div>
+            <div class="text">演进</div>
+        </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../evolution/kotlin-evolution.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">Kotlin 语言演进</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../evolution/components-stability.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">不同组件的稳定性</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../compatibility-guide-13.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">Kotlin 1.3 的兼容性指南</span>
+            </a>
+    </div>
+
+    </div>
+
+                <div class="tree-item tree-branch js-item js-branch _opened"
+         data-id="常见问题">
+
+        <div class="tree-item-title tree-branch-title js-item-title js-branch-title is_active">
+            <div class="marker"></div>
+            <div class="text">常见问题</div>
+        </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../faq.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">FAQ</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../comparison-to-java.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">与 Java 比较</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../comparison-to-scala.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">与 Scala 比较【官方已删除】</span>
+            </a>
+    </div>
+
+    </div>
+
+    </nav>
+
+
+                <ul>
+                  <li><a href="http://www.kotlincn.net/docs/kotlin-docs.pdf" class="reference-pdf-link">
+                    <span class="icon"></span>
+                    <span class="text">完整 Kotlin 参考（PDF）</span>
+                  </a></li>
+                  <li><a href="https://www.gitbook.com/download/pdf/book/hltj/kotlin-reference-chinese" class="reference-pdf-link">
+                    <span class="icon"></span>
+                    <span class="text">完整 Kotlin 参考（字大PDF）</span>
+                  </a></li>
+                  <li><a href="https://www.gitbook.com/download/epub/book/hltj/kotlin-reference-chinese" class="reference-pdf-link">
+                    <span class="icon"></span>
+                    <span class="text">完整 Kotlin 参考（ePUB）</span>
+                  </a></li>
+                  <li><a href="https://www.gitbook.com/download/mobi/book/hltj/kotlin-reference-chinese" class="reference-pdf-link">
+                    <span class="icon"></span>
+                    <span class="text">完整 Kotlin 参考（Mobi）</span>
+                  </a></li>
+                </ul>
+            </div>
+        </aside>
+
+        <article role="main" class="page-content g-9">
+<a href="https://github.com/hltj/kotlinx.coroutines-cn/edit/master/docs/select-expression.md"
+   class="page-link-to-github"
+   target="_blank"
+   title="在 GitHub 上编辑本页">
+        <i class="github-icon"></i>
+        <span class="text">改进翻译</span>
+</a>
+                
+<!--- TEST_NAME SelectGuideTest -->
+<p class="typo-para"><strong class="typo-strong">目录</strong></p>
+<!--- TOC -->
+<ul class="typo-list typo-list_type_simple">
+<li class="typo-list__item"><a class="typo-link" href="select-expression.html#select">select 表达式（实验性的）</a>
+<ul class="typo-list typo-list_type_simple">
+<li class="typo-list__item"><a class="typo-link" href="select-expression.html#在通道中-select">在通道中 select</a></li>
+<li class="typo-list__item"><a class="typo-link" href="select-expression.html#通道关闭时-select">通道关闭时 select</a></li>
+<li class="typo-list__item"><a class="typo-link" href="select-expression.html#select-以发送">Select 以发送</a></li>
+<li class="typo-list__item"><a class="typo-link" href="select-expression.html#select-延迟值">Select 延迟值</a></li>
+<li class="typo-list__item"><a class="typo-link" href="select-expression.html#在延迟值通道上切换">在延迟值通道上切换</a></li>
+</ul>
+</li>
+</ul>
+<!--- END -->
+<h2 class="typo-header typo-h2" id="select">select 表达式（实验性的）</h2>
+<p class="typo-para">select 表达式可以同时等待多个挂起函数，并 <em>选择</em>
+第一个可用的。</p>
+<blockquote class="typo-quote">
+<p class="typo-para">Select 表达式在 <code>kotlinx.coroutines</code> 中是一个实验性的特性。这些 API 在
+<code>kotlinx.coroutines</code> 库即将到来的更新中可能会<!--
+-->发生改变。</p>
+</blockquote>
+<h3 class="typo-header typo-h3" id="在通道中-select">在通道中 select</h3>
+<p class="typo-para">我们现在有两个字符串生产者：<code>fizz</code> 和 <code>buzz</code> 。其中 <code>fizz</code> 每 300 毫秒生成一个“Fizz”字符串：</p>
+<div class="sample" data-highlight-only="" theme="idea">
+<pre><code class="language-kotlin">fun CoroutineScope.fizz() = produce&lt;String&gt; {
+    while (true) { // 每 300 毫秒发送一个 "Fizz"
+        delay(300)
+        send("Fizz")
+    }
+}
+</code></pre>
+</div>
+<p class="typo-para">接着 <code>buzz</code> 每 500 毫秒生成一个 “Buzz!” 字符串：</p>
+<div class="sample" data-highlight-only="" theme="idea">
+<pre><code class="language-kotlin">fun CoroutineScope.buzz() = produce&lt;String&gt; {
+    while (true) { // 每 500 毫秒发送一个"Buzz!"
+        delay(500)
+        send("Buzz!")
+    }
+}
+</code></pre>
+</div>
+<p class="typo-para">使用 <a class="typo-link" href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.channels/-receive-channel/receive.html">receive</a> 挂起函数，我们可以从两个通道接收 <em>其中一个</em> 的数据。
+但是 <a class="typo-link" href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.selects/select.html">select</a> 表达式允许我们使用其
+<a class="typo-link" href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.channels/-receive-channel/on-receive.html">onReceive</a> 子句 <em>同时</em> 从两者接收：</p>
+<div class="sample" data-highlight-only="" theme="idea">
+<pre><code class="language-kotlin">suspend fun selectFizzBuzz(fizz: ReceiveChannel&lt;String&gt;, buzz: ReceiveChannel&lt;String&gt;) {
+    select&lt;Unit&gt; { // &lt;Unit&gt; 意味着该 select 表达式不返回任何结果
+        fizz.onReceive { value -&gt;  // 这是第一个 select 子句
+            println("fizz -&gt; '$value'")
+        }
+        buzz.onReceive { value -&gt;  // 这是第二个 select 子句
+            println("buzz -&gt; '$value'")
+        }
+    }
+}
+</code></pre>
+</div>
+<p class="typo-para">让我们运行代码 7 次：</p>
+<!--- CLEAR -->
+<div class="sample" data-min-compiler-version="1.3" theme="idea">
+<pre><code class="language-kotlin">import kotlinx.coroutines.*
+import kotlinx.coroutines.channels.*
+import kotlinx.coroutines.selects.*
+
+fun CoroutineScope.fizz() = produce&lt;String&gt; {
+    while (true) { // 每 300 毫秒发送一个 "Fizz"
+        delay(300)
+        send("Fizz")
+    }
+}
+
+fun CoroutineScope.buzz() = produce&lt;String&gt; {
+    while (true) { // 每 500 毫秒发送一个 "Buzz!"
+        delay(500)
+        send("Buzz!")
+    }
+}
+
+suspend fun selectFizzBuzz(fizz: ReceiveChannel&lt;String&gt;, buzz: ReceiveChannel&lt;String&gt;) {
+    select&lt;Unit&gt; { // &lt;Unit&gt; 意味着该 select 表达式不返回任何结果
+        fizz.onReceive { value -&gt;  // 这是第一个 select 子句
+            println("fizz -&gt; '$value'")
+        }
+        buzz.onReceive { value -&gt;  // 这是第二个 select 子句
+            println("buzz -&gt; '$value'")
+        }
+    }
+}
+
+fun main() = runBlocking&lt;Unit&gt; {
+//sampleStart
+    val fizz = fizz()
+    val buzz = buzz()
+    repeat(7) {
+        selectFizzBuzz(fizz, buzz)
+    }
+    coroutineContext.cancelChildren() // 取消 fizz 和 buzz 协程
+//sampleEnd        
+}
+</code></pre>
+</div>
+<blockquote class="typo-quote">
+<p class="typo-para">可以在<a class="typo-link" href="https://github.com/hltj/kotlinx.coroutines-cn/blob/master/kotlinx-coroutines-core/jvm/test/guide/example-select-01.kt">这里</a>获取完整代码。</p>
+</blockquote>
+<p class="typo-para">这段代码的执行结果如下：</p>
+<pre><code class="code _highlighted" data-lang="text/plain">fizz -&gt; 'Fizz'
+buzz -&gt; 'Buzz!'
+fizz -&gt; 'Fizz'
+fizz -&gt; 'Fizz'
+buzz -&gt; 'Buzz!'
+fizz -&gt; 'Fizz'
+buzz -&gt; 'Buzz!'
+</code></pre>
+<!--- TEST -->
+<h3 class="typo-header typo-h3" id="通道关闭时-select">通道关闭时 select</h3>
+<p class="typo-para">select 中的 <a class="typo-link" href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.channels/-receive-channel/on-receive.html">onReceive</a> 子句在已经关闭的通道执行会发生失败，并导致相应的
+<code>select</code> 抛出异常。我们可以使用 <a class="typo-link" href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.channels/on-receive-or-null.html">onReceiveOrNull</a> 子句在关闭通道时执行<!--
+-->特定操作。以下示例还显示了 <code>select</code> 是一个返回<!--
+-->其查询方法结果的表达式：</p>
+<div class="sample" data-highlight-only="" theme="idea">
+<pre><code class="language-kotlin">suspend fun selectAorB(a: ReceiveChannel&lt;String&gt;, b: ReceiveChannel&lt;String&gt;): String =
+    select&lt;String&gt; {
+        a.onReceiveOrNull { value -&gt; 
+            if (value == null) 
+                "Channel 'a' is closed" 
+            else 
+                "a -&gt; '$value'"
+        }
+        b.onReceiveOrNull { value -&gt; 
+            if (value == null) 
+                "Channel 'b' is closed"
+            else    
+                "b -&gt; '$value'"
+        }
+    }
+</code></pre>
+</div>
+<p class="typo-para">注意，<a class="typo-link" href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.channels/on-receive-or-null.html">onReceiveOrNull</a> 是一个仅在用于不可空元素的通道上<!--
+-->定义的扩展函数，以使关闭的通道与空值之间<!--
+-->不会出现意外的混乱。</p>
+<p class="typo-para">现在有一个生成四次“Hello”字符串的 <code>a</code> 通道，
+和一个生成四次“World”字符串的 <code>b</code> 通道，我们在这两个通道上使用它：</p>
+<!--- CLEAR -->
+<div class="sample" data-min-compiler-version="1.3" theme="idea">
+<pre><code class="language-kotlin">import kotlinx.coroutines.*
+import kotlinx.coroutines.channels.*
+import kotlinx.coroutines.selects.*
+
+suspend fun selectAorB(a: ReceiveChannel&lt;String&gt;, b: ReceiveChannel&lt;String&gt;): String =
+    select&lt;String&gt; {
+        a.onReceiveOrNull { value -&gt; 
+            if (value == null) 
+                "Channel 'a' is closed" 
+            else 
+                "a -&gt; '$value'"
+        }
+        b.onReceiveOrNull { value -&gt; 
+            if (value == null) 
+                "Channel 'b' is closed"
+            else    
+                "b -&gt; '$value'"
+        }
+    }
+    
+fun main() = runBlocking&lt;Unit&gt; {
+//sampleStart
+    val a = produce&lt;String&gt; {
+        repeat(4) { send("Hello $it") }
+    }
+    val b = produce&lt;String&gt; {
+        repeat(4) { send("World $it") }
+    }
+    repeat(8) { // 打印最早的八个结果
+        println(selectAorB(a, b))
+    }
+    coroutineContext.cancelChildren()  
+//sampleEnd      
+}    
+</code></pre>
+</div>
+<blockquote class="typo-quote">
+<p class="typo-para">可以在<a class="typo-link" href="https://github.com/hltj/kotlinx.coroutines-cn/blob/master/kotlinx-coroutines-core/jvm/test/guide/example-select-02.kt">这里</a>获取完整代码。</p>
+</blockquote>
+<p class="typo-para">这段代码的结果非常有趣，所以我们将在细节中分析它：</p>
+<pre><code class="code _highlighted" data-lang="text/plain">a -&gt; 'Hello 0'
+a -&gt; 'Hello 1'
+b -&gt; 'World 0'
+a -&gt; 'Hello 2'
+a -&gt; 'Hello 3'
+b -&gt; 'World 1'
+Channel 'a' is closed
+Channel 'a' is closed
+</code></pre>
+<!--- TEST -->
+<p class="typo-para">有几个结果可以通过观察得出。</p>
+<p class="typo-para">首先，<code>select</code> <em>偏向于</em> 第一个子句，当可以同时选到多个子句时，
+第一个子句将被选中。在这里，两个通道都在不断地生成字符串，因此 <code>a</code> 通道<!--
+-->作为 select 中的第一个子句获胜。然而因为我们使用的是无缓冲通道，所以 <code>a</code> 在其调用
+<a class="typo-link" href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.channels/-send-channel/send.html">send</a> 时会不时地被挂起，进而 <code>b</code> 也有机会发送。</p>
+<p class="typo-para">第二个观察结果是，当通道已经关闭时，
+会立即选择 <a class="typo-link" href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.channels/on-receive-or-null.html">onReceiveOrNull</a>。</p>
+<h3 class="typo-header typo-h3" id="select-以发送">Select 以发送</h3>
+<p class="typo-para">Select 表达式具有 <a class="typo-link" href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.channels/-send-channel/on-send.html">onSend</a> 子句，可以很好的与<!--
+-->选择的偏向特性结合使用。</p>
+<p class="typo-para">我们来编写一个整数生成器的示例，当主通道上的<!--
+-->消费者无法跟上它时，它会将值发送到 <code>side</code> 通道上：</p>
+<div class="sample" data-highlight-only="" theme="idea">
+<pre><code class="language-kotlin">fun CoroutineScope.produceNumbers(side: SendChannel&lt;Int&gt;) = produce&lt;Int&gt; {
+    for (num in 1..10) { // 生产从 1 到 10 的 10 个数值
+        delay(100) // 延迟 100 毫秒
+        select&lt;Unit&gt; {
+            onSend(num) {} // 发送到主通道
+            side.onSend(num) {} // 或者发送到 side 通道
+        }
+    }
+}
+</code></pre>
+</div>
+<p class="typo-para">消费者将会非常缓慢，每个数值处理需要 250 毫秒：</p>
+<!--- CLEAR -->
+<div class="sample" data-min-compiler-version="1.3" theme="idea">
+<pre><code class="language-kotlin">import kotlinx.coroutines.*
+import kotlinx.coroutines.channels.*
+import kotlinx.coroutines.selects.*
+
+fun CoroutineScope.produceNumbers(side: SendChannel&lt;Int&gt;) = produce&lt;Int&gt; {
+    for (num in 1..10) { // 生产从 1 到 10 的 10 个数值
+        delay(100) // 延迟 100 毫秒
+        select&lt;Unit&gt; {
+            onSend(num) {} // 发送到主通道
+            side.onSend(num) {} // 或者发送到 side 通道
+        }
+    }
+}
+
+fun main() = runBlocking&lt;Unit&gt; {
+//sampleStart
+    val side = Channel&lt;Int&gt;() // 分配 side 通道
+    launch { // 对于 side 通道来说，这是一个很快的消费者
+        side.consumeEach { println("Side channel has $it") }
+    }
+    produceNumbers(side).consumeEach { 
+        println("Consuming $it")
+        delay(250) // 不要着急，让我们正确消化消耗被发送来的数字
+    }
+    println("Done consuming")
+    coroutineContext.cancelChildren()  
+//sampleEnd      
+}
+</code></pre>
+</div>
+<blockquote class="typo-quote">
+<p class="typo-para">可以在<a class="typo-link" href="https://github.com/hltj/kotlinx.coroutines-cn/blob/master/kotlinx-coroutines-core/jvm/test/guide/example-select-03.kt">这里</a>获取完整代码。</p>
+</blockquote>
+<p class="typo-para">让我们看看会发生什么：</p>
+<pre><code class="code _highlighted" data-lang="text/plain">Consuming 1
+Side channel has 2
+Side channel has 3
+Consuming 4
+Side channel has 5
+Side channel has 6
+Consuming 7
+Side channel has 8
+Side channel has 9
+Consuming 10
+Done consuming
+</code></pre>
+<!--- TEST -->
+<h3 class="typo-header typo-h3" id="select-延迟值">Select 延迟值</h3>
+<p class="typo-para">延迟值可以使用 <a class="typo-link" href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-deferred/on-await.html">onAwait</a> 子句查询。
+让我们启动一个异步函数，它在随机的延迟后<!--
+-->会延迟返回字符串：</p>
+<div class="sample" data-highlight-only="" theme="idea">
+<pre><code class="language-kotlin">fun CoroutineScope.asyncString(time: Int) = async {
+    delay(time.toLong())
+    "Waited for $time ms"
+}
+</code></pre>
+</div>
+<p class="typo-para">让我们随机启动十余个异步函数，每个都延迟随机的时间。</p>
+<div class="sample" data-highlight-only="" theme="idea">
+<pre><code class="language-kotlin">fun CoroutineScope.asyncStringsList(): List&lt;Deferred&lt;String&gt;&gt; {
+    val random = Random(3)
+    return List(12) { asyncString(random.nextInt(1000)) }
+}
+</code></pre>
+</div>
+<p class="typo-para">现在 main 函数在等待第一个函数完成，并统计仍处于<!--
+-->激活状态的延迟值的数量。注意，我们在这里使用 <code>select</code> 表达式事实上是作为一种 Kotlin DSL，
+所以我们可以用任意代码为它提供子句。在这种情况下，我们遍历一个<!--
+-->延迟值的队列，并为每个延迟值提供 <code>onAwait</code> 子句的调用。</p>
+<!--- CLEAR -->
+<div class="sample" data-min-compiler-version="1.3" theme="idea">
+<pre><code class="language-kotlin">import kotlinx.coroutines.*
+import kotlinx.coroutines.selects.*
+import java.util.*
+    
+fun CoroutineScope.asyncString(time: Int) = async {
+    delay(time.toLong())
+    "Waited for $time ms"
+}
+
+fun CoroutineScope.asyncStringsList(): List&lt;Deferred&lt;String&gt;&gt; {
+    val random = Random(3)
+    return List(12) { asyncString(random.nextInt(1000)) }
+}
+
+fun main() = runBlocking&lt;Unit&gt; {
+//sampleStart
+    val list = asyncStringsList()
+    val result = select&lt;String&gt; {
+        list.withIndex().forEach { (index, deferred) -&gt;
+            deferred.onAwait { answer -&gt;
+                "Deferred $index produced answer '$answer'"
+            }
+        }
+    }
+    println(result)
+    val countActive = list.count { it.isActive }
+    println("$countActive coroutines are still active")
+//sampleEnd
+}
+</code></pre>
+</div>
+<blockquote class="typo-quote">
+<p class="typo-para">可以在<a class="typo-link" href="https://github.com/hltj/kotlinx.coroutines-cn/blob/master/kotlinx-coroutines-core/jvm/test/guide/example-select-04.kt">这里</a>获取完整代码。</p>
+</blockquote>
+<p class="typo-para">该输出如下：</p>
+<pre><code class="code _highlighted" data-lang="text/plain">Deferred 4 produced answer 'Waited for 128 ms'
+11 coroutines are still active
+</code></pre>
+<!--- TEST -->
+<h3 class="typo-header typo-h3" id="在延迟值通道上切换">在延迟值通道上切换</h3>
+<p class="typo-para">我们现在来编写一个通道生产者函数，它消费一个产生延迟字符串的通道，并等待每个接收的<!--
+-->延迟值，但它只在下一个延迟值到达或者通道关闭之前处于运行状态。此示例将
+<a class="typo-link" href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.channels/on-receive-or-null.html">onReceiveOrNull</a> 和 <a class="typo-link" href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-deferred/on-await.html">onAwait</a> 子句放在同一个 <code>select</code> 中：</p>
+<div class="sample" data-highlight-only="" theme="idea">
+<pre><code class="language-kotlin">fun CoroutineScope.switchMapDeferreds(input: ReceiveChannel&lt;Deferred&lt;String&gt;&gt;) = produce&lt;String&gt; {
+    var current = input.receive() // 从第一个接收到的延迟值开始
+    while (isActive) { // 循环直到被取消或关闭
+        val next = select&lt;Deferred&lt;String&gt;?&gt; { // 从这个 select 中返回下一个延迟值或 null
+            input.onReceiveOrNull { update -&gt;
+                update // 替换下一个要等待的值
+            }
+            current.onAwait { value -&gt;  
+                send(value) // 发送当前延迟生成的值
+                input.receiveOrNull() // 然后使用从输入通道得到的下一个延迟值
+            }
+        }
+        if (next == null) {
+            println("Channel was closed")
+            break // 跳出循环
+        } else {
+            current = next
+        }
+    }
+}
+</code></pre>
+</div>
+<p class="typo-para">为了测试它，我们将用一个简单的异步函数，它在特定的延迟后返回特定的字符串：</p>
+<div class="sample" data-highlight-only="" theme="idea">
+<pre><code class="language-kotlin">fun CoroutineScope.asyncString(str: String, time: Long) = async {
+    delay(time)
+    str
+}
+</code></pre>
+</div>
+<p class="typo-para">main 函数只是启动一个协程来打印 <code>switchMapDeferreds</code> 的结果并向它发送一些<!--
+-->测试数据：</p>
+<!--- CLEAR -->
+<div class="sample" data-min-compiler-version="1.3" theme="idea">
+<pre><code class="language-kotlin">import kotlinx.coroutines.*
+import kotlinx.coroutines.channels.*
+import kotlinx.coroutines.selects.*
+    
+fun CoroutineScope.switchMapDeferreds(input: ReceiveChannel&lt;Deferred&lt;String&gt;&gt;) = produce&lt;String&gt; {
+    var current = input.receive() // 从第一个接收到的延迟值开始
+    while (isActive) { // 循环直到被取消或关闭
+        val next = select&lt;Deferred&lt;String&gt;?&gt; { // 从这个 select 中返回下一个延迟值或 null
+            input.onReceiveOrNull { update -&gt;
+                update // 替换下一个要等待的值
+            }
+            current.onAwait { value -&gt;  
+                send(value) // 发送当前延迟生成的值
+                input.receiveOrNull() // 然后使用从输入通道得到的下一个延迟值
+            }
+        }
+        if (next == null) {
+            println("Channel was closed")
+            break // 跳出循环
+        } else {
+            current = next
+        }
+    }
+}
+
+fun CoroutineScope.asyncString(str: String, time: Long) = async {
+    delay(time)
+    str
+}
+
+fun main() = runBlocking&lt;Unit&gt; {
+//sampleStart
+    val chan = Channel&lt;Deferred&lt;String&gt;&gt;() // 测试使用的通道
+    launch { // 启动打印协程
+        for (s in switchMapDeferreds(chan)) 
+            println(s) // 打印每个获得的字符串
+    }
+    chan.send(asyncString("BEGIN", 100))
+    delay(200) // 充足的时间来生产 "BEGIN"
+    chan.send(asyncString("Slow", 500))
+    delay(100) // 不充足的时间来生产 "Slow"
+    chan.send(asyncString("Replace", 100))
+    delay(500) // 在最后一个前给它一点时间
+    chan.send(asyncString("END", 500))
+    delay(1000) // 给执行一段时间
+    chan.close() // 关闭通道……
+    delay(500) // 然后等待一段时间来让它结束
+//sampleEnd
+}
+</code></pre>
+</div>
+<blockquote class="typo-quote">
+<p class="typo-para">可以在<a class="typo-link" href="https://github.com/hltj/kotlinx.coroutines-cn/blob/master/kotlinx-coroutines-core/jvm/test/guide/example-select-05.kt">这里</a>获取完整代码。</p>
+</blockquote>
+<p class="typo-para">这段代码的执行结果：</p>
+<pre><code class="code _highlighted" data-lang="text/plain">BEGIN
+Replace
+END
+Channel was closed
+</code></pre>
+<!--- TEST -->
+<!--- MODULE kotlinx-coroutines-core -->
+<!--- INDEX kotlinx.coroutines -->
+<!--- INDEX kotlinx.coroutines.channels -->
+<!--- INDEX kotlinx.coroutines.selects -->
+<!--- END -->
+
+        </article>
+    </div>
+        </div>
+</div>
+
+<footer role="contentinfo" class="global-footer">
+
+    <div class="global-footer-terms">
+        <div class="g-layout">
+            <ul class="terms-social">
+                <li class="terms-social__item terms-social__item_blog">
+                    <a target="_blank" class="link" href="https://blog.jetbrains.com/kotlin/">博客</a>
+                </li>
+                <li class="terms-social__item terms-social__item_forum">
+                    <a target="_blank" class="link" href="https://discuss.kotlinlang.org/">论坛</a>
+                </li>
+                <li class="terms-social__item terms-social__item_bug-tracker">
+                    <a target="_blank" class="link" href="https://youtrack.jetbrains.com/issues/KT">问题跟踪</a>
+                </li>
+                <li class="terms-social__item terms-social__item_github">
+                    <a target="_blank" class="link" href="https://github.com/JetBrains/kotlin">GitHub</a>
+                </li>
+                <li class="terms-social__item terms-social__item_twitter">
+                    <a target="_blank" class="link" href="https://twitter.com/kotlin">Twitter</a>
+                </li>
+            </ul>
+            <div class="global-footer-container">
+                <div class="global-footer-row-left">
+                        <p class="terms-para"><a class="terms-kit"
+                              href="http://www.kotlincn.net/contribute.html">为 Kotlin 做贡献</a></p>
+                    <p class="terms-para"><a class="terms-kit"
+                                             href="http://www.kotlincn.net/eap/">抢先体验预览</a></p>
+                    <p class="terms-para"><a class="terms-kit"
+                                             href="http://www.kotlincn.net/security.html">安全性</a></p>
+                        <p class="terms-para"><a class="terms-kit"
+                              href="http://www.kotlincn.net/assets/kotlin-media-kit.pdf">宣传资料</a></p>
+                    <div class="terms-copyright">
+                        采用 <a href="https://github.com/JetBrains/kotlin-web-site/blob/master/LICENSE">Apache
+                        2
+                        授权许可</a>
+                    </div>
+
+                    <div class="terms-foundation">
+                        Kotlin 商标受 <a
+                            href="http://www.kotlincn.net/foundation/kotlin-foundation.html">Kotlin 基金会</a>保护
+                    </div>
+                </div>
+                <div class="global-footer-row-right">
+                    <div class="terms-sponsor">
+                        Kotlin 语言与 Kotlin 官方英文站由 <a href="http://jetbrains.com" class="sponsor sponsor_jetbrains jetbrains-logo _logo-jetbrains"
+                                                      target="_blank">JetBrains</a> 赞助及开发；
+                    </div>
+                    <div class="terms-sponsor">
+                        本站由<a href="https://hltj.me/" class="testimonial-company-link" target="_blank" rel="nofollow">灰蓝天际</a>、
+                        <a href="http://tanfujun.com" class="testimonial-company-link" target="_blank" rel="nofollow">晓_晨DEV</a>、
+                        <a href="https://github.com/qiaoyuang" class="testimonial-company-link" target="_blank" rel="nofollow">乔禹昂</a>、
+                        <a href="https://github.com/SpielbergGao" class="testimonial-company-link" target="_blank" rel="nofollow">高金龙</a>、
+                        <a href="https://github.com/HoshinoTented" class="testimonial-company-link" target="_blank" rel="nofollow">HoshinoTented</a>、
+                        <a href="https://www.liuwj.me" class="testimonial-company-link" target="_blank" rel="nofollow">刘文俊</a>、
+                        <a href="https://github.com/Hiwensen" class="testimonial-company-link" target="_blank" rel="nofollow">常少威</a>、
+                        <a href="https://github.com/Yue-plus" class="testimonial-company-link" target="_blank" rel="nofollow">Yue-plus</a>、
+                        <a href="https://github.com/Guolianxing" class="testimonial-company-link" target="_blank" rel="nofollow">Guolianxing</a>
+                        &nbsp;<a href="http://www.kotlincn.net/contribute.html#中文站翻译贡献者" class="testimonial-company-link" target="_blank" rel="nofollow">等</a>译
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</footer><div class="search-popup _hidden" tabindex="1000">
+    <div class="search-popup__content">
+        <div class="search-popup__controls">
+            <div class="search-popup__input"></div>
+            <div class="search-popup__close">
+                <div class="search-popup__close-icon-wrapper">
+                    <div class="search-popup__close-icon"></div>
+                </div>
+                <div class="search-popup__close-text">esc</div>
+            </div>
+        </div>
+        <div class="search-popup__results"></div>
+    </div>
+</div>
+<script src="../../../_assets/common.js?&amp;v=02aab4e0a4be79567299335059fe4adc"></script>
+    <script src="../../../_assets/reference.js?&amp;v=42db5638a201ca172b1b2d12bd88c10c"></script>
+</body>
+</html>

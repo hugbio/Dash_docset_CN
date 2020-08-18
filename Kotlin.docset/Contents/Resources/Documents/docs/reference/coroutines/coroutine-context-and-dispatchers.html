@@ -1,0 +1,2015 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=1000, initial-scale=1">
+
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-5W8DZRW');</script>
+<!-- End Google Tag Manager -->
+
+<link rel="dns-prefetch" href="http://fonts.googleapis.com/">
+<link rel="dns-prefetch" href="http://fonts.gstatic.com/">
+<link rel="dns-prefetch" href="http://resources.jetbrains.com/">
+
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<link rel="Shortcut Icon" href="../../../assets/images/favicon.ico" type="image/x-icon"/>
+<link rel="apple-touch-icon" href="http://www.kotlincn.net/assets/images/apple-touch-icon.png"/>
+<link rel="apple-touch-icon" sizes="72x72"
+      href="http://www.kotlincn.net/assets/images/apple-touch-icon-72x72.png"/>
+<link rel="apple-touch-icon" sizes="114x114"
+      href="http://www.kotlincn.net/assets/images/apple-touch-icon-114x114.png"/>
+<link rel="apple-touch-icon" sizes="144x144"
+      href="http://www.kotlincn.net/assets/images/apple-touch-icon-144x144.png"/>
+
+<!-- Social Media tag Starts -->
+<!-- Place this data between the <head> tags of your website -->
+<!-- Open Graph data -->
+<meta property="og:title" content=""/>
+<meta property="og:type" content="website"/>
+<meta property="og:url" content="https://www.kotlincn.net/docs/reference/coroutines/coroutine-context-and-dispatchers.html"/>
+<meta property="og:image" content="https://www.kotlincn.net/assets/images/open-graph/kotlin_250x250.png"/>
+    <meta property="og:description" content="">
+<meta property="og:site_name" content="Kotlin"/>
+
+<!-- Twitter Card data -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@kotlin">
+<meta name="twitter:title" content="">
+    <meta name="twitter:description" content="">
+<meta name="twitter:image:src" content="https://www.kotlincn.net/assets/images/twitter-card/kotlin_800x320.png">
+<!-- Social Media tag Ends -->
+
+
+<link rel="stylesheet" href="../../../_assets/styles.css?&amp;v=e44e3d4fd9246ec9985fe88b4baf2a72">    <link rel="stylesheet" href="../../../_assets/reference.css?&amp;v=9377ef31169c8f79145bb4c173c29b34">
+
+
+    <title>协程上下文与调度器 - Kotlin 语言中文站</title>
+
+    <link rel="stylesheet" href="../../../_assets/common.css?&amp;v=9e6fbfc1663315f135a0fd5e146c021a"/>
+</head>
+<body class=" page-old-styled ">
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5W8DZRW" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+<div class="global-layout">
+    <div class="global-header-panel banner-nav">
+        <div class="g-layout">
+<div class="global-nav banner-container">
+    <a class="banner-text" href="https://item.jd.com/12898592.html" target="_blank">
+        <div class="banner-item title">
+            新书上架：《深入理解Kotlin协程》（中文社区负责人霍丙乾著）
+        </div>
+        <div class="banner-item underline">
+            立即购买
+        </div>
+    </a>
+    <div class="close-head-banner"></div>
+</div>        </div>
+    </div>
+<header class="global-header">
+    <div class="global-header-panel">
+        <div class="g-layout" data-nosnippet="true">
+            <a class="global-header-logo" href="http://www.kotlincn.net/">Kotlin</a> <a href="https://github.com/JetBrains/kotlin/releases/tag/v1.3.72" target="_blank" class="global-header-logo__version">v1.3.72</a>
+<nav class="global-nav">
+    <div class="nav-links">
+            <a href="https://www.kotliner.cn/" class="nav-item  nav-item-external" target="_blank" >
+                博客
+            </a>
+            <a href="https://discuss.kotliner.cn/" class="nav-item  nav-item-external" target="_blank" >
+                论坛
+            </a>
+            <a href="../index.html" class="nav-item ">
+                学习
+            </a>
+            <a href="http://www.kotlincn.net/community/" class="nav-item ">
+                社区
+            </a>
+            <a href="http://www.kotlincn.net/education/" class="nav-item ">
+                教学
+            </a>
+            <a href="https://play.kotlinlang.org" class="nav-item  nav-item-external" target="_blank" >
+                演练
+            </a>
+    </div>
+    <div class="search-button">
+        <div class="icon"></div>
+    </div>
+</nav>        </div>
+    </div>
+</header>        <div class="g-layout global-content">
+            <nav class="docs-nav-new">
+                <div class="kto-tabs">
+                        <a class="kto-tabs__item kto-tabs__item_active" href="../index.html">语言指南</a>
+                        <a class="kto-tabs__item" href="http://www.kotlincn.net/docs/tutorials/">教程</a>
+                        <a class="kto-tabs__item" href="http://www.kotlincn.net/docs/books.html">图书</a>
+                </div>
+            </nav>
+
+    <div class="g-grid">
+
+        <aside class="g-3">
+            <div class="js-side-tree-nav">
+                    <nav class="side-tree-nav">
+                <div class="tree-item tree-branch js-item js-branch _opened"
+         data-id="概述">
+
+        <div class="tree-item-title tree-branch-title js-item-title js-branch-title is_active">
+            <div class="marker"></div>
+            <div class="text">概述</div>
+        </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../server-overview.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">Kotlin 用于服务器端开发</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../android-overview.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">Kotlin 用于 Android 开发</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../js-overview.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">Kotlin 用于 JavaScript 开发</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../native-overview.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">Kotlin 用于原生开发</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../data-science-overview.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">Kotlin 用于数据科学</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../coroutines-overview.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">协程</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../multiplatform.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">多平台</span>
+            </a>
+    </div>
+
+    </div>
+
+                <div class="tree-item tree-branch js-item js-branch _opened"
+         data-id="新特性">
+
+        <div class="tree-item-title tree-branch-title js-item-title js-branch-title is_active">
+            <div class="marker"></div>
+            <div class="text">新特性</div>
+        </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../whatsnew13.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">1.3 的新特性</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../whatsnew12.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">1.2 的新特性</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../whatsnew11.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">1.1 的新特性</span>
+            </a>
+    </div>
+
+    </div>
+
+                <div class="tree-item tree-branch js-item js-branch _opened"
+         data-id="开始">
+
+        <div class="tree-item-title tree-branch-title js-item-title js-branch-title is_active">
+            <div class="marker"></div>
+            <div class="text">开始</div>
+        </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../basic-syntax.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">基本语法</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../idioms.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">习惯用法</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../coding-conventions.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">编码规范</span>
+            </a>
+    </div>
+
+    </div>
+
+                <div class="tree-item tree-branch js-item js-branch _opened"
+         data-id="基础">
+
+        <div class="tree-item-title tree-branch-title js-item-title js-branch-title is_active">
+            <div class="marker"></div>
+            <div class="text">基础</div>
+        </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../basic-types.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">基本类型</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../packages.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">包与导入</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../control-flow.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">控制流</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../returns.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">返回与跳转</span>
+            </a>
+    </div>
+
+    </div>
+
+                <div class="tree-item tree-branch js-item js-branch _opened"
+         data-id="类与对象">
+
+        <div class="tree-item-title tree-branch-title js-item-title js-branch-title is_active">
+            <div class="marker"></div>
+            <div class="text">类与对象</div>
+        </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../classes.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">类与继承</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../properties.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">属性与字段</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../interfaces.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">接口</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../visibility-modifiers.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">可见性修饰符</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../extensions.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">扩展</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../data-classes.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">数据类</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../sealed-classes.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">密封类</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../generics.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">泛型</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../nested-classes.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">嵌套类</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../enum-classes.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">枚举类</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../object-declarations.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">对象</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../type-aliases.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">类型别名</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../inline-classes.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">内联类</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../delegation.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">委托</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../delegated-properties.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">委托属性</span>
+            </a>
+    </div>
+
+    </div>
+
+                <div class="tree-item tree-branch js-item js-branch _opened"
+         data-id="函数与 Lambda 表达式">
+
+        <div class="tree-item-title tree-branch-title js-item-title js-branch-title is_active">
+            <div class="marker"></div>
+            <div class="text">函数与 Lambda 表达式</div>
+        </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../functions.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">函数</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../lambdas.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">Lambda 表达式</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../inline-functions.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">内联函数</span>
+            </a>
+    </div>
+
+    </div>
+
+                <div class="tree-item tree-branch js-item js-branch _opened"
+         data-id="集合">
+
+        <div class="tree-item-title tree-branch-title js-item-title js-branch-title is_active">
+            <div class="marker"></div>
+            <div class="text">集合</div>
+        </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../collections-overview.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">集合概述</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../constructing-collections.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">构造集合</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../iterators.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">迭代器</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../ranges.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">区间与数列</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../sequences.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">序列</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../collection-operations.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">操作概述</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../collection-transformations.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">转换</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../collection-filtering.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">过滤</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../collection-plus-minus.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">加减操作符</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../collection-grouping.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">分组</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../collection-parts.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">取集合的一部分</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../collection-elements.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">取单个元素</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../collection-ordering.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">排序</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../collection-aggregate.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">聚合操作</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../collection-write.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">集合写操作</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../list-operations.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">List 相关操作</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../set-operations.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">Set 相关操作</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../map-operations.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">Map 相关操作</span>
+            </a>
+    </div>
+
+    </div>
+
+                <div class="tree-item tree-branch js-item js-branch _opened"
+         data-id="协程">
+
+        <div class="tree-item-title tree-branch-title js-item-title js-branch-title is_active">
+            <div class="marker"></div>
+            <div class="text">协程</div>
+        </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="coroutines-guide.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">协程指南</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="basics.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">基础</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="cancellation-and-timeouts.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">取消与超时</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="composing-suspending-functions.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">组合挂起函数</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <div class="tree-item-title tree-leaf-title js-item-title js-leaf-title is_active ">
+                <div class="marker"></div>
+                <div class="text">协程上下文与调度器</div>
+            </div>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="flow.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">异步流</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="channels.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">通道</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="exception-handling.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">异常处理与监督</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="shared-mutable-state-and-concurrency.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">共享的可变状态与并发</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="select-expression.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">Select 表达式（实验性的）</span>
+            </a>
+    </div>
+
+    </div>
+
+                <div class="tree-item tree-branch js-item js-branch _opened"
+         data-id="多平台程序设计">
+
+        <div class="tree-item-title tree-branch-title js-item-title js-branch-title is_active">
+            <div class="marker"></div>
+            <div class="text">多平台程序设计</div>
+        </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../platform-specific-declarations.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">平台相关声明</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../building-mpp-with-gradle.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">以 Gradle 构建</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../mpp-dsl-reference.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">多平台 Gradle DSL 参考</span>
+            </a>
+    </div>
+
+    </div>
+
+                <div class="tree-item tree-branch js-item js-branch _opened"
+         data-id="更多语言结构">
+
+        <div class="tree-item-title tree-branch-title js-item-title js-branch-title is_active">
+            <div class="marker"></div>
+            <div class="text">更多语言结构</div>
+        </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../multi-declarations.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">解构声明</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../typecasts.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">类型检测与转换</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../this-expressions.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">This 表达式</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../equality.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">相等性</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../operator-overloading.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">操作符重载</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../null-safety.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">空安全</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../exceptions.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">异常</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../annotations.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">注解</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../reflection.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">反射</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../scope-functions.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">作用域函数</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../type-safe-builders.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">类型安全的构建器</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../opt-in-requirements.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">Opt-in Requirements</span>
+            </a>
+    </div>
+
+    </div>
+
+                <div class="tree-item tree-branch js-item js-branch _opened"
+         data-id="核心库">
+
+        <div class="tree-item-title tree-branch-title js-item-title js-branch-title is_active">
+            <div class="marker"></div>
+            <div class="text">核心库</div>
+        </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="https://kotlinlang.org/api/latest/jvm/stdlib/index.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">标准库</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="https://kotlinlang.org/api/latest/kotlin.test/index.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">kotlin.test</span>
+            </a>
+    </div>
+
+    </div>
+
+                <div class="tree-item tree-branch js-item js-branch _opened"
+         data-id="参考">
+
+        <div class="tree-item-title tree-branch-title js-item-title js-branch-title is_active">
+            <div class="marker"></div>
+            <div class="text">参考</div>
+        </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../keyword-reference.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">关键字与操作符</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../grammar.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">语法</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../code-style-migration-guide.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">编码风格约定</span>
+            </a>
+    </div>
+
+    </div>
+
+                <div class="tree-item tree-branch js-item js-branch _opened"
+         data-id="Java 互操作">
+
+        <div class="tree-item-title tree-branch-title js-item-title js-branch-title is_active">
+            <div class="marker"></div>
+            <div class="text">Java 互操作</div>
+        </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../java-interop.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">Kotlin 中调用 Java</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../java-to-kotlin-interop.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">Java 中调用 Kotlin</span>
+            </a>
+    </div>
+
+    </div>
+
+                <div class="tree-item tree-branch js-item js-branch _opened"
+         data-id="JavaScript">
+
+        <div class="tree-item-title tree-branch-title js-item-title js-branch-title is_active">
+            <div class="marker"></div>
+            <div class="text">JavaScript</div>
+        </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../js-project-setup.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">搭建项目</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../dynamic-type.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">动态类型</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../js-interop.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">Kotlin 中调用 JavaScript</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../js-to-kotlin-interop.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">JavaScript 中调用 Kotlin</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../js-modules.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">JavaScript 模块</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../js-reflection.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">JavaScript 反射</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../javascript-dce.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">JavaScript DCE</span>
+            </a>
+    </div>
+
+    </div>
+
+                <div class="tree-item tree-branch js-item js-branch _opened"
+         data-id="原生">
+
+        <div class="tree-item-title tree-branch-title js-item-title js-branch-title is_active">
+            <div class="marker"></div>
+            <div class="text">原生</div>
+        </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../native/concurrency.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">并发</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../native/immutability.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">不可变性</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../native/libraries.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">Kotlin 库</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../native/platform_libs.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">平台库</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../native/c_interop.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">与 C 语言互操作</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../native/objc_interop.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">与 Objective-C 及 Swift 互操作</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../native/cocoapods.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">CocoaPods 集成</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../native/gradle_plugin.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">Gradle 插件</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../native/debugging.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">调试</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../native/faq.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">FAQ</span>
+            </a>
+    </div>
+
+    </div>
+
+                <div class="tree-item tree-branch js-item js-branch _opened"
+         data-id="工具">
+
+        <div class="tree-item-title tree-branch-title js-item-title js-branch-title is_active">
+            <div class="marker"></div>
+            <div class="text">工具</div>
+        </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../using-gradle.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">Gradle</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../using-maven.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">Maven</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../using-ant.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">Ant</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../compiler-reference.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">编译器选项</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../compiler-plugins.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">编译器插件</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../kapt.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">Kapt</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../kotlin-doc.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">Dokka</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../kotlin-osgi.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">OSGi</span>
+            </a>
+    </div>
+
+    </div>
+
+                <div class="tree-item tree-branch js-item js-branch _opened"
+         data-id="演进">
+
+        <div class="tree-item-title tree-branch-title js-item-title js-branch-title is_active">
+            <div class="marker"></div>
+            <div class="text">演进</div>
+        </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../evolution/kotlin-evolution.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">Kotlin 语言演进</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../evolution/components-stability.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">不同组件的稳定性</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../compatibility-guide-13.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">Kotlin 1.3 的兼容性指南</span>
+            </a>
+    </div>
+
+    </div>
+
+                <div class="tree-item tree-branch js-item js-branch _opened"
+         data-id="常见问题">
+
+        <div class="tree-item-title tree-branch-title js-item-title js-branch-title is_active">
+            <div class="marker"></div>
+            <div class="text">常见问题</div>
+        </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../faq.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">FAQ</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../comparison-to-java.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">与 Java 比较</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../comparison-to-scala.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">与 Scala 比较【官方已删除】</span>
+            </a>
+    </div>
+
+    </div>
+
+    </nav>
+
+
+                <ul>
+                  <li><a href="http://www.kotlincn.net/docs/kotlin-docs.pdf" class="reference-pdf-link">
+                    <span class="icon"></span>
+                    <span class="text">完整 Kotlin 参考（PDF）</span>
+                  </a></li>
+                  <li><a href="https://www.gitbook.com/download/pdf/book/hltj/kotlin-reference-chinese" class="reference-pdf-link">
+                    <span class="icon"></span>
+                    <span class="text">完整 Kotlin 参考（字大PDF）</span>
+                  </a></li>
+                  <li><a href="https://www.gitbook.com/download/epub/book/hltj/kotlin-reference-chinese" class="reference-pdf-link">
+                    <span class="icon"></span>
+                    <span class="text">完整 Kotlin 参考（ePUB）</span>
+                  </a></li>
+                  <li><a href="https://www.gitbook.com/download/mobi/book/hltj/kotlin-reference-chinese" class="reference-pdf-link">
+                    <span class="icon"></span>
+                    <span class="text">完整 Kotlin 参考（Mobi）</span>
+                  </a></li>
+                </ul>
+            </div>
+        </aside>
+
+        <article role="main" class="page-content g-9">
+<a href="https://github.com/hltj/kotlinx.coroutines-cn/edit/master/docs/coroutine-context-and-dispatchers.md"
+   class="page-link-to-github"
+   target="_blank"
+   title="在 GitHub 上编辑本页">
+        <i class="github-icon"></i>
+        <span class="text">改进翻译</span>
+</a>
+                
+<!--- TEST_NAME DispatcherGuideTest -->
+<p class="typo-para"><strong class="typo-strong">目录</strong></p>
+<!--- TOC -->
+<ul class="typo-list typo-list_type_simple">
+<li class="typo-list__item"><a class="typo-link" href="coroutine-context-and-dispatchers.html#协程上下文与调度器">协程上下文与调度器</a>
+<ul class="typo-list typo-list_type_simple">
+<li class="typo-list__item"><a class="typo-link" href="coroutine-context-and-dispatchers.html#调度器与线程">调度器与线程</a></li>
+<li class="typo-list__item"><a class="typo-link" href="coroutine-context-and-dispatchers.html#非受限调度器-vs-受限调度器">非受限调度器 vs 受限调度器</a></li>
+<li class="typo-list__item"><a class="typo-link" href="coroutine-context-and-dispatchers.html#调试协程与线程">调试协程与线程</a>
+<ul class="typo-list typo-list_type_simple">
+<li class="typo-list__item"><a class="typo-link" href="coroutine-context-and-dispatchers.html#用-idea-调试">用 IDEA 调试</a></li>
+<li class="typo-list__item"><a class="typo-link" href="coroutine-context-and-dispatchers.html#用日志调试">用日志调试</a></li>
+</ul>
+</li>
+<li class="typo-list__item"><a class="typo-link" href="coroutine-context-and-dispatchers.html#在不同线程间跳转">在不同线程间跳转</a></li>
+<li class="typo-list__item"><a class="typo-link" href="coroutine-context-and-dispatchers.html#上下文中的作业">上下文中的作业</a></li>
+<li class="typo-list__item"><a class="typo-link" href="coroutine-context-and-dispatchers.html#子协程">子协程</a></li>
+<li class="typo-list__item"><a class="typo-link" href="coroutine-context-and-dispatchers.html#父协程的职责">父协程的职责</a></li>
+<li class="typo-list__item"><a class="typo-link" href="coroutine-context-and-dispatchers.html#命名协程以用于调试">命名协程以用于调试</a></li>
+<li class="typo-list__item"><a class="typo-link" href="coroutine-context-and-dispatchers.html#组合上下文中的元素">组合上下文中的元素</a></li>
+<li class="typo-list__item"><a class="typo-link" href="coroutine-context-and-dispatchers.html#协程作用域">协程作用域</a></li>
+<li class="typo-list__item"><a class="typo-link" href="coroutine-context-and-dispatchers.html#线程局部数据">线程局部数据</a></li>
+</ul>
+</li>
+</ul>
+<!--- END -->
+<h2 class="typo-header typo-h2" id="协程上下文与调度器">协程上下文与调度器</h2>
+<p class="typo-para">协程总是运行在一些以
+<a class="typo-link" href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/">CoroutineContext</a> 
+类型为代表的上下文中，它们被定义在了 Kotlin 的标准库里。</p>
+<p class="typo-para">协程上下文是各种不同元素的集合。其中主元素是协程中的 <a class="typo-link" href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-job/index.html">Job</a>，
+我们在前面的文档中见过它以及它的调度器，而本文将对它进行介绍。</p>
+<h3 class="typo-header typo-h3" id="调度器与线程">调度器与线程</h3>
+<p class="typo-para">协程上下文包含一个 <em>协程调度器</em> （参见 <a class="typo-link" href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-dispatcher/index.html">CoroutineDispatcher</a>）它确定了哪些线程或与线程<!--
+-->相对应的协程执行。协程调度器可以将协程限制在<!--
+-->一个特定的线程执行，或将它分派到一个线程池，亦或是让它不受限地运行。</p>
+<p class="typo-para">所有的协程构建器诸如 <a class="typo-link" href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/launch.html">launch</a> 和 <a class="typo-link" href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/async.html">async</a> 接收一个可选的
+<a class="typo-link" href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/">CoroutineContext</a> 
+参数，它可以被用来显式的为一个新协程或其它上下文元素指定一个调度器。</p>
+<p class="typo-para">尝试下面的示例：</p>
+<div class="sample" data-min-compiler-version="1.3" theme="idea">
+<pre><code class="language-kotlin">import kotlinx.coroutines.*
+
+fun main() = runBlocking&lt;Unit&gt; {
+//sampleStart
+    launch { // 运行在父协程的上下文中，即 runBlocking 主协程
+        println("main runBlocking      : I'm working in thread ${Thread.currentThread().name}")
+    }
+    launch(Dispatchers.Unconfined) { // 不受限的——将工作在主线程中
+        println("Unconfined            : I'm working in thread ${Thread.currentThread().name}")
+    }
+    launch(Dispatchers.Default) { // 将会获取默认调度器
+        println("Default               : I'm working in thread ${Thread.currentThread().name}")
+    }
+    launch(newSingleThreadContext("MyOwnThread")) { // 将使它获得一个新的线程
+        println("newSingleThreadContext: I'm working in thread ${Thread.currentThread().name}")
+    }
+//sampleEnd    
+}
+</code></pre>
+</div>
+<blockquote class="typo-quote">
+<p class="typo-para">可以在<a class="typo-link" href="https://github.com/hltj/kotlinx.coroutines-cn/blob/master/kotlinx-coroutines-core/jvm/test/guide/example-context-01.kt">这里</a>获取完整代码。</p>
+</blockquote>
+<p class="typo-para">它执行后得到了如下输出（也许顺序会有所不同）：</p>
+<pre><code class="code _highlighted" data-lang="text/plain">Unconfined            : I'm working in thread main
+Default               : I'm working in thread DefaultDispatcher-worker-1
+newSingleThreadContext: I'm working in thread MyOwnThread
+main runBlocking      : I'm working in thread main
+</code></pre>
+<!--- TEST LINES_START_UNORDERED -->
+<p class="typo-para">当调用 <code>launch { …… }</code> 时不传参数，它从启动了它的 <a class="typo-link" href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-scope/index.html">CoroutineScope</a>
+中承袭了上下文（以及调度器）。在这个案例中，它从 <code>main</code> 线程中的 <code>runBlocking</code>
+主协程承袭了上下文。</p>
+<p class="typo-para"><a class="typo-link" href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-dispatchers/-unconfined.html">Dispatchers.Unconfined</a> 是一个特殊的调度器且似乎也运行在 <code>main</code> 线程中，但实际上，
+它是一种不同的机制，这会在后文中讲到。</p>
+<p class="typo-para">当协程在 <a class="typo-link" href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-global-scope/index.html">GlobalScope</a> 中启动时，使用的是由 <a class="typo-link" href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-dispatchers/-default.html">Dispatchers.Default</a> 代表的默认调度器。
+默认调度器使用共享的后台线程池。
+所以 <code>launch(Dispatchers.Default) { …… }</code> 与 <code>GlobalScope.launch { …… }</code> 使用相同的调度器。</p>
+<p class="typo-para"><a class="typo-link" href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/new-single-thread-context.html">newSingleThreadContext</a> 为协程的运行启动了一个线程。
+一个专用的线程是一种非常昂贵的资源。
+在真实的应用程序中两者都必须被释放，当不再需要的时候，使用 <a class="typo-link" href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-executor-coroutine-dispatcher/close.html">close</a>
+函数，或存储在一个顶层变量中使它在整个应用程序中被重用。</p>
+<h3 class="typo-header typo-h3" id="非受限调度器-vs-受限调度器">非受限调度器 vs 受限调度器</h3>
+<p class="typo-para"><a class="typo-link" href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-dispatchers/-unconfined.html">Dispatchers.Unconfined</a> 协程调度器在调用它的线程启动了一个协程，但它仅仅只是运行到<!--
+-->第一个挂起点。挂起后，它恢复线程中的协程，而这完全由<!--
+-->被调用的挂起函数来决定。非受限的调度器非常适用于执行不<!--
+-->消耗 CPU 时间的任务，以及不更新局限于特定线程的任何共享数据（如UI）的协程。</p>
+<p class="typo-para">另一方面，该调度器默认继承了外部的 <a class="typo-link" href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-scope/index.html">CoroutineScope</a>。
+<a class="typo-link" href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/run-blocking.html">runBlocking</a> 协程的默认调度器，特别是，
+当它被限制在了调用者线程时，继承自它将会有效地限制协程<!--
+-->在该线程运行并且具有可预测的 FIFO 调度。</p>
+<div class="sample" data-min-compiler-version="1.3" theme="idea">
+<pre><code class="language-kotlin">import kotlinx.coroutines.*
+
+fun main() = runBlocking&lt;Unit&gt; {
+//sampleStart
+    launch(Dispatchers.Unconfined) { // 非受限的——将和主线程一起工作
+        println("Unconfined      : I'm working in thread ${Thread.currentThread().name}")
+        delay(500)
+        println("Unconfined      : After delay in thread ${Thread.currentThread().name}")
+    }
+    launch { // 父协程的上下文，主 runBlocking 协程
+        println("main runBlocking: I'm working in thread ${Thread.currentThread().name}")
+        delay(1000)
+        println("main runBlocking: After delay in thread ${Thread.currentThread().name}")
+    }
+//sampleEnd    
+}
+</code></pre>
+</div>
+<blockquote class="typo-quote">
+<p class="typo-para">可以在<a class="typo-link" href="https://github.com/hltj/kotlinx.coroutines-cn/blob/master/kotlinx-coroutines-core/jvm/test/guide/example-context-02.kt">这里</a>获取完整代码。</p>
+</blockquote>
+<p class="typo-para">执行后的输出：</p>
+<pre><code class="code _highlighted" data-lang="text/plain">Unconfined      : I'm working in thread main
+main runBlocking: I'm working in thread main
+Unconfined      : After delay in thread kotlinx.coroutines.DefaultExecutor
+main runBlocking: After delay in thread main
+</code></pre>
+<!--- TEST LINES_START -->
+<p class="typo-para">所以，该协程的上下文继承自 <code>runBlocking {...}</code> 协程并在
+<code>main</code> 线程中运行，当 <a class="typo-link" href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/delay.html">delay</a> 函数调用的时候，非受限的那个协程在<!--
+-->默认的执行者线程中恢复执行。</p>
+<blockquote class="typo-quote">
+<p class="typo-para">非受限的调度器是一种高级机制，可以在某些极端情况下提供帮助<!--
+-->而不需要调度协程以便稍后执行或产生不希望的副作用，
+因为某些操作必须立即在协程中执行。
+非受限调度器不应该在通常的代码中使用。</p>
+</blockquote>
+<h3 class="typo-header typo-h3" id="调试协程与线程">调试协程与线程</h3>
+<p class="typo-para">协程可以在一个线程上挂起并在其它线程上恢复。
+如果没有特殊工具，甚至对于一个单线程的调度器也是难以<!--
+-->弄清楚协程在何时何地正在做什么事情。</p>
+<h4 class="typo-header typo-h4" id="用-idea-调试">用 IDEA 调试</h4>
+<p class="typo-para">The Coroutine Debugger of the Kotlin plugin simplifies debugging coroutines in IntelliJ IDEA.</p>
+<blockquote class="typo-quote">
+<p class="typo-para">Debugging works for versions 1.3.8 or later of <code>kotlinx-coroutines-core</code>.</p>
+</blockquote>
+<p class="typo-para">The <strong class="typo-strong">Debug Tool Window</strong> contains a <strong class="typo-strong">Coroutines</strong> tab. In this tab, you can find information about both currently 
+running and suspended coroutines. The coroutines are grouped by the dispatcher they are running on.</p>
+<p class="typo-para"><img alt="Debugging coroutines" class="typo-image" src="../../../assets/externals/docs/reference/coroutines/images/coroutine-debugger.png"/></p>
+<p class="typo-para">You can:</p>
+<ul class="typo-list typo-list_type_simple">
+<li class="typo-list__item">Easily check the state of each coroutine.</li>
+<li class="typo-list__item">See the values of local and captured variables for both running and suspended coroutines.</li>
+<li class="typo-list__item">See a full coroutine creation stack, as well as a call stack inside the coroutine. The stack includes all frames with 
+variable values, even those that would be lost during standard debugging.</li>
+</ul>
+<p class="typo-para">If you need a full report containing the state of each coroutine and its stack, right-click inside the <strong class="typo-strong">Coroutines</strong> tab, and then
+click <strong class="typo-strong">Get Coroutines Dump</strong>.</p>
+<p class="typo-para">Learn more about debugging coroutines in <a class="typo-link" href="https://blog.jetbrains.com/kotlin/2020/07/kotlin-1-4-rc-debugging-coroutines/">this blog post</a>
+and <a class="typo-link" href="https://www.jetbrains.com/help/idea/debug-kotlin-coroutines.html">IntelliJ IDEA documentation</a>.</p>
+<h4 class="typo-header typo-h4" id="用日志调试">用日志调试</h4>
+<p class="typo-para">另一种调试线程应用程序<!--
+-->而不使用协程调试器的方法是让线程在每一个日志文件的日志声明中打印线程的名字。这种特性在日志框架中是<!--
+-->普遍受支持的。但是在使用协程时，单独的线程名称不会给出很多协程上下文信息，所以
+<code>kotlinx.coroutines</code> 包含了调试工具来让它更简单。</p>
+<p class="typo-para">使用 <code>-Dkotlinx.coroutines.debug</code> JVM 参数运行下面的代码：</p>
+<div class="sample" data-min-compiler-version="1.3" theme="idea">
+<pre><code class="language-kotlin">import kotlinx.coroutines.*
+
+fun log(msg: String) = println("[${Thread.currentThread().name}] $msg")
+
+fun main() = runBlocking&lt;Unit&gt; {
+//sampleStart
+    val a = async {
+        log("I'm computing a piece of the answer")
+        6
+    }
+    val b = async {
+        log("I'm computing another piece of the answer")
+        7
+    }
+    log("The answer is ${a.await() * b.await()}")
+//sampleEnd    
+}
+</code></pre>
+</div>
+<blockquote class="typo-quote">
+<p class="typo-para">可以在<a class="typo-link" href="https://github.com/hltj/kotlinx.coroutines-cn/blob/master/kotlinx-coroutines-core/jvm/test/guide/example-context-03.kt">这里</a>获取完整代码。</p>
+</blockquote>
+<p class="typo-para">这里有三个协程，包括 <code>runBlocking</code> 内的主协程 (#1) ，
+以及计算延期的值的另外两个协程 <code>a</code> (#2) 和 <code>b</code> (#3)。
+它们都在 <code>runBlocking</code> 上下文中执行并且被限制在了主线程内。
+这段代码的输出如下：</p>
+<pre><code class="code _highlighted" data-lang="text/plain">[main @coroutine#2] I'm computing a piece of the answer
+[main @coroutine#3] I'm computing another piece of the answer
+[main @coroutine#1] The answer is 42
+</code></pre>
+<!--- TEST FLEXIBLE_THREAD -->
+<p class="typo-para">这个 <code>log</code> 函数在方括号种打印了线程的名字，并且你可以看到它是 <code>main</code>
+线程，并且附带了当前正在其上执行的协程的标识符。这个标识符<!--
+-->在调试模式开启时，将连续分配给所有创建的协程。</p>
+<blockquote class="typo-quote">
+<p class="typo-para">当 JVM 以 <code>-ea</code> 参数配置运行时，调试模式也会开启。
+你可以在 <a class="typo-link" href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-d-e-b-u-g_-p-r-o-p-e-r-t-y_-n-a-m-e.html">DEBUG_PROPERTY_NAME</a> 属性的文档中阅读有关调试工具的更多信息。</p>
+</blockquote>
+<h3 class="typo-header typo-h3" id="在不同线程间跳转">在不同线程间跳转</h3>
+<p class="typo-para">使用 <code>-Dkotlinx.coroutines.debug</code> JVM 参数运行下面的代码（参见<a class="typo-link" href="coroutine-context-and-dispatchers.html#调试协程与线程">调试</a>）：</p>
+<div class="sample" data-min-compiler-version="1.3" theme="idea">
+<pre><code class="language-kotlin">import kotlinx.coroutines.*
+
+fun log(msg: String) = println("[${Thread.currentThread().name}] $msg")
+
+fun main() {
+//sampleStart
+    newSingleThreadContext("Ctx1").use { ctx1 -&gt;
+        newSingleThreadContext("Ctx2").use { ctx2 -&gt;
+            runBlocking(ctx1) {
+                log("Started in ctx1")
+                withContext(ctx2) {
+                    log("Working in ctx2")
+                }
+                log("Back to ctx1")
+            }
+        }
+    }
+//sampleEnd    
+}
+</code></pre>
+</div>
+<blockquote class="typo-quote">
+<p class="typo-para">可以在<a class="typo-link" href="https://github.com/hltj/kotlinx.coroutines-cn/blob/master/kotlinx-coroutines-core/jvm/test/guide/example-context-04.kt">这里</a>获取完整代码。</p>
+</blockquote>
+<p class="typo-para">它演示了一些新技术。其中一个使用 <a class="typo-link" href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/run-blocking.html">runBlocking</a> 来显式指定了一个上下文，并且<!--
+-->另一个使用 <a class="typo-link" href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/with-context.html">withContext</a> 函数来改变协程的上下文，而仍然驻留在相同的<!--
+-->协程中，正如可以在下面的输出中所见到的：</p>
+<pre><code class="code _highlighted" data-lang="text/plain">[Ctx1 @coroutine#1] Started in ctx1
+[Ctx2 @coroutine#1] Working in ctx2
+[Ctx1 @coroutine#1] Back to ctx1
+</code></pre>
+<!--- TEST -->
+<p class="typo-para">注意，在这个例子中，当我们不再需要某个在 <a class="typo-link" href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/new-single-thread-context.html">newSingleThreadContext</a> 中创建的线程的时候，
+它使用了 Kotlin 标准库中的 <code>use</code> 函数来释放该线程。</p>
+<h3 class="typo-header typo-h3" id="上下文中的作业">上下文中的作业</h3>
+<p class="typo-para">协程的 <a class="typo-link" href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-job/index.html">Job</a> 是上下文的一部分，并且可以使用
+<code>coroutineContext [Job]</code> 表达式在上下文中检索它：</p>
+<div class="sample" data-min-compiler-version="1.3" theme="idea">
+<pre><code class="language-kotlin">import kotlinx.coroutines.*
+
+fun main() = runBlocking&lt;Unit&gt; {
+//sampleStart
+    println("My job is ${coroutineContext[Job]}")
+//sampleEnd    
+}
+</code></pre>
+</div>
+<blockquote class="typo-quote">
+<p class="typo-para">可以在<a class="typo-link" href="https://github.com/hltj/kotlinx.coroutines-cn/blob/master/kotlinx-coroutines-core/jvm/test/guide/example-context-05.kt">这里</a>获取完整代码。</p>
+</blockquote>
+<p class="typo-para">在<a class="typo-link" href="coroutine-context-and-dispatchers.html#调试协程与线程">调试模式</a>下，它将输出如下这些信息：</p>
+<pre><code>My job is "coroutine#1":BlockingCoroutine{Active}@6d311334
+</code></pre>
+<!--- TEST lines.size == 1 && lines[0].startsWith("My job is \"coroutine#1\":BlockingCoroutine{Active}@") -->
+<p class="typo-para">请注意，<a class="typo-link" href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-scope/index.html">CoroutineScope</a> 中的 <a class="typo-link" href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/is-active.html">isActive</a> 只是
+<code>coroutineContext[Job]?.isActive == true</code> 的一种方便的快捷方式。</p>
+<h3 class="typo-header typo-h3" id="子协程">子协程</h3>
+<p class="typo-para">当一个协程被其它协程在 <a class="typo-link" href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-scope/index.html">CoroutineScope</a> 中启动的时候，
+它将通过 <a class="typo-link" href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-scope/coroutine-context.html">CoroutineScope.coroutineContext</a> 来承袭上下文，并且<!--
+-->这个新协程的 <a class="typo-link" href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-job/index.html">Job</a> 将会成为<!--
+-->父协程作业的 <em>子</em> 作业。当一个父协程被取消的时候，所有它的子协程<!--
+-->也会被递归的取消。</p>
+<p class="typo-para">然而，当使用 <a class="typo-link" href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-global-scope/index.html">GlobalScope</a> 来启动一个协程时，则新协程的作业没有父作业。
+因此它与这个启动的作用域无关且独立运作。</p>
+<div class="sample" data-min-compiler-version="1.3" theme="idea">
+<pre><code class="language-kotlin">import kotlinx.coroutines.*
+
+fun main() = runBlocking&lt;Unit&gt; {
+//sampleStart
+    // 启动一个协程来处理某种传入请求（request）
+    val request = launch {
+        // 孵化了两个子作业, 其中一个通过 GlobalScope 启动
+        GlobalScope.launch {
+            println("job1: I run in GlobalScope and execute independently!")
+            delay(1000)
+            println("job1: I am not affected by cancellation of the request")
+        }
+        // 另一个则承袭了父协程的上下文
+        launch {
+            delay(100)
+            println("job2: I am a child of the request coroutine")
+            delay(1000)
+            println("job2: I will not execute this line if my parent request is cancelled")
+        }
+    }
+    delay(500)
+    request.cancel() // 取消请求（request）的执行
+    delay(1000) // 延迟一秒钟来看看发生了什么
+    println("main: Who has survived request cancellation?")
+//sampleEnd
+}
+</code></pre>
+</div>
+<blockquote class="typo-quote">
+<p class="typo-para">可以在<a class="typo-link" href="https://github.com/hltj/kotlinx.coroutines-cn/blob/master/kotlinx-coroutines-core/jvm/test/guide/example-context-06.kt">这里</a>获取完整代码。</p>
+</blockquote>
+<p class="typo-para">这段代码的输出如下：</p>
+<pre><code class="code _highlighted" data-lang="text/plain">job1: I run in GlobalScope and execute independently!
+job2: I am a child of the request coroutine
+job1: I am not affected by cancellation of the request
+main: Who has survived request cancellation?
+</code></pre>
+<!--- TEST -->
+<h3 class="typo-header typo-h3" id="父协程的职责">父协程的职责</h3>
+<p class="typo-para">一个父协程总是等待所有的子协程执行结束。父协程并不显式的跟踪<!--
+-->所有子协程的启动，并且不必使用 <a class="typo-link" href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-job/join.html">Job.join</a> 在最后的时候等待它们：</p>
+<div class="sample" data-min-compiler-version="1.3" theme="idea">
+<pre><code class="language-kotlin">import kotlinx.coroutines.*
+
+fun main() = runBlocking&lt;Unit&gt; {
+//sampleStart
+    // 启动一个协程来处理某种传入请求（request）
+    val request = launch {
+        repeat(3) { i -&gt; // 启动少量的子作业
+            launch  {
+                delay((i + 1) * 200L) // 延迟 200 毫秒、400 毫秒、600 毫秒的时间
+                println("Coroutine $i is done")
+            }
+        }
+        println("request: I'm done and I don't explicitly join my children that are still active")
+    }
+    request.join() // 等待请求的完成，包括其所有子协程
+    println("Now processing of the request is complete")
+//sampleEnd
+}
+</code></pre>
+</div>
+<blockquote class="typo-quote">
+<p class="typo-para">可以在<a class="typo-link" href="https://github.com/hltj/kotlinx.coroutines-cn/blob/master/kotlinx-coroutines-core/jvm/test/guide/example-context-07.kt">这里</a>获取完整代码。</p>
+</blockquote>
+<p class="typo-para">结果如下所示：</p>
+<pre><code class="code _highlighted" data-lang="text/plain">request: I'm done and I don't explicitly join my children that are still active
+Coroutine 0 is done
+Coroutine 1 is done
+Coroutine 2 is done
+Now processing of the request is complete
+</code></pre>
+<!--- TEST -->
+<h3 class="typo-header typo-h3" id="命名协程以用于调试">命名协程以用于调试</h3>
+<p class="typo-para">当协程经常打印日志并且你只需要关联来自同一个协程的日志记录时，
+则自动分配的 id 是非常好的。然而，当一个协程与特定请求的处理相关联时<!--
+-->或做一些特定的后台任务，最好将其明确命名以用于调试目的。
+<a class="typo-link" href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-name/index.html">CoroutineName</a> 上下文元素与线程名具有相同的目的。当<a class="typo-link" href="coroutine-context-and-dispatchers.html#调试协程与线程">调试模式</a><!--
+-->开启时，它被包含在正在执行此协程的线程名中。</p>
+<p class="typo-para">下面的例子演示了这一概念：</p>
+<div class="sample" data-min-compiler-version="1.3" theme="idea">
+<pre><code class="language-kotlin">import kotlinx.coroutines.*
+
+fun log(msg: String) = println("[${Thread.currentThread().name}] $msg")
+
+fun main() = runBlocking(CoroutineName("main")) {
+//sampleStart
+    log("Started main coroutine")
+    // 运行两个后台值计算
+    val v1 = async(CoroutineName("v1coroutine")) {
+        delay(500)
+        log("Computing v1")
+        252
+    }
+    val v2 = async(CoroutineName("v2coroutine")) {
+        delay(1000)
+        log("Computing v2")
+        6
+    }
+    log("The answer for v1 / v2 = ${v1.await() / v2.await()}")
+//sampleEnd    
+}
+</code></pre>
+</div>
+<blockquote class="typo-quote">
+<p class="typo-para">可以在<a class="typo-link" href="https://github.com/hltj/kotlinx.coroutines-cn/blob/master/kotlinx-coroutines-core/jvm/test/guide/example-context-08.kt">这里</a>获取完整代码。</p>
+</blockquote>
+<p class="typo-para">程序执行使用了 <code>-Dkotlinx.coroutines.debug</code> JVM 参数，输出如下所示：</p>
+<pre><code class="code _highlighted" data-lang="text/plain">[main @main#1] Started main coroutine
+[main @v1coroutine#2] Computing v1
+[main @v2coroutine#3] Computing v2
+[main @main#1] The answer for v1 / v2 = 42
+</code></pre>
+<!--- TEST FLEXIBLE_THREAD -->
+<h3 class="typo-header typo-h3" id="组合上下文中的元素">组合上下文中的元素</h3>
+<p class="typo-para">有时我们需要在协程上下文中定义多个元素。我们可以使用 <code>+</code> 操作符来实现。
+比如说，我们可以显式指定一个调度器来启动协程并且同时显式指定<!--
+-->一个命名：</p>
+<div class="sample" data-min-compiler-version="1.3" theme="idea">
+<pre><code class="language-kotlin">import kotlinx.coroutines.*
+
+fun main() = runBlocking&lt;Unit&gt; {
+//sampleStart
+    launch(Dispatchers.Default + CoroutineName("test")) {
+        println("I'm working in thread ${Thread.currentThread().name}")
+    }
+//sampleEnd    
+}
+</code></pre>
+</div>
+<blockquote class="typo-quote">
+<p class="typo-para">可以在<a class="typo-link" href="https://github.com/hltj/kotlinx.coroutines-cn/blob/master/kotlinx-coroutines-core/jvm/test/guide/example-context-09.kt">这里</a>获取完整代码。</p>
+</blockquote>
+<p class="typo-para">这段代码使用了 <code>-Dkotlinx.coroutines.debug</code> JVM 参数，输出如下所示：</p>
+<pre><code class="code _highlighted" data-lang="text/plain">I'm working in thread DefaultDispatcher-worker-1 @test#2
+</code></pre>
+<!--- TEST FLEXIBLE_THREAD -->
+<h3 class="typo-header typo-h3" id="协程作用域">协程作用域</h3>
+<p class="typo-para">让我们将关于上下文，子协程以及作业的知识综合在一起。假设我们的应用程序拥有一个<!--
+-->具有生命周期的对象，但这个对象并不是一个协程。举例来说，我们编写了一个 Android 应用程序<!--
+-->并在 Android 的 activity 上下文中启动了一组协程来使用异步操作拉取<!--
+-->并更新数据以及执行动画等等。所有这些协程必须在这个 activity 销毁的时候取消<!--
+-->以避免内存泄漏。当然，我们也可以手动操作上下文与作业，以结合 activity 的生命周期<!--
+-->与它的协程，但是 <code>kotlinx.coroutines</code> 提供了一个封装：<a class="typo-link" href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-scope/index.html">CoroutineScope</a> 的抽象。
+你应该已经熟悉了协程作用域，因为所有的协程构建器都声明为在它之上的扩展。</p>
+<p class="typo-para">我们通过创建一个 <a class="typo-link" href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-scope/index.html">CoroutineScope</a> 实例来管理协程的生命周期，并使它与
+activity 的生命周期相关联。<code>CoroutineScope</code> 可以通过 <a class="typo-link" href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-scope.html">CoroutineScope()</a> 创建或者通过<a class="typo-link" href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-main-scope.html">MainScope()</a>
+工厂函数。前者创建了一个通用作用域，而后者为使用 <a class="typo-link" href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-dispatchers/-main.html">Dispatchers.Main</a> 作为默认调度器的 UI 应用程序
+创建作用域：</p>
+<div class="sample" data-highlight-only="" theme="idea">
+<pre><code class="language-kotlin">class Activity {
+    private val mainScope = MainScope()
+
+    fun destroy() {
+        mainScope.cancel()
+    }
+    // 继续运行……
+</code></pre>
+</div>
+<p class="typo-para">Now, we can launch coroutines in the scope of this <code>Activity</code> using the defined <code>scope</code>.
+For the demo, we launch ten coroutines that delay for a different time:</p>
+<div class="sample" data-highlight-only="" theme="idea">
+<pre><code class="language-kotlin">    // 在 Activity 类中
+    fun doSomething() {
+        // 在示例中启动了 10 个协程，且每个都工作了不同的时长
+        repeat(10) { i -&gt;
+            mainScope.launch {
+                delay((i + 1) * 200L) // 延迟 200 毫秒、400 毫秒、600 毫秒等等不同的时间
+                println("Coroutine $i is done")
+            }
+        }
+    }
+} // Activity 类结束
+</code></pre>
+</div>
+<p class="typo-para">在 main 函数中我们创建 activity，调用测试函数 <code>doSomething</code>，并且在 500 毫秒后销毁这个 activity。
+这取消了从 <code>doSomething</code> 启动的所有协程。我们可以观察到这些是由于在销毁之后，
+即使我们再等一会儿，activity 也不再打印消息。</p>
+<!--- CLEAR -->
+<div class="sample" data-min-compiler-version="1.3" theme="idea">
+<pre><code class="language-kotlin">import kotlinx.coroutines.*
+
+class Activity {
+    private val mainScope = CoroutineScope(Dispatchers.Default) // use Default for test purposes
+    
+    fun destroy() {
+        mainScope.cancel()
+    }
+
+    fun doSomething() {
+        // 在示例中启动了 10 个协程，且每个都工作了不同的时长
+        repeat(10) { i -&gt;
+            mainScope.launch {
+                delay((i + 1) * 200L) // 延迟 200 毫秒、400 毫秒、600 毫秒等等不同的时间
+                println("Coroutine $i is done")
+            }
+        }
+    }
+} // Activity 类结束
+
+fun main() = runBlocking&lt;Unit&gt; {
+//sampleStart
+    val activity = Activity()
+    activity.doSomething() // 运行测试函数
+    println("Launched coroutines")
+    delay(500L) // 延迟半秒钟
+    println("Destroying activity!")
+    activity.destroy() // 取消所有的协程
+    delay(1000) // 为了在视觉上确认它们没有工作
+//sampleEnd    
+}
+</code></pre>
+</div>
+<blockquote class="typo-quote">
+<p class="typo-para">可以在<a class="typo-link" href="https://github.com/hltj/kotlinx.coroutines-cn/blob/master/kotlinx-coroutines-core/jvm/test/guide/example-context-10.kt">这里</a>获取完整代码。</p>
+</blockquote>
+<p class="typo-para">这个示例的输出如下所示：</p>
+<pre><code class="code _highlighted" data-lang="text/plain">Launched coroutines
+Coroutine 0 is done
+Coroutine 1 is done
+Destroying activity!
+</code></pre>
+<!--- TEST -->
+<p class="typo-para">你可以看到，只有前两个协程打印了消息，而另一个协程在
+<code>Activity.destroy()</code> 中单次调用了 <code>job.cancel()</code>。</p>
+<blockquote class="typo-quote">
+<p class="typo-para">注意，Android 在所有具有生命周期的实体中都对协程作用域提供了一等的支持。
+请查看<a class="typo-link" href="https://developer.android.com/topic/libraries/architecture/coroutines#lifecyclescope">相关文档</a>。</p>
+</blockquote>
+<h3 class="typo-header typo-h3" id="线程局部数据">线程局部数据</h3>
+<p class="typo-para">有时，能够将一些线程局部数据传递到协程与协程之间是很方便的。 
+然而，由于它们不受任何特定线程的约束，如果手动完成，可能会导致出现样板代码。</p>
+<p class="typo-para"><a class="typo-link" href="https://docs.oracle.com/javase/8/docs/api/java/lang/ThreadLocal.html"><code>ThreadLocal</code></a>，
+<a class="typo-link" href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/java.lang.-thread-local/as-context-element.html">asContextElement</a> 扩展函数在这里会充当救兵。它创建了额外的上下文元素，
+且保留给定 <code>ThreadLocal</code> 的值，并在每次协程切换其上下文时恢复它。</p>
+<p class="typo-para">它很容易在下面的代码中演示：</p>
+<div class="sample" data-min-compiler-version="1.3" theme="idea">
+<pre><code class="language-kotlin">import kotlinx.coroutines.*
+
+val threadLocal = ThreadLocal&lt;String?&gt;() // 声明线程局部变量
+
+fun main() = runBlocking&lt;Unit&gt; {
+//sampleStart
+    threadLocal.set("main")
+    println("Pre-main, current thread: ${Thread.currentThread()}, thread local value: '${threadLocal.get()}'")
+    val job = launch(Dispatchers.Default + threadLocal.asContextElement(value = "launch")) {
+        println("Launch start, current thread: ${Thread.currentThread()}, thread local value: '${threadLocal.get()}'")
+        yield()
+        println("After yield, current thread: ${Thread.currentThread()}, thread local value: '${threadLocal.get()}'")
+    }
+    job.join()
+    println("Post-main, current thread: ${Thread.currentThread()}, thread local value: '${threadLocal.get()}'")
+//sampleEnd    
+}
+</code></pre>
+</div>
+<blockquote class="typo-quote">
+<p class="typo-para">可以在<a class="typo-link" href="https://github.com/hltj/kotlinx.coroutines-cn/blob/master/kotlinx-coroutines-core/jvm/test/guide/example-context-11.kt">这里</a>获取完整代码。</p>
+</blockquote>
+<p class="typo-para">在这个例子中我们使用 <a class="typo-link" href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-dispatchers/-default.html">Dispatchers.Default</a> 在后台线程池中启动了一个新的协程，所以<!--
+-->它工作在线程池中的不同线程中，但它仍然具有线程局部变量的值，
+我们指定使用 <code>threadLocal.asContextElement(value = "launch")</code>，
+无论协程执行在哪个线程中都是没有问题的。
+因此，其输出如（<a class="typo-link" href="coroutine-context-and-dispatchers.html#调试协程与线程">调试</a>）所示：</p>
+<pre><code class="code _highlighted" data-lang="text/plain">Pre-main, current thread: Thread[main @coroutine#1,5,main], thread local value: 'main'
+Launch start, current thread: Thread[DefaultDispatcher-worker-1 @coroutine#2,5,main], thread local value: 'launch'
+After yield, current thread: Thread[DefaultDispatcher-worker-2 @coroutine#2,5,main], thread local value: 'launch'
+Post-main, current thread: Thread[main @coroutine#1,5,main], thread local value: 'main'
+</code></pre>
+<!--- TEST FLEXIBLE_THREAD -->
+<p class="typo-para">这很容易忘记去设置相应的上下文元素。如果运行协程的线程不同，
+在协程中访问的线程局部变量则可能会产生意外的值。
+为了避免这种情况，建议使用 <a class="typo-link" href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/java.lang.-thread-local/ensure-present.html">ensurePresent</a>
+方法并且在不正确的使用时快速失败。</p>
+<p class="typo-para"><code>ThreadLocal</code> 具有一流的支持，可以与任何 <code>kotlinx.coroutines</code> 提供的原语一起使用。
+但它有一个关键限制，即：当一个线程局部变量变化时，则这个新值不会传播给协程调用者<!--
+-->（因为上下文元素无法追踪所有 <code>ThreadLocal</code> 对象访问），并且下次挂起时更新的值将丢失。
+使用 <a class="typo-link" href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/with-context.html">withContext</a> 在协程中更新线程局部变量，详见 <a class="typo-link" href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/java.lang.-thread-local/as-context-element.html">asContextElement</a>。</p>
+<p class="typo-para">另外，一个值可以存储在一个可变的域中，例如 <code>class Counter(var i: Int)</code>，是的，反过来，
+可以存储在线程局部的变量中。然而，在这个案例中你完全有责任来进行同步<!--
+-->可能的对这个可变的域进行的并发的修改。</p>
+<p class="typo-para">对于高级的使用，例如，那些在内部使用线程局部传递数据的<!--
+-->用于与日志记录 MDC 集成，以及事务上下文或任何其它库，请参见需要实现的
+<a class="typo-link" href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-thread-context-element/index.html">ThreadContextElement</a> 接口的文档。</p>
+<!--- MODULE kotlinx-coroutines-core -->
+<!--- INDEX kotlinx.coroutines -->
+<!--- END -->
+
+        </article>
+    </div>
+        </div>
+</div>
+
+<footer role="contentinfo" class="global-footer">
+
+    <div class="global-footer-terms">
+        <div class="g-layout">
+            <ul class="terms-social">
+                <li class="terms-social__item terms-social__item_blog">
+                    <a target="_blank" class="link" href="https://blog.jetbrains.com/kotlin/">博客</a>
+                </li>
+                <li class="terms-social__item terms-social__item_forum">
+                    <a target="_blank" class="link" href="https://discuss.kotlinlang.org/">论坛</a>
+                </li>
+                <li class="terms-social__item terms-social__item_bug-tracker">
+                    <a target="_blank" class="link" href="https://youtrack.jetbrains.com/issues/KT">问题跟踪</a>
+                </li>
+                <li class="terms-social__item terms-social__item_github">
+                    <a target="_blank" class="link" href="https://github.com/JetBrains/kotlin">GitHub</a>
+                </li>
+                <li class="terms-social__item terms-social__item_twitter">
+                    <a target="_blank" class="link" href="https://twitter.com/kotlin">Twitter</a>
+                </li>
+            </ul>
+            <div class="global-footer-container">
+                <div class="global-footer-row-left">
+                        <p class="terms-para"><a class="terms-kit"
+                              href="http://www.kotlincn.net/contribute.html">为 Kotlin 做贡献</a></p>
+                    <p class="terms-para"><a class="terms-kit"
+                                             href="http://www.kotlincn.net/eap/">抢先体验预览</a></p>
+                    <p class="terms-para"><a class="terms-kit"
+                                             href="http://www.kotlincn.net/security.html">安全性</a></p>
+                        <p class="terms-para"><a class="terms-kit"
+                              href="http://www.kotlincn.net/assets/kotlin-media-kit.pdf">宣传资料</a></p>
+                    <div class="terms-copyright">
+                        采用 <a href="https://github.com/JetBrains/kotlin-web-site/blob/master/LICENSE">Apache
+                        2
+                        授权许可</a>
+                    </div>
+
+                    <div class="terms-foundation">
+                        Kotlin 商标受 <a
+                            href="http://www.kotlincn.net/foundation/kotlin-foundation.html">Kotlin 基金会</a>保护
+                    </div>
+                </div>
+                <div class="global-footer-row-right">
+                    <div class="terms-sponsor">
+                        Kotlin 语言与 Kotlin 官方英文站由 <a href="http://jetbrains.com" class="sponsor sponsor_jetbrains jetbrains-logo _logo-jetbrains"
+                                                      target="_blank">JetBrains</a> 赞助及开发；
+                    </div>
+                    <div class="terms-sponsor">
+                        本站由<a href="https://hltj.me/" class="testimonial-company-link" target="_blank" rel="nofollow">灰蓝天际</a>、
+                        <a href="http://tanfujun.com" class="testimonial-company-link" target="_blank" rel="nofollow">晓_晨DEV</a>、
+                        <a href="https://github.com/qiaoyuang" class="testimonial-company-link" target="_blank" rel="nofollow">乔禹昂</a>、
+                        <a href="https://github.com/SpielbergGao" class="testimonial-company-link" target="_blank" rel="nofollow">高金龙</a>、
+                        <a href="https://github.com/HoshinoTented" class="testimonial-company-link" target="_blank" rel="nofollow">HoshinoTented</a>、
+                        <a href="https://www.liuwj.me" class="testimonial-company-link" target="_blank" rel="nofollow">刘文俊</a>、
+                        <a href="https://github.com/Hiwensen" class="testimonial-company-link" target="_blank" rel="nofollow">常少威</a>、
+                        <a href="https://github.com/Yue-plus" class="testimonial-company-link" target="_blank" rel="nofollow">Yue-plus</a>、
+                        <a href="https://github.com/Guolianxing" class="testimonial-company-link" target="_blank" rel="nofollow">Guolianxing</a>
+                        &nbsp;<a href="http://www.kotlincn.net/contribute.html#中文站翻译贡献者" class="testimonial-company-link" target="_blank" rel="nofollow">等</a>译
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</footer><div class="search-popup _hidden" tabindex="1000">
+    <div class="search-popup__content">
+        <div class="search-popup__controls">
+            <div class="search-popup__input"></div>
+            <div class="search-popup__close">
+                <div class="search-popup__close-icon-wrapper">
+                    <div class="search-popup__close-icon"></div>
+                </div>
+                <div class="search-popup__close-text">esc</div>
+            </div>
+        </div>
+        <div class="search-popup__results"></div>
+    </div>
+</div>
+<script src="../../../_assets/common.js?&amp;v=02aab4e0a4be79567299335059fe4adc"></script>
+    <script src="../../../_assets/reference.js?&amp;v=42db5638a201ca172b1b2d12bd88c10c"></script>
+</body>
+</html>

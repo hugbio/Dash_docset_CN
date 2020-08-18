@@ -1,0 +1,3040 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=1000, initial-scale=1">
+
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-5W8DZRW');</script>
+<!-- End Google Tag Manager -->
+
+<link rel="dns-prefetch" href="http://fonts.googleapis.com/">
+<link rel="dns-prefetch" href="http://fonts.gstatic.com/">
+<link rel="dns-prefetch" href="http://resources.jetbrains.com/">
+
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<link rel="Shortcut Icon" href="../../../assets/images/favicon.ico" type="image/x-icon"/>
+<link rel="apple-touch-icon" href="http://www.kotlincn.net/assets/images/apple-touch-icon.png"/>
+<link rel="apple-touch-icon" sizes="72x72"
+      href="http://www.kotlincn.net/assets/images/apple-touch-icon-72x72.png"/>
+<link rel="apple-touch-icon" sizes="114x114"
+      href="http://www.kotlincn.net/assets/images/apple-touch-icon-114x114.png"/>
+<link rel="apple-touch-icon" sizes="144x144"
+      href="http://www.kotlincn.net/assets/images/apple-touch-icon-144x144.png"/>
+
+<!-- Social Media tag Starts -->
+<!-- Place this data between the <head> tags of your website -->
+<!-- Open Graph data -->
+<meta property="og:title" content=""/>
+<meta property="og:type" content="website"/>
+<meta property="og:url" content="https://www.kotlincn.net/docs/reference/coroutines/flow.html"/>
+<meta property="og:image" content="https://www.kotlincn.net/assets/images/open-graph/kotlin_250x250.png"/>
+    <meta property="og:description" content="">
+<meta property="og:site_name" content="Kotlin"/>
+
+<!-- Twitter Card data -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@kotlin">
+<meta name="twitter:title" content="">
+    <meta name="twitter:description" content="">
+<meta name="twitter:image:src" content="https://www.kotlincn.net/assets/images/twitter-card/kotlin_800x320.png">
+<!-- Social Media tag Ends -->
+
+
+<link rel="stylesheet" href="../../../_assets/styles.css?&amp;v=e44e3d4fd9246ec9985fe88b4baf2a72">    <link rel="stylesheet" href="../../../_assets/reference.css?&amp;v=9377ef31169c8f79145bb4c173c29b34">
+
+
+    <title>异步流 - Kotlin 语言中文站</title>
+
+    <link rel="stylesheet" href="../../../_assets/common.css?&amp;v=9e6fbfc1663315f135a0fd5e146c021a"/>
+</head>
+<body class=" page-old-styled ">
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5W8DZRW" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+<div class="global-layout">
+    <div class="global-header-panel banner-nav">
+        <div class="g-layout">
+<div class="global-nav banner-container">
+    <a class="banner-text" href="https://item.jd.com/12898592.html" target="_blank">
+        <div class="banner-item title">
+            新书上架：《深入理解Kotlin协程》（中文社区负责人霍丙乾著）
+        </div>
+        <div class="banner-item underline">
+            立即购买
+        </div>
+    </a>
+    <div class="close-head-banner"></div>
+</div>        </div>
+    </div>
+<header class="global-header">
+    <div class="global-header-panel">
+        <div class="g-layout" data-nosnippet="true">
+            <a class="global-header-logo" href="http://www.kotlincn.net/">Kotlin</a> <a href="https://github.com/JetBrains/kotlin/releases/tag/v1.3.72" target="_blank" class="global-header-logo__version">v1.3.72</a>
+<nav class="global-nav">
+    <div class="nav-links">
+            <a href="https://www.kotliner.cn/" class="nav-item  nav-item-external" target="_blank" >
+                博客
+            </a>
+            <a href="https://discuss.kotliner.cn/" class="nav-item  nav-item-external" target="_blank" >
+                论坛
+            </a>
+            <a href="../index.html" class="nav-item ">
+                学习
+            </a>
+            <a href="http://www.kotlincn.net/community/" class="nav-item ">
+                社区
+            </a>
+            <a href="http://www.kotlincn.net/education/" class="nav-item ">
+                教学
+            </a>
+            <a href="https://play.kotlinlang.org" class="nav-item  nav-item-external" target="_blank" >
+                演练
+            </a>
+    </div>
+    <div class="search-button">
+        <div class="icon"></div>
+    </div>
+</nav>        </div>
+    </div>
+</header>        <div class="g-layout global-content">
+            <nav class="docs-nav-new">
+                <div class="kto-tabs">
+                        <a class="kto-tabs__item kto-tabs__item_active" href="../index.html">语言指南</a>
+                        <a class="kto-tabs__item" href="http://www.kotlincn.net/docs/tutorials/">教程</a>
+                        <a class="kto-tabs__item" href="http://www.kotlincn.net/docs/books.html">图书</a>
+                </div>
+            </nav>
+
+    <div class="g-grid">
+
+        <aside class="g-3">
+            <div class="js-side-tree-nav">
+                    <nav class="side-tree-nav">
+                <div class="tree-item tree-branch js-item js-branch _opened"
+         data-id="概述">
+
+        <div class="tree-item-title tree-branch-title js-item-title js-branch-title is_active">
+            <div class="marker"></div>
+            <div class="text">概述</div>
+        </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../server-overview.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">Kotlin 用于服务器端开发</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../android-overview.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">Kotlin 用于 Android 开发</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../js-overview.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">Kotlin 用于 JavaScript 开发</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../native-overview.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">Kotlin 用于原生开发</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../data-science-overview.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">Kotlin 用于数据科学</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../coroutines-overview.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">协程</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../multiplatform.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">多平台</span>
+            </a>
+    </div>
+
+    </div>
+
+                <div class="tree-item tree-branch js-item js-branch _opened"
+         data-id="新特性">
+
+        <div class="tree-item-title tree-branch-title js-item-title js-branch-title is_active">
+            <div class="marker"></div>
+            <div class="text">新特性</div>
+        </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../whatsnew13.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">1.3 的新特性</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../whatsnew12.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">1.2 的新特性</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../whatsnew11.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">1.1 的新特性</span>
+            </a>
+    </div>
+
+    </div>
+
+                <div class="tree-item tree-branch js-item js-branch _opened"
+         data-id="开始">
+
+        <div class="tree-item-title tree-branch-title js-item-title js-branch-title is_active">
+            <div class="marker"></div>
+            <div class="text">开始</div>
+        </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../basic-syntax.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">基本语法</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../idioms.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">习惯用法</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../coding-conventions.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">编码规范</span>
+            </a>
+    </div>
+
+    </div>
+
+                <div class="tree-item tree-branch js-item js-branch _opened"
+         data-id="基础">
+
+        <div class="tree-item-title tree-branch-title js-item-title js-branch-title is_active">
+            <div class="marker"></div>
+            <div class="text">基础</div>
+        </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../basic-types.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">基本类型</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../packages.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">包与导入</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../control-flow.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">控制流</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../returns.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">返回与跳转</span>
+            </a>
+    </div>
+
+    </div>
+
+                <div class="tree-item tree-branch js-item js-branch _opened"
+         data-id="类与对象">
+
+        <div class="tree-item-title tree-branch-title js-item-title js-branch-title is_active">
+            <div class="marker"></div>
+            <div class="text">类与对象</div>
+        </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../classes.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">类与继承</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../properties.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">属性与字段</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../interfaces.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">接口</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../visibility-modifiers.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">可见性修饰符</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../extensions.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">扩展</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../data-classes.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">数据类</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../sealed-classes.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">密封类</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../generics.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">泛型</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../nested-classes.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">嵌套类</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../enum-classes.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">枚举类</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../object-declarations.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">对象</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../type-aliases.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">类型别名</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../inline-classes.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">内联类</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../delegation.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">委托</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../delegated-properties.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">委托属性</span>
+            </a>
+    </div>
+
+    </div>
+
+                <div class="tree-item tree-branch js-item js-branch _opened"
+         data-id="函数与 Lambda 表达式">
+
+        <div class="tree-item-title tree-branch-title js-item-title js-branch-title is_active">
+            <div class="marker"></div>
+            <div class="text">函数与 Lambda 表达式</div>
+        </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../functions.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">函数</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../lambdas.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">Lambda 表达式</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../inline-functions.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">内联函数</span>
+            </a>
+    </div>
+
+    </div>
+
+                <div class="tree-item tree-branch js-item js-branch _opened"
+         data-id="集合">
+
+        <div class="tree-item-title tree-branch-title js-item-title js-branch-title is_active">
+            <div class="marker"></div>
+            <div class="text">集合</div>
+        </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../collections-overview.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">集合概述</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../constructing-collections.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">构造集合</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../iterators.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">迭代器</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../ranges.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">区间与数列</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../sequences.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">序列</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../collection-operations.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">操作概述</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../collection-transformations.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">转换</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../collection-filtering.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">过滤</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../collection-plus-minus.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">加减操作符</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../collection-grouping.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">分组</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../collection-parts.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">取集合的一部分</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../collection-elements.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">取单个元素</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../collection-ordering.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">排序</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../collection-aggregate.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">聚合操作</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../collection-write.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">集合写操作</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../list-operations.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">List 相关操作</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../set-operations.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">Set 相关操作</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../map-operations.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">Map 相关操作</span>
+            </a>
+    </div>
+
+    </div>
+
+                <div class="tree-item tree-branch js-item js-branch _opened"
+         data-id="协程">
+
+        <div class="tree-item-title tree-branch-title js-item-title js-branch-title is_active">
+            <div class="marker"></div>
+            <div class="text">协程</div>
+        </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="coroutines-guide.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">协程指南</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="basics.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">基础</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="cancellation-and-timeouts.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">取消与超时</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="composing-suspending-functions.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">组合挂起函数</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="coroutine-context-and-dispatchers.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">协程上下文与调度器</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <div class="tree-item-title tree-leaf-title js-item-title js-leaf-title is_active ">
+                <div class="marker"></div>
+                <div class="text">异步流</div>
+            </div>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="channels.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">通道</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="exception-handling.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">异常处理与监督</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="shared-mutable-state-and-concurrency.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">共享的可变状态与并发</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="select-expression.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">Select 表达式（实验性的）</span>
+            </a>
+    </div>
+
+    </div>
+
+                <div class="tree-item tree-branch js-item js-branch _opened"
+         data-id="多平台程序设计">
+
+        <div class="tree-item-title tree-branch-title js-item-title js-branch-title is_active">
+            <div class="marker"></div>
+            <div class="text">多平台程序设计</div>
+        </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../platform-specific-declarations.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">平台相关声明</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../building-mpp-with-gradle.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">以 Gradle 构建</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../mpp-dsl-reference.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">多平台 Gradle DSL 参考</span>
+            </a>
+    </div>
+
+    </div>
+
+                <div class="tree-item tree-branch js-item js-branch _opened"
+         data-id="更多语言结构">
+
+        <div class="tree-item-title tree-branch-title js-item-title js-branch-title is_active">
+            <div class="marker"></div>
+            <div class="text">更多语言结构</div>
+        </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../multi-declarations.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">解构声明</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../typecasts.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">类型检测与转换</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../this-expressions.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">This 表达式</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../equality.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">相等性</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../operator-overloading.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">操作符重载</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../null-safety.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">空安全</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../exceptions.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">异常</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../annotations.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">注解</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../reflection.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">反射</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../scope-functions.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">作用域函数</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../type-safe-builders.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">类型安全的构建器</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../opt-in-requirements.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">Opt-in Requirements</span>
+            </a>
+    </div>
+
+    </div>
+
+                <div class="tree-item tree-branch js-item js-branch _opened"
+         data-id="核心库">
+
+        <div class="tree-item-title tree-branch-title js-item-title js-branch-title is_active">
+            <div class="marker"></div>
+            <div class="text">核心库</div>
+        </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="https://kotlinlang.org/api/latest/jvm/stdlib/index.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">标准库</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="https://kotlinlang.org/api/latest/kotlin.test/index.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">kotlin.test</span>
+            </a>
+    </div>
+
+    </div>
+
+                <div class="tree-item tree-branch js-item js-branch _opened"
+         data-id="参考">
+
+        <div class="tree-item-title tree-branch-title js-item-title js-branch-title is_active">
+            <div class="marker"></div>
+            <div class="text">参考</div>
+        </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../keyword-reference.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">关键字与操作符</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../grammar.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">语法</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../code-style-migration-guide.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">编码风格约定</span>
+            </a>
+    </div>
+
+    </div>
+
+                <div class="tree-item tree-branch js-item js-branch _opened"
+         data-id="Java 互操作">
+
+        <div class="tree-item-title tree-branch-title js-item-title js-branch-title is_active">
+            <div class="marker"></div>
+            <div class="text">Java 互操作</div>
+        </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../java-interop.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">Kotlin 中调用 Java</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../java-to-kotlin-interop.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">Java 中调用 Kotlin</span>
+            </a>
+    </div>
+
+    </div>
+
+                <div class="tree-item tree-branch js-item js-branch _opened"
+         data-id="JavaScript">
+
+        <div class="tree-item-title tree-branch-title js-item-title js-branch-title is_active">
+            <div class="marker"></div>
+            <div class="text">JavaScript</div>
+        </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../js-project-setup.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">搭建项目</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../dynamic-type.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">动态类型</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../js-interop.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">Kotlin 中调用 JavaScript</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../js-to-kotlin-interop.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">JavaScript 中调用 Kotlin</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../js-modules.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">JavaScript 模块</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../js-reflection.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">JavaScript 反射</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../javascript-dce.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">JavaScript DCE</span>
+            </a>
+    </div>
+
+    </div>
+
+                <div class="tree-item tree-branch js-item js-branch _opened"
+         data-id="原生">
+
+        <div class="tree-item-title tree-branch-title js-item-title js-branch-title is_active">
+            <div class="marker"></div>
+            <div class="text">原生</div>
+        </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../native/concurrency.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">并发</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../native/immutability.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">不可变性</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../native/libraries.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">Kotlin 库</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../native/platform_libs.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">平台库</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../native/c_interop.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">与 C 语言互操作</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../native/objc_interop.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">与 Objective-C 及 Swift 互操作</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../native/cocoapods.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">CocoaPods 集成</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../native/gradle_plugin.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">Gradle 插件</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../native/debugging.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">调试</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../native/faq.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">FAQ</span>
+            </a>
+    </div>
+
+    </div>
+
+                <div class="tree-item tree-branch js-item js-branch _opened"
+         data-id="工具">
+
+        <div class="tree-item-title tree-branch-title js-item-title js-branch-title is_active">
+            <div class="marker"></div>
+            <div class="text">工具</div>
+        </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../using-gradle.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">Gradle</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../using-maven.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">Maven</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../using-ant.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">Ant</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../compiler-reference.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">编译器选项</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../compiler-plugins.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">编译器插件</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../kapt.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">Kapt</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../kotlin-doc.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">Dokka</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../kotlin-osgi.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">OSGi</span>
+            </a>
+    </div>
+
+    </div>
+
+                <div class="tree-item tree-branch js-item js-branch _opened"
+         data-id="演进">
+
+        <div class="tree-item-title tree-branch-title js-item-title js-branch-title is_active">
+            <div class="marker"></div>
+            <div class="text">演进</div>
+        </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../evolution/kotlin-evolution.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">Kotlin 语言演进</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../evolution/components-stability.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">不同组件的稳定性</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../compatibility-guide-13.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">Kotlin 1.3 的兼容性指南</span>
+            </a>
+    </div>
+
+    </div>
+
+                <div class="tree-item tree-branch js-item js-branch _opened"
+         data-id="常见问题">
+
+        <div class="tree-item-title tree-branch-title js-item-title js-branch-title is_active">
+            <div class="marker"></div>
+            <div class="text">常见问题</div>
+        </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../faq.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">FAQ</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../comparison-to-java.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">与 Java 比较</span>
+            </a>
+    </div>
+
+                    <div class="tree-item tree-leaf js-item js-leaf ">
+            <a href="../comparison-to-scala.html"
+               class="tree-item-title tree-leaf-title js-item-title js-leaf-title "
+            >
+                <span class="marker"></span>
+                <span class="text">与 Scala 比较【官方已删除】</span>
+            </a>
+    </div>
+
+    </div>
+
+    </nav>
+
+
+                <ul>
+                  <li><a href="http://www.kotlincn.net/docs/kotlin-docs.pdf" class="reference-pdf-link">
+                    <span class="icon"></span>
+                    <span class="text">完整 Kotlin 参考（PDF）</span>
+                  </a></li>
+                  <li><a href="https://www.gitbook.com/download/pdf/book/hltj/kotlin-reference-chinese" class="reference-pdf-link">
+                    <span class="icon"></span>
+                    <span class="text">完整 Kotlin 参考（字大PDF）</span>
+                  </a></li>
+                  <li><a href="https://www.gitbook.com/download/epub/book/hltj/kotlin-reference-chinese" class="reference-pdf-link">
+                    <span class="icon"></span>
+                    <span class="text">完整 Kotlin 参考（ePUB）</span>
+                  </a></li>
+                  <li><a href="https://www.gitbook.com/download/mobi/book/hltj/kotlin-reference-chinese" class="reference-pdf-link">
+                    <span class="icon"></span>
+                    <span class="text">完整 Kotlin 参考（Mobi）</span>
+                  </a></li>
+                </ul>
+            </div>
+        </aside>
+
+        <article role="main" class="page-content g-9">
+<a href="https://github.com/hltj/kotlinx.coroutines-cn/edit/master/docs/flow.md"
+   class="page-link-to-github"
+   target="_blank"
+   title="在 GitHub 上编辑本页">
+        <i class="github-icon"></i>
+        <span class="text">改进翻译</span>
+</a>
+                
+<!--- TEST_NAME FlowGuideTest -->
+<p class="typo-para"><strong class="typo-strong">目录</strong></p>
+<!--- TOC -->
+<ul class="typo-list typo-list_type_simple">
+<li class="typo-list__item"><a class="typo-link" href="flow.html#异步流">异步流</a>
+<ul class="typo-list typo-list_type_simple">
+<li class="typo-list__item"><a class="typo-link" href="flow.html#表示多个值">表示多个值</a>
+<ul class="typo-list typo-list_type_simple">
+<li class="typo-list__item"><a class="typo-link" href="flow.html#序列">序列</a></li>
+<li class="typo-list__item"><a class="typo-link" href="flow.html#挂起函数">挂起函数</a></li>
+<li class="typo-list__item"><a class="typo-link" href="flow.html#流">流</a></li>
+</ul>
+</li>
+<li class="typo-list__item"><a class="typo-link" href="flow.html#流是冷的">流是冷的</a></li>
+<li class="typo-list__item"><a class="typo-link" href="flow.html#流取消基础">流取消基础</a></li>
+<li class="typo-list__item"><a class="typo-link" href="flow.html#流构建器">流构建器</a></li>
+<li class="typo-list__item"><a class="typo-link" href="flow.html#过渡流操作符">过渡流操作符</a>
+<ul class="typo-list typo-list_type_simple">
+<li class="typo-list__item"><a class="typo-link" href="flow.html#转换操作符">转换操作符</a></li>
+<li class="typo-list__item"><a class="typo-link" href="flow.html#限长操作符">限长操作符</a></li>
+</ul>
+</li>
+<li class="typo-list__item"><a class="typo-link" href="flow.html#末端流操作符">末端流操作符</a></li>
+<li class="typo-list__item"><a class="typo-link" href="flow.html#流是连续的">流是连续的</a></li>
+<li class="typo-list__item"><a class="typo-link" href="flow.html#流上下文">流上下文</a>
+<ul class="typo-list typo-list_type_simple">
+<li class="typo-list__item"><a class="typo-link" href="flow.html#withcontext-发出错误">withContext 发出错误</a></li>
+<li class="typo-list__item"><a class="typo-link" href="flow.html#flowon-操作符">flowOn 操作符</a></li>
+</ul>
+</li>
+<li class="typo-list__item"><a class="typo-link" href="flow.html#缓冲">缓冲</a>
+<ul class="typo-list typo-list_type_simple">
+<li class="typo-list__item"><a class="typo-link" href="flow.html#合并">合并</a></li>
+<li class="typo-list__item"><a class="typo-link" href="flow.html#处理最新值">处理最新值</a></li>
+</ul>
+</li>
+<li class="typo-list__item"><a class="typo-link" href="flow.html#组合多个流">组合多个流</a>
+<ul class="typo-list typo-list_type_simple">
+<li class="typo-list__item"><a class="typo-link" href="flow.html#zip">Zip</a></li>
+<li class="typo-list__item"><a class="typo-link" href="flow.html#combine">Combine</a></li>
+</ul>
+</li>
+<li class="typo-list__item"><a class="typo-link" href="flow.html#展平流">展平流</a>
+<ul class="typo-list typo-list_type_simple">
+<li class="typo-list__item"><a class="typo-link" href="flow.html#flatmapconcat">flatMapConcat</a></li>
+<li class="typo-list__item"><a class="typo-link" href="flow.html#flatmapmerge">flatMapMerge</a></li>
+<li class="typo-list__item"><a class="typo-link" href="flow.html#flatmaplatest">flatMapLatest</a></li>
+</ul>
+</li>
+<li class="typo-list__item"><a class="typo-link" href="flow.html#流异常">流异常</a>
+<ul class="typo-list typo-list_type_simple">
+<li class="typo-list__item"><a class="typo-link" href="flow.html#收集器-try-与-catch">收集器 try 与 catch</a></li>
+<li class="typo-list__item"><a class="typo-link" href="flow.html#一切都已捕获">一切都已捕获</a></li>
+</ul>
+</li>
+<li class="typo-list__item"><a class="typo-link" href="flow.html#异常透明性">异常透明性</a>
+<ul class="typo-list typo-list_type_simple">
+<li class="typo-list__item"><a class="typo-link" href="flow.html#透明捕获">透明捕获</a></li>
+<li class="typo-list__item"><a class="typo-link" href="flow.html#声明式捕获">声明式捕获</a></li>
+</ul>
+</li>
+<li class="typo-list__item"><a class="typo-link" href="flow.html#流完成">流完成</a>
+<ul class="typo-list typo-list_type_simple">
+<li class="typo-list__item"><a class="typo-link" href="flow.html#命令式-finally-块">命令式 finally 块</a></li>
+<li class="typo-list__item"><a class="typo-link" href="flow.html#声明式处理">声明式处理</a></li>
+<li class="typo-list__item"><a class="typo-link" href="flow.html#成功完成">成功完成</a></li>
+</ul>
+</li>
+<li class="typo-list__item"><a class="typo-link" href="flow.html#命令式还是声明式">命令式还是声明式</a></li>
+<li class="typo-list__item"><a class="typo-link" href="flow.html#启动流">启动流</a></li>
+<li class="typo-list__item"><a class="typo-link" href="flow.html#流取消检测">流取消检测</a>
+<ul class="typo-list typo-list_type_simple">
+<li class="typo-list__item"><a class="typo-link" href="flow.html#让繁忙的流可取消">让繁忙的流可取消</a></li>
+</ul>
+</li>
+<li class="typo-list__item"><a class="typo-link" href="flow.html#flow-and-reactive-streams">流（Flow）与响应式流（Reactive Streams）</a></li>
+</ul>
+</li>
+</ul>
+<!--- END -->
+<h2 class="typo-header typo-h2" id="异步流">异步流</h2>
+<p class="typo-para">挂起函数可以异步的返回单个值，但是该如何异步返回<!--
+-->多个计算好的值呢？这正是 Kotlin 流（Flow）的用武之地。</p>
+<h3 class="typo-header typo-h3" id="表示多个值">表示多个值</h3>
+<p class="typo-para">在 Kotlin 中可以使用<a class="typo-link" href="https://kotlinlang.org/docs/reference/collections-overview.html">集合</a>来表示多个值。 
+比如说，我们有一个 <code>simple</code> 函数，它返回一个包含三个数字的 <a class="typo-link" href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a>，
+然后使用 <a class="typo-link" href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/for-each.html">forEach</a> 打印它们：</p>
+<div class="sample" data-min-compiler-version="1.3" theme="idea">
+<pre><code class="language-kotlin">fun simple(): List&lt;Int&gt; = listOf(1, 2, 3)
+ 
+fun main() {
+    simple().forEach { value -&gt; println(value) } 
+}
+</code></pre>
+</div>
+<blockquote class="typo-quote">
+<p class="typo-para">可以在<a class="typo-link" href="https://github.com/hltj/kotlinx.coroutines-cn/blob/master/kotlinx-coroutines-core/jvm/test/guide/example-flow-01.kt">这里</a>获取完整代码。</p>
+</blockquote>
+<p class="typo-para">这段代码输出如下：</p>
+<pre><code class="code _highlighted" data-lang="text/plain">1
+2
+3
+</code></pre>
+<!--- TEST -->
+<h4 class="typo-header typo-h4" id="序列">序列</h4>
+<p class="typo-para">如果使用一些消耗 CPU 资源的阻塞代码计算数字<!--
+-->（每次计算需要 100 毫秒）那么我们可以使用 <a class="typo-link" href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.sequences/index.html">Sequence</a> 来表示数字：</p>
+<div class="sample" data-min-compiler-version="1.3" theme="idea">
+<pre><code class="language-kotlin">fun simple(): Sequence&lt;Int&gt; = sequence { // 序列构建器
+    for (i in 1..3) {
+        Thread.sleep(100) // 假装我们正在计算
+        yield(i) // 产生下一个值
+    }
+}
+
+fun main() {
+    simple().forEach { value -&gt; println(value) } 
+}
+</code></pre>
+</div>
+<blockquote class="typo-quote">
+<p class="typo-para">可以在<a class="typo-link" href="https://github.com/hltj/kotlinx.coroutines-cn/blob/master/kotlinx-coroutines-core/jvm/test/guide/example-flow-02.kt">这里</a>获取完整代码。</p>
+</blockquote>
+<p class="typo-para">这段代码输出相同的数字，但在打印每个数字之前等待 100 毫秒。</p>
+<!--- TEST 
+1
+2
+3
+-->
+<h4 class="typo-header typo-h4" id="挂起函数">挂起函数</h4>
+<p class="typo-para">然而，计算过程阻塞运行该代码的主线程。
+当这些值由异步代码计算时，我们可以使用 <code>suspend</code> 修饰符标记函数 <code>simple</code>，
+这样它就可以在不阻塞的情况下执行其工作并将结果作为列表返回：</p>
+<div class="sample" data-min-compiler-version="1.3" theme="idea">
+<pre><code class="language-kotlin">import kotlinx.coroutines.*                 
+                           
+//sampleStart
+suspend fun simple(): List&lt;Int&gt; {
+    delay(1000) // 假装我们在这里做了一些异步的事情
+    return listOf(1, 2, 3)
+}
+
+fun main() = runBlocking&lt;Unit&gt; {
+    simple().forEach { value -&gt; println(value) } 
+}
+//sampleEnd
+</code></pre>
+</div>
+<blockquote class="typo-quote">
+<p class="typo-para">可以在<a class="typo-link" href="https://github.com/hltj/kotlinx.coroutines-cn/blob/master/kotlinx-coroutines-core/jvm/test/guide/example-flow-03.kt">这里</a>获取完整代码。</p>
+</blockquote>
+<p class="typo-para">这段代码将会在等待一秒之后打印数字。</p>
+<!--- TEST 
+1
+2
+3
+-->
+<h4 class="typo-header typo-h4" id="流">流</h4>
+<p class="typo-para">使用 List<int> 结果类型，意味着我们只能一次返回所有值。
+为了表示异步计算的值流（stream），我们可以使用 Flow<int> 类型（正如同步计算值会使用 Sequence<int> 类型）：</int></int></int></p>
+<div class="sample" data-min-compiler-version="1.3" theme="idea">
+<pre><code class="language-kotlin">import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.*
+
+//sampleStart               
+fun simple(): Flow&lt;Int&gt; = flow { // 流构建器
+    for (i in 1..3) {
+        delay(100) // 假装我们在这里做了一些有用的事情
+        emit(i) // 发送下一个值
+    }
+}
+
+fun main() = runBlocking&lt;Unit&gt; {
+    // 启动并发的协程以验证主线程并未阻塞
+    launch {
+        for (k in 1..3) {
+            println("I'm not blocked $k")
+            delay(100)
+        }
+    }
+    // 收集这个流
+    simple().collect { value -&gt; println(value) } 
+}
+//sampleEnd
+</code></pre>
+</div>
+<blockquote class="typo-quote">
+<p class="typo-para">可以在<a class="typo-link" href="https://github.com/hltj/kotlinx.coroutines-cn/blob/master/kotlinx-coroutines-core/jvm/test/guide/example-flow-04.kt">这里</a>获取完整代码。</p>
+</blockquote>
+<p class="typo-para">这段代码在不阻塞主线程的情况下每等待 100 毫秒打印一个数字。在主线程中运行一个<!--
+-->单独的协程每 100 毫秒打印一次 “I'm not blocked” 已经经过了验证。</p>
+<pre><code class="code _highlighted" data-lang="text/plain">I'm not blocked 1
+1
+I'm not blocked 2
+2
+I'm not blocked 3
+3
+</code></pre>
+<!--- TEST -->
+<p class="typo-para">注意使用 <a class="typo-link" href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/flow.html">Flow</a> 的代码与先前示例的下述区别：</p>
+<ul class="typo-list typo-list_type_simple">
+<li class="typo-list__item">名为 <a class="typo-link" href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/flow.html">flow</a> 的 <a class="typo-link" href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/flow.html">Flow</a> 类型构建器函数。</li>
+<li class="typo-list__item"><code>flow { ... }</code> 构建块中的代码可以挂起。</li>
+<li class="typo-list__item">函数 <code>simple</code> 不再标有 <code>suspend</code> 修饰符。</li>
+<li class="typo-list__item">流使用 <a class="typo-link" href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-flow-collector/emit.html">emit</a> 函数 <em>发射</em> 值。</li>
+<li class="typo-list__item">流使用 <a class="typo-link" href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/collect.html">collect</a> 函数 <em>收集</em> 值。</li>
+</ul>
+<blockquote class="typo-quote">
+<p class="typo-para">我们可以在 <code>simple</code> 的 <code>flow { ... }</code> 函数体内使用 <a class="typo-link" href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/delay.html">delay</a> 代替 <code>Thread.sleep</code>
+以观察主线程在本案例中被阻塞了。</p>
+</blockquote>
+<h3 class="typo-header typo-h3" id="流是冷的">流是冷的</h3>
+<p class="typo-para">Flow 是一种类似于序列的冷流 — 这段 <a class="typo-link" href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/flow.html">flow</a> 构建器中的代码<!--
+-->直到流被收集的时候才运行。这在以下的示例中非常明显：</p>
+<div class="sample" data-min-compiler-version="1.3" theme="idea">
+<pre><code class="language-kotlin">import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.*
+
+//sampleStart      
+fun simple(): Flow&lt;Int&gt; = flow { 
+    println("Flow started")
+    for (i in 1..3) {
+        delay(100)
+        emit(i)
+    }
+}
+
+fun main() = runBlocking&lt;Unit&gt; {
+    println("Calling simple function...")
+    val flow = simple()
+    println("Calling collect...")
+    flow.collect { value -&gt; println(value) } 
+    println("Calling collect again...")
+    flow.collect { value -&gt; println(value) } 
+}
+//sampleEnd
+</code></pre>
+</div>
+<blockquote class="typo-quote">
+<p class="typo-para">可以在<a class="typo-link" href="https://github.com/hltj/kotlinx.coroutines-cn/blob/master/kotlinx-coroutines-core/jvm/test/guide/example-flow-05.kt">这里</a>获取完整代码。</p>
+</blockquote>
+<p class="typo-para">打印如下：</p>
+<pre><code class="code _highlighted" data-lang="text/plain">Calling simple function...
+Calling collect...
+Flow started
+1
+2
+3
+Calling collect again...
+Flow started
+1
+2
+3
+</code></pre>
+<!--- TEST -->
+<p class="typo-para">这是返回一个流的 <code>simple</code> 函数没有标记 <code>suspend</code> 修饰符的主要原因。
+通过它自己，<code>simple()</code> 调用会尽快返回且不会进行任何等待。该流在每次收集的时候启动，
+这就是为什么当我们再次调用 <code>collect</code> 时我们会看到“Flow started”。</p>
+<h3 class="typo-header typo-h3" id="流取消基础">流取消基础</h3>
+<p class="typo-para">流采用与协程同样的协作取消。像往常一样，流的收集可以在<!--
+-->当流在一个可取消的挂起函数（例如 <a class="typo-link" href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/delay.html">delay</a>）中挂起的时候取消。
+以下示例展示了当 <a class="typo-link" href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/with-timeout-or-null.html">withTimeoutOrNull</a> 块中代码在运行的时候流是如何在超时的情况下取消<!--
+-->并停止执行其代码的：</p>
+<div class="sample" data-min-compiler-version="1.3" theme="idea">
+<pre><code class="language-kotlin">import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.*
+
+//sampleStart           
+fun simple(): Flow&lt;Int&gt; = flow { 
+    for (i in 1..3) {
+        delay(100)          
+        println("Emitting $i")
+        emit(i)
+    }
+}
+
+fun main() = runBlocking&lt;Unit&gt; {
+    withTimeoutOrNull(250) { // 在 250 毫秒后超时
+        simple().collect { value -&gt; println(value) } 
+    }
+    println("Done")
+}
+//sampleEnd
+</code></pre>
+</div>
+<blockquote class="typo-quote">
+<p class="typo-para">可以在<a class="typo-link" href="https://github.com/hltj/kotlinx.coroutines-cn/blob/master/kotlinx-coroutines-core/jvm/test/guide/example-flow-06.kt">这里</a>获取完整代码。</p>
+</blockquote>
+<p class="typo-para">注意，在 <code>simple</code> 函数中流仅发射两个数字，产生以下输出：</p>
+<pre><code class="code _highlighted" data-lang="text/plain">Emitting 1
+1
+Emitting 2
+2
+Done
+</code></pre>
+<!--- TEST -->
+<p class="typo-para">See <a class="typo-link" href="flow.html#flow-cancellation-checks">Flow cancellation checks</a> section for more details.</p>
+<h3 class="typo-header typo-h3" id="流构建器">流构建器</h3>
+<p class="typo-para">先前示例中的 <code>flow { ... }</code> 构建器是最基础的一个。还有其他构建器<!--
+-->使流的声明更简单：</p>
+<ul class="typo-list typo-list_type_simple">
+<li class="typo-list__item"><a class="typo-link" href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/flow-of.html">flowOf</a> 构建器定义了一个发射固定值集的流。</li>
+<li class="typo-list__item">使用 <code>.asFlow()</code>  扩展函数，可以将各种集合与序列转换为流。</li>
+</ul>
+<p class="typo-para">因此，从流中打印从 1 到 3 的数字的示例可以写成：</p>
+<div class="sample" data-min-compiler-version="1.3" theme="idea">
+<pre><code class="language-kotlin">import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.*
+
+fun main() = runBlocking&lt;Unit&gt; {
+//sampleStart
+    // 将一个整数区间转化为流
+    (1..3).asFlow().collect { value -&gt; println(value) }
+//sampleEnd 
+}
+</code></pre>
+</div>
+<blockquote class="typo-quote">
+<p class="typo-para">可以在<a class="typo-link" href="https://github.com/hltj/kotlinx.coroutines-cn/blob/master/kotlinx-coroutines-core/jvm/test/guide/example-flow-07.kt">这里</a>获取完整代码。</p>
+</blockquote>
+<!--- TEST
+1
+2
+3
+-->
+<h3 class="typo-header typo-h3" id="过渡流操作符">过渡流操作符</h3>
+<p class="typo-para">可以使用操作符转换流，就像使用集合与序列一样。
+过渡操作符应用于上游流，并返回下游流。
+这些操作符也是冷操作符，就像流一样。这类操作符<!--
+-->本身不是挂起函数。它运行的速度很快，返回新的转换流的定义。</p>
+<p class="typo-para">基础的操作符拥有相似的名字，比如 <a class="typo-link" href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/map.html">map</a> 与 <a class="typo-link" href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/filter.html">filter</a>。
+流与序列的主要区别在于这些操作符中的代码<!--
+-->可以调用挂起函数。</p>
+<p class="typo-para">举例来说，一个请求中的流可以<!--
+-->使用 <a class="typo-link" href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/map.html">map</a> 操作符映射出结果，即使执行一个长时间的请求<!--
+-->操作也可以使用挂起函数来实现：</p>
+<div class="sample" data-min-compiler-version="1.3" theme="idea">
+<pre><code class="language-kotlin">import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.*
+
+//sampleStart           
+suspend fun performRequest(request: Int): String {
+    delay(1000) // 模仿长时间运行的异步工作
+    return "response $request"
+}
+
+fun main() = runBlocking&lt;Unit&gt; {
+    (1..3).asFlow() // 一个请求流
+        .map { request -&gt; performRequest(request) }
+        .collect { response -&gt; println(response) }
+}
+//sampleEnd
+</code></pre>
+</div>
+<blockquote class="typo-quote">
+<p class="typo-para">可以在<a class="typo-link" href="https://github.com/hltj/kotlinx.coroutines-cn/blob/master/kotlinx-coroutines-core/jvm/test/guide/example-flow-08.kt">这里</a>获取完整代码。</p>
+</blockquote>
+<p class="typo-para">它产生以下三行，每一行每秒出现一次：</p>
+<pre><code class="code _highlighted" data-lang="text/plain">response 1
+response 2
+response 3
+</code></pre>
+<!--- TEST -->
+<h4 class="typo-header typo-h4" id="转换操作符">转换操作符</h4>
+<p class="typo-para">在流转换操作符中，最通用的一种称为 <a class="typo-link" href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/transform.html">transform</a>。它可以用来模仿<!--
+-->简单的转换，例如 <a class="typo-link" href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/map.html">map</a> 与 <a class="typo-link" href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/filter.html">filter</a>，以及实施更复杂的转换。
+使用 <code>transform</code> 操作符，我们可以 <a class="typo-link" href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-flow-collector/emit.html">发射</a> 任意值任意次。</p>
+<p class="typo-para">比如说，使用 <code>transform</code> 我们可以在执行长时间运行的异步请求之前发射一个字符串<!--
+-->并跟踪这个响应：</p>
+<div class="sample" data-min-compiler-version="1.3" theme="idea">
+<pre><code class="language-kotlin">import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.*
+
+suspend fun performRequest(request: Int): String {
+    delay(1000) // 模仿长时间运行的异步任务
+    return "response $request"
+}
+
+fun main() = runBlocking&lt;Unit&gt; {
+//sampleStart
+    (1..3).asFlow() // 一个请求流
+        .transform { request -&gt;
+            emit("Making request $request") 
+            emit(performRequest(request)) 
+        }
+        .collect { response -&gt; println(response) }
+//sampleEnd
+}
+</code></pre>
+</div>
+<blockquote class="typo-quote">
+<p class="typo-para">可以在<a class="typo-link" href="https://github.com/hltj/kotlinx.coroutines-cn/blob/master/kotlinx-coroutines-core/jvm/test/guide/example-flow-09.kt">这里</a>获取完整代码。</p>
+</blockquote>
+<p class="typo-para">这段代码的输出如下：</p>
+<pre><code class="code _highlighted" data-lang="text/plain">Making request 1
+response 1
+Making request 2
+response 2
+Making request 3
+response 3
+</code></pre>
+<!--- TEST -->
+<h4 class="typo-header typo-h4" id="限长操作符">限长操作符</h4>
+<p class="typo-para">限长过渡操作符（例如 <a class="typo-link" href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/take.html">take</a>）在流触及相应限制的时候会将它的<!--
+-->执行取消。协程中的取消操作总是通过抛出异常来执行，这样所有的资源管理<!--
+-->函数（如 <code>try {...} finally {...}</code> 块）会在取消的情况下正常运行：</p>
+<div class="sample" data-min-compiler-version="1.3" theme="idea">
+<pre><code class="language-kotlin">import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.*
+
+//sampleStart
+fun numbers(): Flow&lt;Int&gt; = flow {
+    try {                          
+        emit(1)
+        emit(2) 
+        println("This line will not execute")
+        emit(3)    
+    } finally {
+        println("Finally in numbers")
+    }
+}
+
+fun main() = runBlocking&lt;Unit&gt; {
+    numbers() 
+        .take(2) // 只获取前两个
+        .collect { value -&gt; println(value) }
+}            
+//sampleEnd
+</code></pre>
+</div>
+<blockquote class="typo-quote">
+<p class="typo-para">可以在<a class="typo-link" href="https://github.com/hltj/kotlinx.coroutines-cn/blob/master/kotlinx-coroutines-core/jvm/test/guide/example-flow-10.kt">这里</a>获取完整代码。</p>
+</blockquote>
+<p class="typo-para">这段代码的输出清楚地表明，<code>numbers()</code> 函数中对 <code>flow {...}</code> 函数体的执行在<!--
+-->发射出第二个数字后停止：</p>
+<pre><code class="code _highlighted" data-lang="text/plain">1
+2
+Finally in numbers
+</code></pre>
+<!--- TEST -->
+<h3 class="typo-header typo-h3" id="末端流操作符">末端流操作符</h3>
+<p class="typo-para">末端操作符是在流上用于启动流收集的<em>挂起函数</em>。
+<a class="typo-link" href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/collect.html">collect</a> 是最基础的末端操作符，但是还有另外一些更方便使用的末端操作符：</p>
+<ul class="typo-list typo-list_type_simple">
+<li class="typo-list__item">转化为各种集合，例如 <a class="typo-link" href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/to-list.html">toList</a> 与 <a class="typo-link" href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/to-set.html">toSet</a>。</li>
+<li class="typo-list__item">获取第一个（<a class="typo-link" href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/first.html">first</a>）值与确保流发射单个（<a class="typo-link" href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/single.html">single</a>）值的操作符。</li>
+<li class="typo-list__item">使用 <a class="typo-link" href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/reduce.html">reduce</a> 与 <a class="typo-link" href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/fold.html">fold</a> 将流规约到单个值。</li>
+</ul>
+<p class="typo-para">举例来说：</p>
+<div class="sample" data-min-compiler-version="1.3" theme="idea">
+<pre><code class="language-kotlin">import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.*
+
+fun main() = runBlocking&lt;Unit&gt; {
+//sampleStart         
+    val sum = (1..5).asFlow()
+        .map { it * it } // 数字 1 至 5 的平方                        
+        .reduce { a, b -&gt; a + b } // 求和（末端操作符）
+    println(sum)
+//sampleEnd     
+}
+</code></pre>
+</div>
+<blockquote class="typo-quote">
+<p class="typo-para">可以在<a class="typo-link" href="https://github.com/hltj/kotlinx.coroutines-cn/blob/master/kotlinx-coroutines-core/jvm/test/guide/example-flow-11.kt">这里</a>获取完整代码。</p>
+</blockquote>
+<p class="typo-para">打印单个数字：</p>
+<pre><code class="code _highlighted" data-lang="text/plain">55
+</code></pre>
+<!--- TEST -->
+<h3 class="typo-header typo-h3" id="流是连续的">流是连续的</h3>
+<p class="typo-para">流的每次单独收集都是按顺序执行的，除非进行特殊操作的操作符<!--
+-->使用多个流。该收集过程直接在协程中运行，该协程调用末端操作符。
+默认情况下不启动新协程。
+从上游到下游每个过渡操作符都会处理每个发射出的值<!--
+-->然后再交给末端操作符。</p>
+<p class="typo-para">请参见以下示例，该示例过滤偶数并将其映射到字符串：</p>
+<div class="sample" data-min-compiler-version="1.3" theme="idea">
+<pre><code class="language-kotlin">import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.*
+
+fun main() = runBlocking&lt;Unit&gt; {
+//sampleStart         
+    (1..5).asFlow()
+        .filter {
+            println("Filter $it")
+            it % 2 == 0              
+        }              
+        .map { 
+            println("Map $it")
+            "string $it"
+        }.collect { 
+            println("Collect $it")
+        }    
+//sampleEnd                  
+}
+</code></pre>
+</div>
+<blockquote class="typo-quote">
+<p class="typo-para">可以在<a class="typo-link" href="https://github.com/hltj/kotlinx.coroutines-cn/blob/master/kotlinx-coroutines-core/jvm/test/guide/example-flow-12.kt">这里</a>获取完整代码。</p>
+</blockquote>
+<p class="typo-para">执行：</p>
+<pre><code class="code _highlighted" data-lang="text/plain">Filter 1
+Filter 2
+Map 2
+Collect string 2
+Filter 3
+Filter 4
+Map 4
+Collect string 4
+Filter 5
+</code></pre>
+<!--- TEST -->
+<h3 class="typo-header typo-h3" id="流上下文">流上下文</h3>
+<p class="typo-para">流的收集总是在调用协程的上下文中发生。例如，如果有一个流
+<code>simple</code>，然后以下代码在它的编写者指定的上下文中<!--
+-->运行，而无论流 <code>simple</code> 的实现细节如何：</p>
+<div class="sample" data-highlight-only="" theme="idea">
+<pre><code class="language-kotlin">withContext(context) {
+    simple().collect { value -&gt;
+        println(value) // 运行在指定上下文中
+    }
+}
+</code></pre>
+</div>
+<!--- CLEAR -->
+<p class="typo-para">流的该属性称为 <em>上下文保存</em> 。</p>
+<p class="typo-para">所以默认的，<code>flow { ... }</code> 构建器中的代码运行在相应流的收集器<!--
+-->提供的上下文中。举例来说，考虑打印线程的一个 <code>simple</code> 函数的实现，
+它被调用并发射三个数字：</p>
+<div class="sample" data-min-compiler-version="1.3" theme="idea">
+<pre><code class="language-kotlin">import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.*
+
+fun log(msg: String) = println("[${Thread.currentThread().name}] $msg")
+           
+//sampleStart
+fun simple(): Flow&lt;Int&gt; = flow {
+    log("Started simple flow")
+    for (i in 1..3) {
+        emit(i)
+    }
+}  
+
+fun main() = runBlocking&lt;Unit&gt; {
+    simple().collect { value -&gt; log("Collected $value") } 
+}            
+//sampleEnd
+</code></pre>
+</div>
+<blockquote class="typo-quote">
+<p class="typo-para">可以在<a class="typo-link" href="https://github.com/hltj/kotlinx.coroutines-cn/blob/master/kotlinx-coroutines-core/jvm/test/guide/example-flow-13.kt">这里</a>获取完整代码。</p>
+</blockquote>
+<p class="typo-para">运行这段代码：</p>
+<pre><code class="code _highlighted" data-lang="text/plain">[main @coroutine#1] Started simple flow
+[main @coroutine#1] Collected 1
+[main @coroutine#1] Collected 2
+[main @coroutine#1] Collected 3
+</code></pre>
+<!--- TEST FLEXIBLE_THREAD -->
+<p class="typo-para">由于 <code>simple().collect</code> 是在主线程调用的，那么 <code>simple</code> 的流主体也是在主线程调用的。
+这是快速运行或异步代码的理想默认形式，它不关心执行的上下文并且不会<!--
+-->阻塞调用者。</p>
+<h4 class="typo-header typo-h4" id="withcontext-发出错误">withContext 发出错误</h4>
+<p class="typo-para">然而，长时间运行的消耗 CPU 的代码也许需要在 <a class="typo-link" href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-dispatchers/-default.html">Dispatchers.Default</a> 上下文中执行，并且更新 UI
+的代码也许需要在 <a class="typo-link" href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-dispatchers/-main.html">Dispatchers.Main</a> 中执行。通常，<a class="typo-link" href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/with-context.html">withContext</a> 用于在
+Kotlin 协程中改变代码的上下文，但是 <code>flow {...}</code> 构建器中的代码必须遵循上下文<!--
+-->保存属性，并且不允许从其他上下文中发射（<a class="typo-link" href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-flow-collector/emit.html">emit</a>）。</p>
+<p class="typo-para">尝试运行下面的代码：</p>
+<div class="sample" data-min-compiler-version="1.3" theme="idea">
+<pre><code class="language-kotlin">import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.*
+                      
+//sampleStart
+fun simple(): Flow&lt;Int&gt; = flow {
+    // 在流构建器中更改消耗 CPU 代码的上下文的错误方式
+    kotlinx.coroutines.withContext(Dispatchers.Default) {
+        for (i in 1..3) {
+            Thread.sleep(100) // 假装我们以消耗 CPU 的方式进行计算
+            emit(i) // 发射下一个值
+        }
+    }
+}
+
+fun main() = runBlocking&lt;Unit&gt; {
+    simple().collect { value -&gt; println(value) } 
+}            
+//sampleEnd
+</code></pre>
+</div>
+<blockquote class="typo-quote">
+<p class="typo-para">可以在<a class="typo-link" href="https://github.com/hltj/kotlinx.coroutines-cn/blob/master/kotlinx-coroutines-core/jvm/test/guide/example-flow-14.kt">这里</a>获取完整代码。</p>
+</blockquote>
+<p class="typo-para">这段代码产生如下的异常：</p>
+<pre><code class="code _highlighted" data-lang="text/plain">Exception in thread "main" java.lang.IllegalStateException: Flow invariant is violated:
+		Flow was collected in [CoroutineId(1), "coroutine#1":BlockingCoroutine{Active}@5511c7f8, <a href="http://www.kotlincn.net/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="56143a39353d3f383113203338221a393926166433373565656465">[email&#160;protected]</a>],
+		but emission happened in [CoroutineId(1), "coroutine#1":DispatchedCoroutine{Active}@2dae0000, Dispatchers.Default].
+		Please refer to 'flow' documentation or use 'flowOn' instead
+	at ...
+</code></pre>
+<!--- TEST EXCEPTION -->
+<h4 class="typo-header typo-h4" id="flowon-操作符">flowOn 操作符</h4>
+<p class="typo-para">例外的是 <a class="typo-link" href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/flow-on.html">flowOn</a> 函数，该函数用于更改流发射的上下文。
+以下示例展示了更改流上下文的正确方法，该示例还通过<!--
+-->打印相应线程的名字以展示它们的工作方式：</p>
+<div class="sample" data-min-compiler-version="1.3" theme="idea">
+<pre><code class="language-kotlin">import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.*
+
+fun log(msg: String) = println("[${Thread.currentThread().name}] $msg")
+           
+//sampleStart
+fun simple(): Flow&lt;Int&gt; = flow {
+    for (i in 1..3) {
+        Thread.sleep(100) // 假装我们以消耗 CPU 的方式进行计算
+        log("Emitting $i")
+        emit(i) // 发射下一个值
+    }
+}.flowOn(Dispatchers.Default) // 在流构建器中改变消耗 CPU 代码上下文的正确方式
+
+fun main() = runBlocking&lt;Unit&gt; {
+    simple().collect { value -&gt;
+        log("Collected $value") 
+    } 
+}            
+//sampleEnd
+</code></pre>
+</div>
+<blockquote class="typo-quote">
+<p class="typo-para">可以在<a class="typo-link" href="https://github.com/hltj/kotlinx.coroutines-cn/blob/master/kotlinx-coroutines-core/jvm/test/guide/example-flow-15.kt">这里</a>获取完整代码。</p>
+</blockquote>
+<p class="typo-para">注意，当收集发生在主线程中，<code>flow { ... }</code> 是如何在后台线程中工作的：</p>
+<!--- TEST FLEXIBLE_THREAD
+[DefaultDispatcher-worker-1 @coroutine#2] Emitting 1
+[main @coroutine#1] Collected 1
+[DefaultDispatcher-worker-1 @coroutine#2] Emitting 2
+[main @coroutine#1] Collected 2
+[DefaultDispatcher-worker-1 @coroutine#2] Emitting 3
+[main @coroutine#1] Collected 3
+-->
+<p class="typo-para">这里要观察的另一件事是 <a class="typo-link" href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/flow-on.html">flowOn</a> 操作符已改变流的默认顺序性。
+现在收集发生在一个协程中（“coroutine#1”）而发射发生在运行于另一个线程中<!--
+-->与收集协程并发运行的另一个协程（“coroutine#2”）中。当上游流<!--
+-->必须改变其上下文中的 <a class="typo-link" href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-dispatcher/index.html">CoroutineDispatcher</a> 的时候，<a class="typo-link" href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/flow-on.html">flowOn</a> 操作符创建了另一个协程。</p>
+<h3 class="typo-header typo-h3" id="缓冲">缓冲</h3>
+<p class="typo-para">从收集流所花费的时间来看，将流的不同部分运行在不同的协程中<!--
+-->将会很有帮助，特别是当涉及到长时间运行的异步操作时。例如，考虑一种情况，
+一个 <code>simple</code> 流的发射很慢，它每花费 100 毫秒才产生一个元素；而收集器也非常慢， 
+需要花费 300 毫秒来处理元素。让我们看看从该流收集三个数字要花费多长时间：</p>
+<div class="sample" data-min-compiler-version="1.3" theme="idea">
+<pre><code class="language-kotlin">import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.*
+import kotlin.system.*
+
+//sampleStart
+fun simple(): Flow&lt;Int&gt; = flow {
+    for (i in 1..3) {
+        delay(100) // 假装我们异步等待了 100 毫秒
+        emit(i) // 发射下一个值
+    }
+}
+
+fun main() = runBlocking&lt;Unit&gt; { 
+    val time = measureTimeMillis {
+        simple().collect { value -&gt; 
+            delay(300) // 假装我们花费 300 毫秒来处理它
+            println(value) 
+        } 
+    }   
+    println("Collected in $time ms")
+}
+//sampleEnd
+</code></pre>
+</div>
+<blockquote class="typo-quote">
+<p class="typo-para">可以在<a class="typo-link" href="https://github.com/hltj/kotlinx.coroutines-cn/blob/master/kotlinx-coroutines-core/jvm/test/guide/example-flow-16.kt">这里</a>获取完整代码。</p>
+</blockquote>
+<p class="typo-para">它会产生这样的结果，整个收集过程大约需要 1200 毫秒（3 个数字，每个花费 400 毫秒）：</p>
+<pre><code class="code _highlighted" data-lang="text/plain">1
+2
+3
+Collected in 1220 ms
+</code></pre>
+<!--- TEST ARBITRARY_TIME -->
+<p class="typo-para">我们可以在流上使用 <a class="typo-link" href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/buffer.html">buffer</a> 操作符来并发运行这个 <code>simple</code> 流中发射元素的代码以及收集的代码，
+而不是顺序运行它们：</p>
+<div class="sample" data-min-compiler-version="1.3" theme="idea">
+<pre><code class="language-kotlin">import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.*
+import kotlin.system.*
+
+fun simple(): Flow&lt;Int&gt; = flow {
+    for (i in 1..3) {
+        delay(100) // 假装我们异步等待了 100 毫秒
+        emit(i) // 发射下一个值
+    }
+}
+
+fun main() = runBlocking&lt;Unit&gt; { 
+//sampleStart
+    val time = measureTimeMillis {
+        simple()
+            .buffer() // 缓冲发射项，无需等待
+            .collect { value -&gt; 
+                delay(300) // 假装我们花费 300 毫秒来处理它
+                println(value) 
+            } 
+    }   
+    println("Collected in $time ms")
+//sampleEnd
+}
+</code></pre>
+</div>
+<blockquote class="typo-quote">
+<p class="typo-para">可以在<a class="typo-link" href="https://github.com/hltj/kotlinx.coroutines-cn/blob/master/kotlinx-coroutines-core/jvm/test/guide/example-flow-17.kt">这里</a>获取完整代码。</p>
+</blockquote>
+<p class="typo-para">它产生了相同的数字，只是更快了，由于我们高效地创建了处理流水线，
+仅仅需要等待第一个数字产生的 100 毫秒以及处理每个数字各需<!--
+-->花费的 300 毫秒。这种方式大约花费了 1000 毫秒来运行：</p>
+<pre><code class="code _highlighted" data-lang="text/plain">1
+2
+3
+Collected in 1071 ms
+</code></pre>
+<!--- TEST ARBITRARY_TIME -->
+<blockquote class="typo-quote">
+<p class="typo-para">注意，当必须更改 <a class="typo-link" href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-dispatcher/index.html">CoroutineDispatcher</a> 时，<a class="typo-link" href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/flow-on.html">flowOn</a> 操作符使用了相同的缓冲机制，
+但是我们在这里显式地请求缓冲而不改变执行上下文。</p>
+</blockquote>
+<h4 class="typo-header typo-h4" id="合并">合并</h4>
+<p class="typo-para">当流代表部分操作结果或操作状态更新时，可能没有必要<!--
+-->处理每个值，而是只处理最新的那个。在本示例中，当收集器处理它们太慢的时候，
+<a class="typo-link" href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/conflate.html">conflate</a> 操作符可以用于跳过中间值。构建前面的示例：</p>
+<div class="sample" data-min-compiler-version="1.3" theme="idea">
+<pre><code class="language-kotlin">import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.*
+import kotlin.system.*
+
+fun simple(): Flow&lt;Int&gt; = flow {
+    for (i in 1..3) {
+        delay(100) // 假装我们异步等待了 100 毫秒
+        emit(i) // 发射下一个值
+    }
+}
+
+fun main() = runBlocking&lt;Unit&gt; { 
+//sampleStart
+    val time = measureTimeMillis {
+        simple()
+            .conflate() // 合并发射项，不对每个值进行处理
+            .collect { value -&gt; 
+                delay(300) // 假装我们花费 300 毫秒来处理它
+                println(value) 
+            } 
+    }   
+    println("Collected in $time ms")
+//sampleEnd
+}
+</code></pre>
+</div>
+<blockquote class="typo-quote">
+<p class="typo-para">可以在<a class="typo-link" href="https://github.com/hltj/kotlinx.coroutines-cn/blob/master/kotlinx-coroutines-core/jvm/test/guide/example-flow-18.kt">这里</a>获取完整代码。</p>
+</blockquote>
+<p class="typo-para">我们看到，虽然第一个数字仍在处理中，但第二个和第三个数字已经产生，因此<!--
+-->第二个是 <em>conflated</em> ，只有最新的（第三个）被交付给收集器：</p>
+<pre><code class="code _highlighted" data-lang="text/plain">1
+3
+Collected in 758 ms
+</code></pre>
+<!--- TEST ARBITRARY_TIME -->
+<h4 class="typo-header typo-h4" id="处理最新值">处理最新值</h4>
+<p class="typo-para">当发射器和收集器都很慢的时候，合并是加快处理速度的一种方式。它通过删除发射值来实现。
+另一种方式是取消缓慢的收集器，并在每次发射新值的时候重新启动它。有<!--
+-->一组与 <code>xxx</code> 操作符执行相同基本逻辑的 <code>xxxLatest</code> 操作符，但是在新值产生的时候<!-- but cancel the
+-->取消执行其块中的代码。让我们在先前的示例中尝试更换 <a class="typo-link" href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/conflate.html">conflate</a> 为 <a class="typo-link" href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/collect-latest.html">collectLatest</a>：</p>
+<div class="sample" data-min-compiler-version="1.3" theme="idea">
+<pre><code class="language-kotlin">import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.*
+import kotlin.system.*
+
+fun simple(): Flow&lt;Int&gt; = flow {
+    for (i in 1..3) {
+        delay(100) // 假装我们异步等待了 100 毫秒
+        emit(i) // 发射下一个值
+    }
+}
+
+fun main() = runBlocking&lt;Unit&gt; { 
+//sampleStart
+    val time = measureTimeMillis {
+        simple()
+            .collectLatest { value -&gt; // 取消并重新发射最后一个值
+                println("Collecting $value") 
+                delay(300) // 假装我们花费 300 毫秒来处理它
+                println("Done $value") 
+            } 
+    }   
+    println("Collected in $time ms")
+//sampleEnd
+}
+</code></pre>
+</div>
+<blockquote class="typo-quote">
+<p class="typo-para">可以在<a class="typo-link" href="https://github.com/hltj/kotlinx.coroutines-cn/blob/master/kotlinx-coroutines-core/jvm/test/guide/example-flow-19.kt">这里</a>获取完整代码。</p>
+</blockquote>
+<p class="typo-para">由于 <a class="typo-link" href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/collect-latest.html">collectLatest</a> 的函数体需要花费 300 毫秒，但是新值每 100 秒发射一次，我们看到该代码块<!--
+-->对每个值运行，但是只收集最后一个值：</p>
+<pre><code class="code _highlighted" data-lang="text/plain">Collecting 1
+Collecting 2
+Collecting 3
+Done 3
+Collected in 741 ms
+</code></pre>
+<!--- TEST ARBITRARY_TIME -->
+<h3 class="typo-header typo-h3" id="组合多个流">组合多个流</h3>
+<p class="typo-para">组合多个流有很多种方式。</p>
+<h4 class="typo-header typo-h4" id="zip">Zip</h4>
+<p class="typo-para">就像 Kotlin 标准库中的 <a class="typo-link" href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.sequences/zip.html">Sequence.zip</a> 扩展函数一样，
+流拥有一个 <a class="typo-link" href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/zip.html">zip</a> 操作符用于组合两个流中的相关值：</p>
+<div class="sample" data-min-compiler-version="1.3" theme="idea">
+<pre><code class="language-kotlin">import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.*
+
+fun main() = runBlocking&lt;Unit&gt; { 
+//sampleStart                                                                           
+    val nums = (1..3).asFlow() // 数字 1..3
+    val strs = flowOf("one", "two", "three") // 字符串
+    nums.zip(strs) { a, b -&gt; "$a -&gt; $b" } // 组合单个字符串
+        .collect { println(it) } // 收集并打印
+//sampleEnd
+}
+</code></pre>
+</div>
+<blockquote class="typo-quote">
+<p class="typo-para">可以在<a class="typo-link" href="https://github.com/hltj/kotlinx.coroutines-cn/blob/master/kotlinx-coroutines-core/jvm/test/guide/example-flow-20.kt">这里</a>获取完整代码。</p>
+</blockquote>
+<p class="typo-para">示例打印如下：</p>
+<pre><code class="code _highlighted" data-lang="text/plain">1 -&gt; one
+2 -&gt; two
+3 -&gt; three
+</code></pre>
+<!--- TEST -->
+<h4 class="typo-header typo-h4" id="combine">Combine</h4>
+<p class="typo-para">当流表示一个变量或操作的最新值时（请参阅<!--
+-->相关小节 <a class="typo-link" href="flow.html#合并">conflation</a>），可能需要执行计算，这依赖于<!--
+-->相应流的最新值，并且每当上游流产生值的时候<!--
+-->都需要重新计算。这种相应的操作符家族称为 <a class="typo-link" href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/combine.html">combine</a>。</p>
+<p class="typo-para">例如，先前示例中的数字如果每 300 毫秒更新一次，但字符串每 400 毫秒更新一次，
+然后使用 <a class="typo-link" href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/zip.html">zip</a> 操作符合并它们，但仍会产生相同的结果，
+尽管每 400 毫秒打印一次结果：</p>
+<blockquote class="typo-quote">
+<p class="typo-para">我们在本示例中使用 <a class="typo-link" href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/on-each.html">onEach</a> 过渡操作符来延时每次元素发射并使<!--
+-->该流更具说明性以及更简洁。</p>
+</blockquote>
+<div class="sample" data-min-compiler-version="1.3" theme="idea">
+<pre><code class="language-kotlin">import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.*
+
+fun main() = runBlocking&lt;Unit&gt; { 
+//sampleStart                                                                           
+    val nums = (1..3).asFlow().onEach { delay(300) } // 发射数字 1..3，间隔 300 毫秒
+    val strs = flowOf("one", "two", "three").onEach { delay(400) } // 每 400 毫秒发射一次字符串
+    val startTime = System.currentTimeMillis() // 记录开始的时间
+    nums.zip(strs) { a, b -&gt; "$a -&gt; $b" } // 使用“zip”组合单个字符串
+        .collect { value -&gt; // 收集并打印
+            println("$value at ${System.currentTimeMillis() - startTime} ms from start") 
+        } 
+//sampleEnd
+}
+</code></pre>
+</div>
+<blockquote class="typo-quote">
+<p class="typo-para">可以在<a class="typo-link" href="https://github.com/hltj/kotlinx.coroutines-cn/blob/master/kotlinx-coroutines-core/jvm/test/guide/example-flow-21.kt">这里</a>获取完整代码。</p>
+</blockquote>
+<!--- TEST ARBITRARY_TIME
+1 -> one at 437 ms from start
+2 -> two at 837 ms from start
+3 -> three at 1243 ms from start
+-->
+<p class="typo-para">然而，当在这里使用 <a class="typo-link" href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/combine.html">combine</a> 操作符来替换 <a class="typo-link" href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/zip.html">zip</a>：</p>
+<div class="sample" data-min-compiler-version="1.3" theme="idea">
+<pre><code class="language-kotlin">import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.*
+
+fun main() = runBlocking&lt;Unit&gt; { 
+//sampleStart                                                                           
+    val nums = (1..3).asFlow().onEach { delay(300) } // 发射数字 1..3，间隔 300 毫秒
+    val strs = flowOf("one", "two", "three").onEach { delay(400) } // 每 400 毫秒发射一次字符串
+    val startTime = System.currentTimeMillis() // 记录开始的时间
+    nums.combine(strs) { a, b -&gt; "$a -&gt; $b" } // 使用“combine”组合单个字符串
+        .collect { value -&gt; // 收集并打印
+            println("$value at ${System.currentTimeMillis() - startTime} ms from start") 
+        } 
+//sampleEnd
+}
+</code></pre>
+</div>
+<blockquote class="typo-quote">
+<p class="typo-para">可以在<a class="typo-link" href="https://github.com/hltj/kotlinx.coroutines-cn/blob/master/kotlinx-coroutines-core/jvm/test/guide/example-flow-22.kt">这里</a>获取完整代码。</p>
+</blockquote>
+<p class="typo-para">我们得到了完全不同的输出，其中，<code>nums</code> 或 <code>strs</code> 流中的每次发射都会打印一行：</p>
+<pre><code class="code _highlighted" data-lang="text/plain">1 -&gt; one at 452 ms from start
+2 -&gt; one at 651 ms from start
+2 -&gt; two at 854 ms from start
+3 -&gt; two at 952 ms from start
+3 -&gt; three at 1256 ms from start
+</code></pre>
+<!--- TEST ARBITRARY_TIME -->
+<h3 class="typo-header typo-h3" id="展平流">展平流</h3>
+<p class="typo-para">流表示异步接收的值序列，所以很容易遇到这样的情况：
+每个值都会触发对另一个值序列的请求。比如说，我们可以拥有下面这样一个返回间隔 500
+毫秒的两个字符串流的函数：</p>
+<div class="sample" data-highlight-only="" theme="idea">
+<pre><code class="language-kotlin">fun requestFlow(i: Int): Flow&lt;String&gt; = flow {
+    emit("$i: First") 
+    delay(500) // 等待 500 毫秒
+    emit("$i: Second")    
+}
+</code></pre>
+</div>
+<!--- CLEAR -->
+<p class="typo-para">现在，如果我们有一个包含三个整数的流，并为每个整数调用 <code>requestFlow</code>，如下所示：</p>
+<div class="sample" data-highlight-only="" theme="idea">
+<pre><code class="language-kotlin">(1..3).asFlow().map { requestFlow(it) }
+</code></pre>
+</div>
+<!--- CLEAR -->
+<p class="typo-para">然后我们得到了一个包含流的流（<code>Flow&lt;Flow&lt;String&gt;&gt;</code>），需要将其进行<em>展平</em>为单个流以进行<!--
+-->下一步处理。集合与序列都拥有 <a class="typo-link" href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.sequences/flatten.html">flatten</a> 与 <a class="typo-link" href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.sequences/flat-map.html">flatMap</a>
+操作符来做这件事。然而，由于流具有异步的性质，因此需要不同的展平<em>模式</em>，
+为此，存在一系列的流展平操作符。</p>
+<h4 class="typo-header typo-h4" id="flatmapconcat">flatMapConcat</h4>
+<p class="typo-para">连接模式由 <a class="typo-link" href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/flat-map-concat.html">flatMapConcat</a> 与 <a class="typo-link" href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/flatten-concat.html">flattenConcat</a> 操作符实现。它们<!--
+-->是相应序列操作符最相近的类似物。它们在等待内部流完成之前<!--
+-->开始收集下一个值，如下面的示例所示：</p>
+<div class="sample" data-min-compiler-version="1.3" theme="idea">
+<pre><code class="language-kotlin">import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.*
+
+fun requestFlow(i: Int): Flow&lt;String&gt; = flow {
+    emit("$i: First") 
+    delay(500) // 等待 500 毫秒
+    emit("$i: Second")    
+}
+
+fun main() = runBlocking&lt;Unit&gt; { 
+//sampleStart
+    val startTime = System.currentTimeMillis() // 记录开始时间
+    (1..3).asFlow().onEach { delay(100) } // 每 100 毫秒发射一个数字 
+        .flatMapConcat { requestFlow(it) }                                                                           
+        .collect { value -&gt; // 收集并打印
+            println("$value at ${System.currentTimeMillis() - startTime} ms from start") 
+        } 
+//sampleEnd
+}
+</code></pre>
+</div>
+<blockquote class="typo-quote">
+<p class="typo-para">可以在<a class="typo-link" href="https://github.com/hltj/kotlinx.coroutines-cn/blob/master/kotlinx-coroutines-core/jvm/test/guide/example-flow-23.kt">这里</a>获取完整代码。</p>
+</blockquote>
+<p class="typo-para">在输出中可以清楚地看到 <a class="typo-link" href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/flat-map-concat.html">flatMapConcat</a> 的顺序性质：</p>
+<pre><code class="code _highlighted" data-lang="text/plain">1: First at 121 ms from start
+1: Second at 622 ms from start
+2: First at 727 ms from start
+2: Second at 1227 ms from start
+3: First at 1328 ms from start
+3: Second at 1829 ms from start
+</code></pre>
+<!--- TEST ARBITRARY_TIME -->
+<h4 class="typo-header typo-h4" id="flatmapmerge">flatMapMerge</h4>
+<p class="typo-para">另一种展平模式是并发收集所有传入的流，并将它们的值合并到<!--
+-->一个单独的流，以便尽快的发射值。
+它由 <a class="typo-link" href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/flat-map-merge.html">flatMapMerge</a> 与 <a class="typo-link" href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/flatten-merge.html">flattenMerge</a> 操作符实现。他们都接收可选的<!--
+-->用于限制并发收集的流的个数的 <code>concurrency</code> 参数<!--
+-->（默认情况下，它等于 <a class="typo-link" href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-d-e-f-a-u-l-t_-c-o-n-c-u-r-r-e-n-c-y.html">DEFAULT_CONCURRENCY</a>）。</p>
+<div class="sample" data-min-compiler-version="1.3" theme="idea">
+<pre><code class="language-kotlin">import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.*
+
+fun requestFlow(i: Int): Flow&lt;String&gt; = flow {
+    emit("$i: First") 
+    delay(500) // 等待 500 毫秒
+    emit("$i: Second")    
+}
+
+fun main() = runBlocking&lt;Unit&gt; { 
+//sampleStart
+    val startTime = System.currentTimeMillis() // 记录开始时间
+    (1..3).asFlow().onEach { delay(100) } // 每 100 毫秒发射一个数字 
+        .flatMapMerge { requestFlow(it) }                                                                           
+        .collect { value -&gt; // 收集并打印
+            println("$value at ${System.currentTimeMillis() - startTime} ms from start") 
+        } 
+//sampleEnd
+}
+</code></pre>
+</div>
+<blockquote class="typo-quote">
+<p class="typo-para">可以在<a class="typo-link" href="https://github.com/hltj/kotlinx.coroutines-cn/blob/master/kotlinx-coroutines-core/jvm/test/guide/example-flow-24.kt">这里</a>获取完整代码。</p>
+</blockquote>
+<p class="typo-para"><a class="typo-link" href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/flat-map-merge.html">flatMapMerge</a> 的并发性质很明显：</p>
+<pre><code class="code _highlighted" data-lang="text/plain">1: First at 136 ms from start
+2: First at 231 ms from start
+3: First at 333 ms from start
+1: Second at 639 ms from start
+2: Second at 732 ms from start
+3: Second at 833 ms from start
+</code></pre>
+<!--- TEST ARBITRARY_TIME -->
+<blockquote class="typo-quote">
+<p class="typo-para">注意，<a class="typo-link" href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/flat-map-merge.html">flatMapMerge</a> 会顺序调用代码块（本示例中的 <code>{ requestFlow(it) }</code>），但是<!--
+-->并发收集结果流，相当于执行顺序是首先执行
+<code>map { requestFlow(it) }</code> 然后在其返回结果上调用 <a class="typo-link" href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/flatten-merge.html">flattenMerge</a>。</p>
+</blockquote>
+<h4 class="typo-header typo-h4" id="flatmaplatest">flatMapLatest</h4>
+<p class="typo-para">与 <a class="typo-link" href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/collect-latest.html">collectLatest</a> 操作符类似（在<!--
+--><a class="typo-link" href="flow.html#处理最新值">"处理最新值"</a> 小节中已经讨论过），也有相对应的“最新”<!--
+-->展平模式，在发出新流后立即取消先前流的收集。
+这由 <a class="typo-link" href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/flat-map-latest.html">flatMapLatest</a> 操作符来实现。</p>
+<div class="sample" data-min-compiler-version="1.3" theme="idea">
+<pre><code class="language-kotlin">import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.*
+
+fun requestFlow(i: Int): Flow&lt;String&gt; = flow {
+    emit("$i: First") 
+    delay(500) // 等待 500 毫秒
+    emit("$i: Second")    
+}
+
+fun main() = runBlocking&lt;Unit&gt; { 
+//sampleStart
+    val startTime = System.currentTimeMillis() // 记录开始时间
+    (1..3).asFlow().onEach { delay(100) } // 每 100 毫秒发射一个数字 
+        .flatMapLatest { requestFlow(it) }                                                                           
+        .collect { value -&gt; // 收集并打印
+            println("$value at ${System.currentTimeMillis() - startTime} ms from start") 
+        } 
+//sampleEnd
+}
+</code></pre>
+</div>
+<blockquote class="typo-quote">
+<p class="typo-para">可以在<a class="typo-link" href="https://github.com/hltj/kotlinx.coroutines-cn/blob/master/kotlinx-coroutines-core/jvm/test/guide/example-flow-25.kt">这里</a>获取完整代码。</p>
+</blockquote>
+<p class="typo-para">该示例的输出很好的展示了 <a class="typo-link" href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/flat-map-latest.html">flatMapLatest</a> 的工作方式：</p>
+<pre><code class="code _highlighted" data-lang="text/plain">1: First at 142 ms from start
+2: First at 322 ms from start
+3: First at 425 ms from start
+3: Second at 931 ms from start
+</code></pre>
+<!--- TEST ARBITRARY_TIME -->
+<blockquote class="typo-quote">
+<p class="typo-para">注意，<a class="typo-link" href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/flat-map-latest.html">flatMapLatest</a> 在一个新值到来时取消了块中的所有代码 (本示例中的 <code>{ requestFlow(it) }</code>）。 
+这在该特定示例中不会有什么区别，由于调用 <code>requestFlow</code> 自身的速度是很快的，不会发生挂起，
+所以不会被取消。然而，如果我们要在块中调用诸如 <code>delay</code> 之类的挂起函数，这将会被表现出来。</p>
+</blockquote>
+<h3 class="typo-header typo-h3" id="流异常">流异常</h3>
+<p class="typo-para">当运算符中的发射器或代码抛出异常时，流收集可以带有异常的完成。
+有几种处理异常的方法。</p>
+<h4 class="typo-header typo-h4" id="收集器-try-与-catch">收集器 try 与 catch</h4>
+<p class="typo-para">收集者可以使用 Kotlin 的 <a class="typo-link" href="https://kotlinlang.org/docs/reference/exceptions.html"><code>try/catch</code></a> 块来处理异常：</p>
+<div class="sample" data-min-compiler-version="1.3" theme="idea">
+<pre><code class="language-kotlin">import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.*
+
+//sampleStart
+fun simple(): Flow&lt;Int&gt; = flow {
+    for (i in 1..3) {
+        println("Emitting $i")
+        emit(i) // 发射下一个值
+    }
+}
+
+fun main() = runBlocking&lt;Unit&gt; {
+    try {
+        simple().collect { value -&gt;         
+            println(value)
+            check(value &lt;= 1) { "Collected $value" }
+        }
+    } catch (e: Throwable) {
+        println("Caught $e")
+    } 
+}            
+//sampleEnd
+</code></pre>
+</div>
+<blockquote class="typo-quote">
+<p class="typo-para">可以在<a class="typo-link" href="https://github.com/hltj/kotlinx.coroutines-cn/blob/master/kotlinx-coroutines-core/jvm/test/guide/example-flow-26.kt">这里</a>获取完整代码。</p>
+</blockquote>
+<p class="typo-para">这段代码成功的在末端操作符 <a class="typo-link" href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/collect.html">collect</a> 中捕获了异常，并且， 
+如我们所见，在这之后不再发出任何值：</p>
+<pre><code class="code _highlighted" data-lang="text/plain">Emitting 1
+1
+Emitting 2
+2
+Caught java.lang.IllegalStateException: Collected 2
+</code></pre>
+<!--- TEST -->
+<h4 class="typo-header typo-h4" id="一切都已捕获">一切都已捕获</h4>
+<p class="typo-para">前面的示例实际上捕获了在发射器或任何过渡或末端操作符中发生的任何异常。
+例如，让我们修改代码以便将发出的值<a class="typo-link" href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/map.html">映射</a>为字符串，
+但是相应的代码会产生一个异常：</p>
+<div class="sample" data-min-compiler-version="1.3" theme="idea">
+<pre><code class="language-kotlin">import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.*
+
+//sampleStart
+fun simple(): Flow&lt;String&gt; = 
+    flow {
+        for (i in 1..3) {
+            println("Emitting $i")
+            emit(i) // 发射下一个值
+        }
+    }
+    .map { value -&gt;
+        check(value &lt;= 1) { "Crashed on $value" }                 
+        "string $value"
+    }
+
+fun main() = runBlocking&lt;Unit&gt; {
+    try {
+        simple().collect { value -&gt; println(value) }
+    } catch (e: Throwable) {
+        println("Caught $e")
+    } 
+}            
+//sampleEnd
+</code></pre>
+</div>
+<blockquote class="typo-quote">
+<p class="typo-para">可以在<a class="typo-link" href="https://github.com/hltj/kotlinx.coroutines-cn/blob/master/kotlinx-coroutines-core/jvm/test/guide/example-flow-27.kt">这里</a>获取完整代码。</p>
+</blockquote>
+<p class="typo-para">仍然会捕获该异常并停止收集：</p>
+<pre><code class="code _highlighted" data-lang="text/plain">Emitting 1
+string 1
+Emitting 2
+Caught java.lang.IllegalStateException: Crashed on 2
+</code></pre>
+<!--- TEST -->
+<h3 class="typo-header typo-h3" id="异常透明性">异常透明性</h3>
+<p class="typo-para">但是，发射器的代码如何封装其异常处理行为？</p>
+<p class="typo-para">流必须<em>对异常透明</em>，即在 <code>flow { ... }</code> 构建器内部的 <code>try/catch</code>
+块中<a class="typo-link" href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-flow-collector/emit.html">发射</a>值是违反异常透明性的。这样可以保证收集器抛出的一个异常<!--
+-->能被像先前示例中那样的 <code>try/catch</code> 块捕获。</p>
+<p class="typo-para">发射器可以使用 <a class="typo-link" href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/catch.html">catch</a> 操作符来保留此异常的透明性并允许封装<!--
+-->它的异常处理。catch 操作符的代码块可以分析异常<!--
+-->并根据捕获到的异常以不同的方式对其做出反应：</p>
+<ul class="typo-list typo-list_type_simple">
+<li class="typo-list__item">可以使用 <code>throw</code> 重新抛出异常。</li>
+<li class="typo-list__item">可以使用 <a class="typo-link" href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/catch.html">catch</a> 代码块中的 <a class="typo-link" href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-flow-collector/emit.html">emit</a> 将异常转换为值发射出去。</li>
+<li class="typo-list__item">可以将异常忽略，或用日志打印，或使用一些其他代码处理它。</li>
+</ul>
+<p class="typo-para">例如，让我们在捕获异常的时候发射文本：</p>
+<div class="sample" data-min-compiler-version="1.3" theme="idea">
+<pre><code class="language-kotlin">import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.*
+
+fun simple(): Flow&lt;String&gt; = 
+    flow {
+        for (i in 1..3) {
+            println("Emitting $i")
+            emit(i) // 发射下一个值
+        }
+    }
+    .map { value -&gt;
+        check(value &lt;= 1) { "Crashed on $value" }
+        "string $value"
+    }
+
+fun main() = runBlocking&lt;Unit&gt; {
+//sampleStart
+    simple()
+        .catch { e -&gt; emit("Caught $e") } // 发射一个异常
+        .collect { value -&gt; println(value) }
+//sampleEnd
+}            
+</code></pre>
+</div>
+<blockquote class="typo-quote">
+<p class="typo-para">可以在<a class="typo-link" href="https://github.com/hltj/kotlinx.coroutines-cn/blob/master/kotlinx-coroutines-core/jvm/test/guide/example-flow-28.kt">这里</a>获取完整代码。</p>
+</blockquote>
+<p class="typo-para">即使我们不再在代码的外层使用 <code>try/catch</code>，示例的输出也是相同的。</p>
+<!--- TEST  
+Emitting 1
+string 1
+Emitting 2
+Caught java.lang.IllegalStateException: Crashed on 2
+-->
+<h4 class="typo-header typo-h4" id="透明捕获">透明捕获</h4>
+<p class="typo-para"><a class="typo-link" href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/catch.html">catch</a> 过渡操作符遵循异常透明性，仅捕获上游异常<!--
+-->（<code>catch</code> 操作符上游的异常，但是它下面的不是）。
+如果 <code>collect { ... }</code> 块（位于 <code>catch</code> 之下）抛出一个异常，那么异常会逃逸：</p>
+<div class="sample" data-min-compiler-version="1.3" theme="idea">
+<pre><code class="language-kotlin">import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.*
+
+//sampleStart
+fun simple(): Flow&lt;Int&gt; = flow {
+    for (i in 1..3) {
+        println("Emitting $i")
+        emit(i)
+    }
+}
+
+fun main() = runBlocking&lt;Unit&gt; {
+    simple()
+        .catch { e -&gt; println("Caught $e") } // 不会捕获下游异常
+        .collect { value -&gt;
+            check(value &lt;= 1) { "Collected $value" }                 
+            println(value) 
+        }
+}            
+//sampleEnd
+</code></pre>
+</div>
+<blockquote class="typo-quote">
+<p class="typo-para">可以在<a class="typo-link" href="https://github.com/hltj/kotlinx.coroutines-cn/blob/master/kotlinx-coroutines-core/jvm/test/guide/example-flow-29.kt">这里</a>获取完整代码。</p>
+</blockquote>
+<p class="typo-para">尽管有 <code>catch</code> 操作符，但不会打印“Caught …”消息：</p>
+<!--- TEST EXCEPTION  
+Emitting 1
+1
+Emitting 2
+Exception in thread "main" java.lang.IllegalStateException: Collected 2
+	at ...
+-->
+<h4 class="typo-header typo-h4" id="声明式捕获">声明式捕获</h4>
+<p class="typo-para">我们可以将 <a class="typo-link" href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/catch.html">catch</a> 操作符的声明性与处理所有异常的期望相结合，将 <a class="typo-link" href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/collect.html">collect</a>
+操作符的代码块移动到 <a class="typo-link" href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/on-each.html">onEach</a> 中，并将其放到 <code>catch</code> 操作符之前。收集该流必须由调用<!--
+-->无参的 <code>collect()</code> 来触发：</p>
+<div class="sample" data-min-compiler-version="1.3" theme="idea">
+<pre><code class="language-kotlin">import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.*
+
+fun simple(): Flow&lt;Int&gt; = flow {
+    for (i in 1..3) {
+        println("Emitting $i")
+        emit(i)
+    }
+}
+
+fun main() = runBlocking&lt;Unit&gt; {
+//sampleStart
+    simple()
+        .onEach { value -&gt;
+            check(value &lt;= 1) { "Collected $value" }                 
+            println(value) 
+        }
+        .catch { e -&gt; println("Caught $e") }
+        .collect()
+//sampleEnd
+}            
+</code></pre>
+</div>
+<blockquote class="typo-quote">
+<p class="typo-para">可以在<a class="typo-link" href="https://github.com/hltj/kotlinx.coroutines-cn/blob/master/kotlinx-coroutines-core/jvm/test/guide/example-flow-30.kt">这里</a>获取完整代码。</p>
+</blockquote>
+<p class="typo-para">现在我们可以看到已经打印了“Caught …”消息，并且我们可以在没有显式使用
+<code>try/catch</code> 块的情况下捕获所有异常：</p>
+<!--- TEST EXCEPTION  
+Emitting 1
+1
+Emitting 2
+Caught java.lang.IllegalStateException: Collected 2
+-->
+<h3 class="typo-header typo-h3" id="流完成">流完成</h3>
+<p class="typo-para">当流收集完成时（普通情况或异常情况），它可能需要执行一个动作。
+你可能已经注意到，它可以通过两种方式完成：命令式或声明式。</p>
+<h4 class="typo-header typo-h4" id="命令式-finally-块">命令式 finally 块</h4>
+<p class="typo-para">除了 <code>try</code>/<code>catch</code> 之外，收集器还能使用 <code>finally</code> 块在 <code>collect</code>
+完成时执行一个动作。</p>
+<div class="sample" data-min-compiler-version="1.3" theme="idea">
+<pre><code class="language-kotlin">import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.*
+
+//sampleStart
+fun simple(): Flow&lt;Int&gt; = (1..3).asFlow()
+
+fun main() = runBlocking&lt;Unit&gt; {
+    try {
+        simple().collect { value -&gt; println(value) }
+    } finally {
+        println("Done")
+    }
+}            
+//sampleEnd
+</code></pre>
+</div>
+<blockquote class="typo-quote">
+<p class="typo-para">可以在<a class="typo-link" href="https://github.com/hltj/kotlinx.coroutines-cn/blob/master/kotlinx-coroutines-core/jvm/test/guide/example-flow-31.kt">这里</a>获取完整代码。</p>
+</blockquote>
+<p class="typo-para">这段代码打印出 <code>simple</code> 流产生的三个数字，后面跟一个“Done”字符串：</p>
+<pre><code class="code _highlighted" data-lang="text/plain">1
+2
+3
+Done
+</code></pre>
+<!--- TEST  -->
+<h4 class="typo-header typo-h4" id="声明式处理">声明式处理</h4>
+<p class="typo-para">对于声明式，流拥有 <a class="typo-link" href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/on-completion.html">onCompletion</a> 过渡操作符，它在流完全收集<!--
+-->时调用。</p>
+<p class="typo-para">可以使用 <a class="typo-link" href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/on-completion.html">onCompletion</a> 操作符重写前面的示例，并产生相同的输出：</p>
+<div class="sample" data-min-compiler-version="1.3" theme="idea">
+<pre><code class="language-kotlin">import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.*
+
+fun simple(): Flow&lt;Int&gt; = (1..3).asFlow()
+
+fun main() = runBlocking&lt;Unit&gt; {
+//sampleStart
+    simple()
+        .onCompletion { println("Done") }
+        .collect { value -&gt; println(value) }
+//sampleEnd
+}            
+</code></pre>
+</div>
+<blockquote class="typo-quote">
+<p class="typo-para">可以在<a class="typo-link" href="https://github.com/hltj/kotlinx.coroutines-cn/blob/master/kotlinx-coroutines-core/jvm/test/guide/example-flow-32.kt">这里</a>获取完整代码。</p>
+</blockquote>
+<!--- TEST 
+1
+2
+3
+Done
+-->
+<p class="typo-para"><a class="typo-link" href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/on-completion.html">onCompletion</a> 的主要优点是其 lambda 表达式的可空参数
+<code>Throwable</code> 可以用于确定流收集是正常完成还是有异常发生。在下面的<!--
+-->示例中 <code>simple</code> 流在发射数字 1 之后抛出了一个异常：</p>
+<div class="sample" data-min-compiler-version="1.3" theme="idea">
+<pre><code class="language-kotlin">import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.*
+
+//sampleStart
+fun simple(): Flow&lt;Int&gt; = flow {
+    emit(1)
+    throw RuntimeException()
+}
+
+fun main() = runBlocking&lt;Unit&gt; {
+    simple()
+        .onCompletion { cause -&gt; if (cause != null) println("Flow completed exceptionally") }
+        .catch { cause -&gt; println("Caught exception") }
+        .collect { value -&gt; println(value) }
+}            
+//sampleEnd
+</code></pre>
+</div>
+<blockquote class="typo-quote">
+<p class="typo-para">可以在<a class="typo-link" href="https://github.com/hltj/kotlinx.coroutines-cn/blob/master/kotlinx-coroutines-core/jvm/test/guide/example-flow-33.kt">这里</a>获取完整代码。</p>
+</blockquote>
+<p class="typo-para">如你所期望的，它打印了：</p>
+<pre><code class="code _highlighted" data-lang="text/plain">1
+Flow completed exceptionally
+Caught exception
+</code></pre>
+<!--- TEST -->
+<p class="typo-para"><a class="typo-link" href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/on-completion.html">onCompletion</a> 操作符与 <a class="typo-link" href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/catch.html">catch</a> 不同，它不处理异常。我们可以看到前面的<!--
+-->示例代码，异常仍然流向下游。它将被提供给后面的 <code>onCompletion</code>
+操作符，并可以由 <code>catch</code> 操作符处理。</p>
+<h4 class="typo-header typo-h4" id="成功完成">成功完成</h4>
+<p class="typo-para">与 <a class="typo-link" href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/catch.html">catch</a> 操作符的另一个不同点是 <a class="typo-link" href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/on-completion.html">onCompletion</a> 能观察到所有异常并且<!--
+-->仅在上游流成功完成（没有取消或失败）的情况下接收一个 <code>null</code> 异常。</p>
+<div class="sample" data-min-compiler-version="1.3" theme="idea">
+<pre><code class="language-kotlin">import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.*
+
+//sampleStart
+fun simple(): Flow&lt;Int&gt; = (1..3).asFlow()
+
+fun main() = runBlocking&lt;Unit&gt; {
+    simple()
+        .onCompletion { cause -&gt; println("Flow completed with $cause") }
+        .collect { value -&gt;
+            check(value &lt;= 1) { "Collected $value" }                 
+            println(value) 
+        }
+}
+//sampleEnd
+</code></pre>
+</div>
+<blockquote class="typo-quote">
+<p class="typo-para">可以在<a class="typo-link" href="https://github.com/hltj/kotlinx.coroutines-cn/blob/master/kotlinx-coroutines-core/jvm/test/guide/example-flow-34.kt">这里</a>获取完整代码。</p>
+</blockquote>
+<p class="typo-para">我们可以看到完成时 cause 不为空，因为流由于下游异常而中止：</p>
+<pre><code class="code _highlighted" data-lang="text/plain">1
+Flow completed with java.lang.IllegalStateException: Collected 2
+Exception in thread "main" java.lang.IllegalStateException: Collected 2
+</code></pre>
+<!--- TEST EXCEPTION -->
+<h3 class="typo-header typo-h3" id="命令式还是声明式">命令式还是声明式</h3>
+<p class="typo-para">现在我们知道如何收集流，并以命令式与声明式的方式处理其完成及异常情况。
+这里有一个很自然的问题是，哪种方式应该是首选的？为什么？
+作为一个库，我们不主张采用任何特定的方式，并且相信这两种选择都是有效的，
+应该根据自己的喜好与代码风格进行选择。</p>
+<h3 class="typo-header typo-h3" id="启动流">启动流</h3>
+<p class="typo-para">使用流表示来自一些源的异步事件是很简单的。
+在这个案例中，我们需要一个类似 <code>addEventListener</code> 的函数，该函数注册一段响应的代码<!--
+-->处理即将到来的事件，并继续进行进一步的处理。<a class="typo-link" href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/on-each.html">onEach</a> 操作符可以担任该角色。
+然而，<code>onEach</code> 是一个过渡操作符。我们也需要一个末端操作符来收集流。
+否则仅调用 <code>onEach</code> 是无效的。</p>
+<p class="typo-para">如果我们在 <code>onEach</code> 之后使用 <a class="typo-link" href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/collect.html">collect</a> 末端操作符，那么后面的代码会一直等待直至流被收集：</p>
+<div class="sample" data-min-compiler-version="1.3" theme="idea">
+<pre><code class="language-kotlin">import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.*
+
+//sampleStart
+// 模仿事件流
+fun events(): Flow&lt;Int&gt; = (1..3).asFlow().onEach { delay(100) }
+
+fun main() = runBlocking&lt;Unit&gt; {
+    events()
+        .onEach { event -&gt; println("Event: $event") }
+        .collect() // &lt;--- 等待流收集
+    println("Done")
+}            
+//sampleEnd
+</code></pre>
+</div>
+<blockquote class="typo-quote">
+<p class="typo-para">可以在<a class="typo-link" href="https://github.com/hltj/kotlinx.coroutines-cn/blob/master/kotlinx-coroutines-core/jvm/test/guide/example-flow-35.kt">这里</a>获取完整代码。</p>
+</blockquote>
+<p class="typo-para">你可以看到它的输出：</p>
+<pre><code class="code _highlighted" data-lang="text/plain">Event: 1
+Event: 2
+Event: 3
+Done
+</code></pre>
+<!--- TEST -->
+<p class="typo-para"><a class="typo-link" href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/launch-in.html">launchIn</a> 末端操作符可以在这里派上用场。使用 <code>launchIn</code> 替换 <code>collect</code> 我们可以<!--
+-->在单独的协程中启动流的收集，这样就可以立即继续<!--
+-->进一步执行代码：</p>
+<div class="sample" data-min-compiler-version="1.3" theme="idea">
+<pre><code class="language-kotlin">import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.*
+
+// 模仿事件流
+fun events(): Flow&lt;Int&gt; = (1..3).asFlow().onEach { delay(100) }
+
+//sampleStart
+fun main() = runBlocking&lt;Unit&gt; {
+    events()
+        .onEach { event -&gt; println("Event: $event") }
+        .launchIn(this) // &lt;--- 在单独的协程中执行流
+    println("Done")
+}            
+//sampleEnd
+</code></pre>
+</div>
+<blockquote class="typo-quote">
+<p class="typo-para">可以在<a class="typo-link" href="https://github.com/hltj/kotlinx.coroutines-cn/blob/master/kotlinx-coroutines-core/jvm/test/guide/example-flow-36.kt">这里</a>获取完整代码。</p>
+</blockquote>
+<p class="typo-para">它打印了：</p>
+<pre><code class="code _highlighted" data-lang="text/plain">Done
+Event: 1
+Event: 2
+Event: 3
+</code></pre>
+<!--- TEST -->
+<p class="typo-para"><code>launchIn</code> 必要的参数 <a class="typo-link" href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-scope/index.html">CoroutineScope</a> 指定了用哪一个协程来启动流的<!--
+-->收集。在先前的示例中这个作用域来自 <a class="typo-link" href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/run-blocking.html">runBlocking</a>
+协程构建器，在这个流运行的时候，<a class="typo-link" href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/run-blocking.html">runBlocking</a> 作用域等待它的子协程执行完毕<!--
+-->并防止 main 函数返回并终止此示例。</p>
+<p class="typo-para">在实际的应用中，作用域来自于一个寿命有限的<!--
+-->实体。在该实体的寿命终止后，相应的作用域就会被取消，即取消<!--
+-->相应流的收集。这种成对的 <code>onEach { ... }.launchIn(scope)</code> 工作方式<!--
+-->就像 <code>addEventListener</code> 一样。而且，这不需要相应的 <code>removeEventListener</code> 函数，
+因为取消与结构化并发可以达成这个目的。</p>
+<p class="typo-para">注意，<a class="typo-link" href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/launch-in.html">launchIn</a> 也会返回一个 <a class="typo-link" href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-job/index.html">Job</a>，可以在不取消整个作用域的情况下仅<a class="typo-link" href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-job/cancel.html">取消</a>相应的流收集<!--
+-->或对其进行 <a class="typo-link" href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-job/join.html">join</a>。</p>
+<h3 class="typo-header typo-h3" id="流取消检测">流取消检测</h3>
+<p class="typo-para">为方便起见，<a class="typo-link" href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/flow.html">流</a>构建器对每个发射值执行附加的 <a class="typo-link" href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/ensure-active.html">ensureActive</a> 检测以进行取消。
+这意味着从 <code>flow { ... }</code> 发出的繁忙循环是可以取消的：</p>
+<div class="sample" data-min-compiler-version="1.3" theme="idea">
+<pre><code class="language-kotlin">import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.*
+
+//sampleStart           
+fun foo(): Flow&lt;Int&gt; = flow { 
+    for (i in 1..5) {
+        println("Emitting $i") 
+        emit(i) 
+    }
+}
+
+fun main() = runBlocking&lt;Unit&gt; {
+    foo().collect { value -&gt; 
+        if (value == 3) cancel()  
+        println(value)
+    } 
+}
+//sampleEnd
+</code></pre>
+</div>
+<blockquote class="typo-quote">
+<p class="typo-para">可以在<a class="typo-link" href="https://github.com/hltj/kotlinx.coroutines-cn/blob/master/kotlinx-coroutines-core/jvm/test/guide/example-flow-37.kt">这里</a>获取完整的代码。</p>
+</blockquote>
+<p class="typo-para">仅得到不超过 3 的数字，在尝试发出 4 之后抛出 <a class="typo-link" href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-cancellation-exception/index.html">CancellationException</a>；</p>
+<pre><code class="code _highlighted" data-lang="text/plain">Emitting 1
+1
+Emitting 2
+2
+Emitting 3
+3
+Emitting 4
+Exception in thread "main" kotlinx.coroutines.JobCancellationException: BlockingCoroutine was cancelled; job="coroutine#1":BlockingCoroutine{Cancelled}@6d7b4f4c
+</code></pre>
+<!--- TEST EXCEPTION -->
+<p class="typo-para">但是，出于性能原因，大多数其他流操作不会自行执行其他取消检测。
+例如，如果使用 <a class="typo-link" href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/kotlin.ranges.-int-range/as-flow.html">IntRange.asFlow</a> 扩展来编写相同的繁忙循环，
+并且没有在任何地方暂停，那么就没有取消的检测；</p>
+<div class="sample" data-min-compiler-version="1.3" theme="idea">
+<pre><code class="language-kotlin">import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.*
+
+//sampleStart           
+fun main() = runBlocking&lt;Unit&gt; {
+    (1..5).asFlow().collect { value -&gt; 
+        if (value == 3) cancel()  
+        println(value)
+    } 
+}
+//sampleEnd
+</code></pre>
+</div>
+<blockquote class="typo-quote">
+<p class="typo-para">可以在<a class="typo-link" href="https://github.com/hltj/kotlinx.coroutines-cn/blob/master/kotlinx-coroutines-core/jvm/test/guide/example-flow-38.kt">这里</a>获取完整的代码。</p>
+</blockquote>
+<p class="typo-para">收集从 1 到 5 的所有数字，并且仅在从 <code>runBlocking</code> 返回之前检测到取消：</p>
+<pre><code class="code _highlighted" data-lang="text/plain">1
+2
+3
+4
+5
+Exception in thread "main" kotlinx.coroutines.JobCancellationException: BlockingCoroutine was cancelled; job="coroutine#1":BlockingCoroutine{Cancelled}@3327bd23
+</code></pre>
+<!--- TEST EXCEPTION -->
+<h4 class="typo-header typo-h4" id="让繁忙的流可取消">让繁忙的流可取消</h4>
+<p class="typo-para">在协程处于繁忙循环的情况下，必须明确检测是否取消。
+可以添加 <code>.onEach { currentCoroutineContext().ensureActive() }</code>，
+但是这里提供了一个现成的 <a class="typo-link" href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/cancellable.html">cancellable</a> 操作符来执行此操作：</p>
+<div class="sample" data-min-compiler-version="1.3" theme="idea">
+<pre><code class="language-kotlin">import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.*
+
+//sampleStart           
+fun main() = runBlocking&lt;Unit&gt; {
+    (1..5).asFlow().cancellable().collect { value -&gt; 
+        if (value == 3) cancel()  
+        println(value)
+    } 
+}
+//sampleEnd
+</code></pre>
+</div>
+<blockquote class="typo-quote">
+<p class="typo-para">可以在<a class="typo-link" href="https://github.com/hltj/kotlinx.coroutines-cn/blob/master/kotlinx-coroutines-core/jvm/test/guide/example-flow-39.kt">这里</a>获取完整的代码。</p>
+</blockquote>
+<p class="typo-para">使用 <code>cancellable</code> 操作符，仅收集从 1 到 3 的数字：</p>
+<pre><code class="code _highlighted" data-lang="text/plain">1
+2
+3
+Exception in thread "main" kotlinx.coroutines.JobCancellationException: BlockingCoroutine was cancelled; job="coroutine#1":BlockingCoroutine{Cancelled}@5ec0a365
+</code></pre>
+<!--- TEST EXCEPTION -->
+<h3 class="typo-header typo-h3" id="flow-and-reactive-streams">流（Flow）与响应式流（Reactive Streams）</h3>
+<p class="typo-para">对于熟悉响应式流（<a class="typo-link" href="https://www.reactive-streams.org/">Reactive Streams</a>）或诸如 RxJava 与 Project Reactor 这样的响应式框架的人来说，
+Flow 的设计也许看起来会非常熟悉。</p>
+<p class="typo-para">确实，其设计灵感来源于响应式流以及其各种实现。但是 Flow 的主要目标是拥有尽可能简单的设计，
+对 Kotlin 以及挂起友好且遵从结构化并发。没有响应式的先驱及他们大量的工作，就不可能实现这一目标。你可以阅读 <a class="typo-link" href="https://medium.com/@elizarov/reactive-streams-and-kotlin-flows-bfd12772cda4">Reactive Streams and Kotlin Flows</a> 这篇文章来了解完成 Flow 的故事。</p>
+<p class="typo-para">虽然有所不同，但从概念上讲，Flow <em>依然是</em>响应式流，并且可以将它转换为响应式（规范及符合 TCK）的发布者（Publisher），反之亦然。
+这些开箱即用的转换器可以在 <code>kotlinx.coroutines</code> 提供的相关响应式模块（<code>kotlinx-coroutines-reactive</code> 用于 Reactive Streams，<code>kotlinx-coroutines-reactor</code> 用于 Project Reactor，以及 <code>kotlinx-coroutines-rx2</code>/<code>kotlinx-coroutines-rx3</code> 用于 RxJava2/RxJava3）中找到。
+集成模块包含 <code>Flow</code> 与其他实现之间的转换，与 Reactor 的 <code>Context</code> 集成以及与一系列响应式实体配合使用的挂起友好的使用方式。</p>
+<!-- stdlib references -->
+<!--- MODULE kotlinx-coroutines-core -->
+<!--- INDEX kotlinx.coroutines -->
+<!--- INDEX kotlinx.coroutines.flow -->
+<!--- END -->
+
+        </article>
+    </div>
+        </div>
+</div>
+
+<footer role="contentinfo" class="global-footer">
+
+    <div class="global-footer-terms">
+        <div class="g-layout">
+            <ul class="terms-social">
+                <li class="terms-social__item terms-social__item_blog">
+                    <a target="_blank" class="link" href="https://blog.jetbrains.com/kotlin/">博客</a>
+                </li>
+                <li class="terms-social__item terms-social__item_forum">
+                    <a target="_blank" class="link" href="https://discuss.kotlinlang.org/">论坛</a>
+                </li>
+                <li class="terms-social__item terms-social__item_bug-tracker">
+                    <a target="_blank" class="link" href="https://youtrack.jetbrains.com/issues/KT">问题跟踪</a>
+                </li>
+                <li class="terms-social__item terms-social__item_github">
+                    <a target="_blank" class="link" href="https://github.com/JetBrains/kotlin">GitHub</a>
+                </li>
+                <li class="terms-social__item terms-social__item_twitter">
+                    <a target="_blank" class="link" href="https://twitter.com/kotlin">Twitter</a>
+                </li>
+            </ul>
+            <div class="global-footer-container">
+                <div class="global-footer-row-left">
+                        <p class="terms-para"><a class="terms-kit"
+                              href="http://www.kotlincn.net/contribute.html">为 Kotlin 做贡献</a></p>
+                    <p class="terms-para"><a class="terms-kit"
+                                             href="http://www.kotlincn.net/eap/">抢先体验预览</a></p>
+                    <p class="terms-para"><a class="terms-kit"
+                                             href="http://www.kotlincn.net/security.html">安全性</a></p>
+                        <p class="terms-para"><a class="terms-kit"
+                              href="http://www.kotlincn.net/assets/kotlin-media-kit.pdf">宣传资料</a></p>
+                    <div class="terms-copyright">
+                        采用 <a href="https://github.com/JetBrains/kotlin-web-site/blob/master/LICENSE">Apache
+                        2
+                        授权许可</a>
+                    </div>
+
+                    <div class="terms-foundation">
+                        Kotlin 商标受 <a
+                            href="http://www.kotlincn.net/foundation/kotlin-foundation.html">Kotlin 基金会</a>保护
+                    </div>
+                </div>
+                <div class="global-footer-row-right">
+                    <div class="terms-sponsor">
+                        Kotlin 语言与 Kotlin 官方英文站由 <a href="http://jetbrains.com" class="sponsor sponsor_jetbrains jetbrains-logo _logo-jetbrains"
+                                                      target="_blank">JetBrains</a> 赞助及开发；
+                    </div>
+                    <div class="terms-sponsor">
+                        本站由<a href="https://hltj.me/" class="testimonial-company-link" target="_blank" rel="nofollow">灰蓝天际</a>、
+                        <a href="http://tanfujun.com" class="testimonial-company-link" target="_blank" rel="nofollow">晓_晨DEV</a>、
+                        <a href="https://github.com/qiaoyuang" class="testimonial-company-link" target="_blank" rel="nofollow">乔禹昂</a>、
+                        <a href="https://github.com/SpielbergGao" class="testimonial-company-link" target="_blank" rel="nofollow">高金龙</a>、
+                        <a href="https://github.com/HoshinoTented" class="testimonial-company-link" target="_blank" rel="nofollow">HoshinoTented</a>、
+                        <a href="https://www.liuwj.me" class="testimonial-company-link" target="_blank" rel="nofollow">刘文俊</a>、
+                        <a href="https://github.com/Hiwensen" class="testimonial-company-link" target="_blank" rel="nofollow">常少威</a>、
+                        <a href="https://github.com/Yue-plus" class="testimonial-company-link" target="_blank" rel="nofollow">Yue-plus</a>、
+                        <a href="https://github.com/Guolianxing" class="testimonial-company-link" target="_blank" rel="nofollow">Guolianxing</a>
+                        &nbsp;<a href="http://www.kotlincn.net/contribute.html#中文站翻译贡献者" class="testimonial-company-link" target="_blank" rel="nofollow">等</a>译
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</footer><div class="search-popup _hidden" tabindex="1000">
+    <div class="search-popup__content">
+        <div class="search-popup__controls">
+            <div class="search-popup__input"></div>
+            <div class="search-popup__close">
+                <div class="search-popup__close-icon-wrapper">
+                    <div class="search-popup__close-icon"></div>
+                </div>
+                <div class="search-popup__close-text">esc</div>
+            </div>
+        </div>
+        <div class="search-popup__results"></div>
+    </div>
+</div>
+<script data-cfasync="false" src="../../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="../../../_assets/common.js?&amp;v=02aab4e0a4be79567299335059fe4adc"></script>
+    <script src="../../../_assets/reference.js?&amp;v=42db5638a201ca172b1b2d12bd88c10c"></script>
+</body>
+</html>

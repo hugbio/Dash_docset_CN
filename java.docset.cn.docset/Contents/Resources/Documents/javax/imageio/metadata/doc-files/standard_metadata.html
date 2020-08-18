@@ -1,0 +1,389 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><html><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/> 
+  <!--
+Copyright (c) 2000, 2013, Oracle and/or its affiliates. All rights reserved.
+ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> 
+  <a class="dashingAutolink" name="autolink-104878"></a><a class="dashAnchor" name="//apple_ref/cpp/Package/Standard%20Metadata%20Format%20Specification"></a><title>Standard Metadata Format Specification</title>
+ </head> 
+ <body bgcolor="white"> 
+  <center> 
+   <h1> Standard (Plug-in Neutral) Metadata Format Specification </h1> 
+  </center> 
+  <p> The plug-in neutral &#34;javax_imageio_1.0&#34; format consists of a root node named &#34;javax_imageio_1.0&#34; which has child nodes &#34;chroma&#34;, &#34;compression&#34;, &#34;dimension&#34;, &#34;document&#34;, &#34;text&#34;, &#34;tile&#34;, and &#34;transparency&#34;. The format is described by the following DTD: </p> 
+  <pre>&lt;!DOCTYPE &#34;javax_imageio_1.0&#34; [
+
+  &lt;!ELEMENT &#34;javax_imageio_1.0&#34; (Chroma?, Compression?, Data?, Dimension?, 
+    Document?, Text?, Transparency?)&gt;
+
+    &lt;!ELEMENT &#34;Chroma&#34; (ColorSpaceType?, NumChannels?, Gamma?, 
+      BlackIsZero?, Palette?, BackgroundIndex?, BackgroundColor?)&gt;
+      &lt;!-- Chroma (color) information --&gt; 
+
+      &lt;!ELEMENT &#34;ColorSpaceType&#34; EMPTY&gt;
+        &lt;!-- The raw color space of the image --&gt; 
+        &lt;!ATTLIST &#34;ColorSpaceType&#34; &#34;name&#34; (&#34;XYZ&#34; | &#34;Lab&#34; | &#34;Luv&#34; | 
+          &#34;YCbCr&#34; | &#34;Yxy&#34; | &#34;YCCK&#34; | &#34;PhotoYCC&#34; | &#34;RGB&#34; | &#34;GRAY&#34; | &#34;HSV&#34; | 
+          &#34;HLS&#34; | &#34;CMYK&#34; | &#34;CMY&#34; | &#34;2CLR&#34; | &#34;3CLR&#34; | &#34;4CLR&#34; | &#34;5CLR&#34; | 
+          &#34;6CLR&#34; | &#34;7CLR&#34; | &#34;8CLR&#34; | &#34;9CLR&#34; | &#34;ACLR&#34; | &#34;BCLR&#34; | &#34;CCLR&#34; | 
+          &#34;DCLR&#34; | &#34;ECLR&#34; | &#34;FCLR&#34;) #REQUIRED&gt;
+
+      &lt;!ELEMENT &#34;NumChannels&#34; EMPTY&gt;
+        &lt;!-- The number of channels in the raw image, including alpha --&gt; 
+        &lt;!ATTLIST &#34;NumChannels&#34; &#34;value&#34; #CDATA #REQUIRED&gt;
+          &lt;!-- Data type: List of Integer --&gt;
+
+      &lt;!ELEMENT &#34;Gamma&#34; EMPTY&gt;
+        &lt;!-- The image gamma --&gt; 
+        &lt;!ATTLIST &#34;Gamma&#34; &#34;value&#34; #CDATA #REQUIRED&gt;
+          &lt;!-- Data type: Float --&gt;
+
+      &lt;!ELEMENT &#34;BlackIsZero&#34; EMPTY&gt;
+        &lt;!-- True if smaller values represent darker shades --&gt; 
+        &lt;!ATTLIST &#34;BlackIsZero&#34; &#34;value&#34; (&#34;TRUE&#34; | &#34;FALSE&#34;) &#34;TRUE&#34;&gt;
+
+      &lt;!ELEMENT &#34;Palette&#34; (PaletteEntry)*&gt;
+        &lt;!-- Palette-color information --&gt; 
+
+        &lt;!ELEMENT &#34;PaletteEntry&#34; EMPTY&gt;
+          &lt;!-- A palette entry --&gt; 
+          &lt;!ATTLIST &#34;PaletteEntry&#34; &#34;index&#34; #CDATA #REQUIRED&gt;
+            &lt;!-- The index of the palette entry --&gt; 
+            &lt;!-- Data type: Integer --&gt;
+          &lt;!ATTLIST &#34;PaletteEntry&#34; &#34;red&#34; #CDATA #REQUIRED&gt;
+            &lt;!-- The red value for the palette entry --&gt; 
+            &lt;!-- Data type: Integer --&gt;
+          &lt;!ATTLIST &#34;PaletteEntry&#34; &#34;green&#34; #CDATA #REQUIRED&gt;
+            &lt;!-- The green value for the palette entry --&gt; 
+            &lt;!-- Data type: Integer --&gt;
+          &lt;!ATTLIST &#34;PaletteEntry&#34; &#34;blue&#34; #CDATA #REQUIRED&gt;
+            &lt;!-- The blue value for the palette entry --&gt; 
+            &lt;!-- Data type: Integer --&gt;
+          &lt;!ATTLIST &#34;PaletteEntry&#34; &#34;alpha&#34; #CDATA &#34;255&#34;&gt;
+            &lt;!-- The alpha value for the palette entry --&gt; 
+            &lt;!-- Data type: Integer --&gt;
+
+      &lt;!ELEMENT &#34;BackgroundIndex&#34; EMPTY&gt;
+        &lt;!-- A palette index to be used as a background --&gt; 
+        &lt;!ATTLIST &#34;BackgroundIndex&#34; &#34;value&#34; #CDATA #REQUIRED&gt;
+          &lt;!-- Data type: Integer --&gt;
+
+      &lt;!ELEMENT &#34;BackgroundColor&#34; EMPTY&gt;
+        &lt;!-- An RGB triple to be used as a background --&gt; 
+        &lt;!ATTLIST &#34;BackgroundColor&#34; &#34;red&#34; #CDATA #REQUIRED&gt;
+          &lt;!-- The red background value --&gt; 
+          &lt;!-- Data type: Integer --&gt;
+        &lt;!ATTLIST &#34;BackgroundColor&#34; &#34;green&#34; #CDATA #REQUIRED&gt;
+          &lt;!-- The green background value --&gt; 
+          &lt;!-- Data type: Integer --&gt;
+        &lt;!ATTLIST &#34;BackgroundColor&#34; &#34;blue&#34; #CDATA #REQUIRED&gt;
+          &lt;!-- The blue background value --&gt; 
+          &lt;!-- Data type: Integer --&gt;
+
+    &lt;!ELEMENT &#34;Compression&#34; (CompressionTypeName?, Lossless?, 
+      NumProgressiveScans?, BitRate?)&gt;
+      &lt;!-- Compression information --&gt; 
+
+      &lt;!ELEMENT &#34;CompressionTypeName&#34; EMPTY&gt;
+        &lt;!-- The name of the compression scheme in use --&gt; 
+        &lt;!ATTLIST &#34;CompressionTypeName&#34; &#34;value&#34; #CDATA #REQUIRED&gt;
+          &lt;!-- Data type: String --&gt;
+
+      &lt;!ELEMENT &#34;Lossless&#34; EMPTY&gt;
+        &lt;!-- True if the compression scheme is lossless --&gt; 
+        &lt;!ATTLIST &#34;Lossless&#34; &#34;value&#34; (&#34;TRUE&#34; | &#34;FALSE&#34;) &#34;TRUE&#34;&gt;
+
+      &lt;!ELEMENT &#34;NumProgressiveScans&#34; EMPTY&gt;
+        &lt;!-- The number of progressive scans used in the image encoding --&gt; 
+        &lt;!ATTLIST &#34;NumProgressiveScans&#34; &#34;value&#34; #CDATA #REQUIRED&gt;
+          &lt;!-- Data type: Integer --&gt;
+
+      &lt;!ELEMENT &#34;BitRate&#34; EMPTY&gt;
+        &lt;!-- The estimated bit rate of the compression scheme --&gt; 
+        &lt;!ATTLIST &#34;BitRate&#34; &#34;value&#34; #CDATA #REQUIRED&gt;
+          &lt;!-- Data type: Float --&gt;
+
+    &lt;!ELEMENT &#34;Data&#34; (PlanarConfiguration?, SampleFormat?, BitsPerSample?, 
+      SignificantBitsPerSample?, SampleMSB?)&gt;
+      &lt;!-- Information on the image layout --&gt; 
+
+      &lt;!ELEMENT &#34;PlanarConfiguration&#34; EMPTY&gt;
+        &lt;!-- The organization of image samples in the stream --&gt; 
+        &lt;!ATTLIST &#34;PlanarConfiguration&#34; &#34;value&#34; (&#34;PixelInterleaved&#34; | 
+          &#34;PlaneInterleaved&#34; | &#34;LineInterleaved&#34; | &#34;TileInterleaved&#34;)
+           #REQUIRED&gt;
+
+      &lt;!ELEMENT &#34;SampleFormat&#34; EMPTY&gt;
+        &lt;!-- The numeric format of image samples --&gt; 
+        &lt;!ATTLIST &#34;SampleFormat&#34; &#34;value&#34; (&#34;SignedIntegral&#34; | 
+          &#34;UnsignedIntegral&#34; | &#34;Real&#34; | &#34;Index&#34;) #REQUIRED&gt;
+
+      &lt;!ELEMENT &#34;BitsPerSample&#34; EMPTY&gt;
+        &lt;!-- The number of bits per sample --&gt; 
+        &lt;!ATTLIST &#34;BitsPerSample&#34; &#34;value&#34; #CDATA #REQUIRED&gt;
+          &lt;!-- A list of integers, one per channel --&gt; 
+          &lt;!-- Data type: List of Integer --&gt;
+          &lt;!-- Min length: 1 --&gt;
+
+      &lt;!ELEMENT &#34;SignificantBitsPerSample&#34; EMPTY&gt;
+        &lt;!-- The number of significant bits per sample --&gt; 
+        &lt;!ATTLIST &#34;SignificantBitsPerSample&#34; &#34;value&#34; #CDATA #REQUIRED&gt;
+          &lt;!-- A list of integers, one per channel --&gt; 
+          &lt;!-- Data type: List of Integer --&gt;
+          &lt;!-- Min length: 1 --&gt;
+
+      &lt;!ELEMENT &#34;SampleMSB&#34; EMPTY&gt;
+        &lt;!-- The position of the most significant bit of each sample --&gt; 
+        &lt;!ATTLIST &#34;SampleMSB&#34; &#34;value&#34; #CDATA #REQUIRED&gt;
+          &lt;!-- A list of integers, one per channel --&gt; 
+          &lt;!-- Data type: List of Integer --&gt;
+          &lt;!-- Min length: 1 --&gt;
+
+    &lt;!ELEMENT &#34;Dimension&#34; (PixelAspectRatio?, ImageOrientation?, 
+      HorizontalPixelSize?, VerticalPixelSize?, 
+      HorizontalPhysicalPixelSpacing?, VerticalPhysicalPixelSpacing?, 
+      HorizontalPosition?, VerticalPosition?, HorizontalPixelOffset?, 
+      VerticalPixelOffset?, HorizontalScreenSize?, VerticalScreenSize?)&gt;
+      &lt;!-- Dimension information --&gt; 
+
+      &lt;!ELEMENT &#34;PixelAspectRatio&#34; EMPTY&gt;
+        &lt;!-- The width of a pixel divided by its height --&gt; 
+        &lt;!ATTLIST &#34;PixelAspectRatio&#34; &#34;value&#34; #CDATA #REQUIRED&gt;
+          &lt;!-- Data type: Float --&gt;
+
+      &lt;!ELEMENT &#34;ImageOrientation&#34; EMPTY&gt;
+        &lt;!-- The desired orientation of the image in terms of flips and 
+             counter-clockwise rotations --&gt; 
+        &lt;!ATTLIST &#34;ImageOrientation&#34; &#34;value&#34; (&#34;Normal&#34; | &#34;Rotate90&#34; | 
+          &#34;Rotate180&#34; | &#34;Rotate270&#34; | &#34;FlipH&#34; | &#34;FlipV&#34; | 
+          &#34;FlipHRotate90&#34; | &#34;FlipVRotate90&#34;) #REQUIRED&gt;
+
+      &lt;!ELEMENT &#34;HorizontalPixelSize&#34; EMPTY&gt;
+        &lt;!-- The width of a pixel, in millimeters, as it should be rendered 
+             on media --&gt; 
+        &lt;!ATTLIST &#34;HorizontalPixelSize&#34; &#34;value&#34; #CDATA #REQUIRED&gt;
+          &lt;!-- Data type: Float --&gt;
+
+      &lt;!ELEMENT &#34;VerticalPixelSize&#34; EMPTY&gt;
+        &lt;!-- The height of a pixel, in millimeters, as it should be 
+             rendered on media --&gt; 
+        &lt;!ATTLIST &#34;VerticalPixelSize&#34; &#34;value&#34; #CDATA #REQUIRED&gt;
+          &lt;!-- Data type: Float --&gt;
+
+      &lt;!ELEMENT &#34;HorizontalPhysicalPixelSpacing&#34; EMPTY&gt;
+        &lt;!-- The horizontal distance in the subject of the image, in 
+             millimeters, represented by one pixel at the center of the 
+             image --&gt; 
+        &lt;!ATTLIST &#34;HorizontalPhysicalPixelSpacing&#34; &#34;value&#34; #CDATA #REQUIRED&gt;
+          &lt;!-- Data type: Float --&gt;
+
+      &lt;!ELEMENT &#34;VerticalPhysicalPixelSpacing&#34; EMPTY&gt;
+        &lt;!-- The vertical distance in the subject of the image, in 
+             millimeters, represented by one pixel at the center of the 
+             image --&gt; 
+        &lt;!ATTLIST &#34;VerticalPhysicalPixelSpacing&#34; &#34;value&#34; #CDATA #REQUIRED&gt;
+          &lt;!-- Data type: Float --&gt;
+
+      &lt;!ELEMENT &#34;HorizontalPosition&#34; EMPTY&gt;
+        &lt;!-- The horizontal position, in millimeters, where the image 
+             should be rendered on media --&gt; 
+        &lt;!ATTLIST &#34;HorizontalPosition&#34; &#34;value&#34; #CDATA #REQUIRED&gt;
+          &lt;!-- Data type: Float --&gt;
+
+      &lt;!ELEMENT &#34;VerticalPosition&#34; EMPTY&gt;
+        &lt;!-- The vertical position, in millimeters, where the image should 
+             be rendered on media --&gt; 
+        &lt;!ATTLIST &#34;VerticalPosition&#34; &#34;value&#34; #CDATA #REQUIRED&gt;
+          &lt;!-- Data type: Float --&gt;
+
+      &lt;!ELEMENT &#34;HorizontalPixelOffset&#34; EMPTY&gt;
+        &lt;!-- The horizontal position, in pixels, where the image should be 
+             rendered onto a raster display --&gt; 
+        &lt;!ATTLIST &#34;HorizontalPixelOffset&#34; &#34;value&#34; #CDATA #REQUIRED&gt;
+          &lt;!-- Data type: Integer --&gt;
+
+      &lt;!ELEMENT &#34;VerticalPixelOffset&#34; EMPTY&gt;
+        &lt;!-- The vertical position, in pixels, where the image should be 
+             rendered onto a raster display --&gt; 
+        &lt;!ATTLIST &#34;VerticalPixelOffset&#34; &#34;value&#34; #CDATA #REQUIRED&gt;
+          &lt;!-- Data type: Integer --&gt;
+
+      &lt;!ELEMENT &#34;HorizontalScreenSize&#34; EMPTY&gt;
+        &lt;!-- The width, in pixels, of the raster display into which the 
+             image should be rendered --&gt; 
+        &lt;!ATTLIST &#34;HorizontalScreenSize&#34; &#34;value&#34; #CDATA #REQUIRED&gt;
+          &lt;!-- Data type: Integer --&gt;
+
+      &lt;!ELEMENT &#34;VerticalScreenSize&#34; EMPTY&gt;
+        &lt;!-- The height, in pixels, of the raster display into which the 
+             image should be rendered --&gt; 
+        &lt;!ATTLIST &#34;VerticalScreenSize&#34; &#34;value&#34; #CDATA #REQUIRED&gt;
+          &lt;!-- Data type: Integer --&gt;
+
+    &lt;!ELEMENT &#34;Document&#34; (FormatVersion?, SubimageInterpretation?, 
+      ImageCreationTime?, ImageModificationTime?)&gt;
+      &lt;!-- Document information --&gt; 
+
+      &lt;!ELEMENT &#34;FormatVersion&#34; EMPTY&gt;
+        &lt;!-- The version of the format used by the stream --&gt; 
+        &lt;!ATTLIST &#34;FormatVersion&#34; &#34;value&#34; #CDATA #REQUIRED&gt;
+          &lt;!-- Data type: String --&gt;
+
+      &lt;!ELEMENT &#34;SubimageInterpretation&#34; EMPTY&gt;
+        &lt;!-- The interpretation of this image in relation to the other 
+             images stored in the same stream --&gt; 
+        &lt;!ATTLIST &#34;SubimageInterpretation&#34; &#34;value&#34; (&#34;Standalone&#34; | 
+          &#34;SinglePage&#34; | &#34;FullResolution&#34; | &#34;ReducedResolution&#34; | 
+          &#34;PyramidLayer&#34; | &#34;Preview&#34; | &#34;VolumeSlice&#34; | &#34;ObjectView&#34; | 
+          &#34;Panorama&#34; | &#34;AnimationFrame&#34; | &#34;TransparencyMask&#34; | 
+          &#34;CompositingLayer&#34; | &#34;SpectralSlice&#34; | &#34;Unknown&#34;) #REQUIRED&gt;
+
+      &lt;!ELEMENT &#34;ImageCreationTime&#34; EMPTY&gt;
+        &lt;!-- The time of image creation --&gt; 
+        &lt;!ATTLIST &#34;ImageCreationTime&#34; &#34;year&#34; #CDATA #REQUIRED&gt;
+          &lt;!-- The full year (e.g., 1967, not 67) --&gt; 
+          &lt;!-- Data type: Integer --&gt;
+        &lt;!ATTLIST &#34;ImageCreationTime&#34; &#34;month&#34; #CDATA #REQUIRED&gt;
+          &lt;!-- The month, with January = 1 --&gt; 
+          &lt;!-- Data type: Integer --&gt;
+          &lt;!-- Min value: 1 (inclusive) --&gt;
+          &lt;!-- Max value: 12 (inclusive) --&gt;
+        &lt;!ATTLIST &#34;ImageCreationTime&#34; &#34;day&#34; #CDATA #REQUIRED&gt;
+          &lt;!-- The day of the month --&gt; 
+          &lt;!-- Data type: Integer --&gt;
+          &lt;!-- Min value: 1 (inclusive) --&gt;
+          &lt;!-- Max value: 31 (inclusive) --&gt;
+        &lt;!ATTLIST &#34;ImageCreationTime&#34; &#34;hour&#34; #CDATA &#34;0&#34;&gt;
+          &lt;!-- The hour from 0 to 23 --&gt; 
+          &lt;!-- Data type: Integer --&gt;
+          &lt;!-- Min value: 0 (inclusive) --&gt;
+          &lt;!-- Max value: 23 (inclusive) --&gt;
+        &lt;!ATTLIST &#34;ImageCreationTime&#34; &#34;minute&#34; #CDATA &#34;0&#34;&gt;
+          &lt;!-- The minute from 0 to 59 --&gt; 
+          &lt;!-- Data type: Integer --&gt;
+          &lt;!-- Min value: 0 (inclusive) --&gt;
+          &lt;!-- Max value: 59 (inclusive) --&gt;
+        &lt;!ATTLIST &#34;ImageCreationTime&#34; &#34;second&#34; #CDATA &#34;0&#34;&gt;
+          &lt;!-- The second from 0 to 60 (60 = leap second) --&gt; 
+          &lt;!-- Data type: Integer --&gt;
+          &lt;!-- Min value: 0 (inclusive) --&gt;
+          &lt;!-- Max value: 60 (inclusive) --&gt;
+
+      &lt;!ELEMENT &#34;ImageModificationTime&#34; EMPTY&gt;
+        &lt;!-- The time of the last image modification --&gt; 
+        &lt;!ATTLIST &#34;ImageModificationTime&#34; &#34;year&#34; #CDATA #REQUIRED&gt;
+          &lt;!-- The full year (e.g., 1967, not 67) --&gt; 
+          &lt;!-- Data type: Integer --&gt;
+        &lt;!ATTLIST &#34;ImageModificationTime&#34; &#34;month&#34; #CDATA #REQUIRED&gt;
+          &lt;!-- The month, with January = 1 --&gt; 
+          &lt;!-- Data type: Integer --&gt;
+          &lt;!-- Min value: 1 (inclusive) --&gt;
+          &lt;!-- Max value: 12 (inclusive) --&gt;
+        &lt;!ATTLIST &#34;ImageModificationTime&#34; &#34;day&#34; #CDATA #REQUIRED&gt;
+          &lt;!-- The day of the month --&gt; 
+          &lt;!-- Data type: Integer --&gt;
+          &lt;!-- Min value: 1 (inclusive) --&gt;
+          &lt;!-- Max value: 31 (inclusive) --&gt;
+        &lt;!ATTLIST &#34;ImageModificationTime&#34; &#34;hour&#34; #CDATA &#34;0&#34;&gt;
+          &lt;!-- The hour from 0 to 23 --&gt; 
+          &lt;!-- Data type: Integer --&gt;
+          &lt;!-- Min value: 0 (inclusive) --&gt;
+          &lt;!-- Max value: 23 (inclusive) --&gt;
+        &lt;!ATTLIST &#34;ImageModificationTime&#34; &#34;minute&#34; #CDATA &#34;0&#34;&gt;
+          &lt;!-- The minute from 0 to 59 --&gt; 
+          &lt;!-- Data type: Integer --&gt;
+          &lt;!-- Min value: 0 (inclusive) --&gt;
+          &lt;!-- Max value: 59 (inclusive) --&gt;
+        &lt;!ATTLIST &#34;ImageModificationTime&#34; &#34;second&#34; #CDATA &#34;0&#34;&gt;
+          &lt;!-- The second from 0 to 60 (60 = leap second) --&gt; 
+          &lt;!-- Data type: Integer --&gt;
+          &lt;!-- Min value: 0 (inclusive) --&gt;
+          &lt;!-- Max value: 60 (inclusive) --&gt;
+
+    &lt;!ELEMENT &#34;Text&#34; (TextEntry)*&gt;
+      &lt;!-- Text information --&gt; 
+
+      &lt;!ELEMENT &#34;TextEntry&#34; EMPTY&gt;
+        &lt;!-- A text entry --&gt; 
+        &lt;!ATTLIST &#34;TextEntry&#34; &#34;keyword&#34; #CDATA #IMPLIED&gt;
+          &lt;!-- A keyword associated with the text entry --&gt; 
+          &lt;!-- Data type: String --&gt;
+        &lt;!ATTLIST &#34;TextEntry&#34; &#34;value&#34; #CDATA #REQUIRED&gt;
+          &lt;!-- the text entry --&gt; 
+          &lt;!-- Data type: String --&gt;
+        &lt;!ATTLIST &#34;TextEntry&#34; &#34;language&#34; #CDATA #IMPLIED&gt;
+          &lt;!-- The language of the text --&gt; 
+          &lt;!-- Data type: String --&gt;
+        &lt;!ATTLIST &#34;TextEntry&#34; &#34;encoding&#34; #CDATA #IMPLIED&gt;
+          &lt;!-- The encoding of the text --&gt; 
+          &lt;!-- Data type: String --&gt;
+        &lt;!ATTLIST &#34;TextEntry&#34; &#34;compression&#34; (&#34;none&#34; | &#34;lzw&#34; | &#34;zip&#34; | 
+          &#34;bzip&#34; | &#34;other&#34;) &#34;none&#34;&gt;
+          &lt;!-- The method used to compress the text --&gt; 
+
+    &lt;!ELEMENT &#34;Transparency&#34; (Alpha?, TransparentIndex?, 
+      TransparentColor?, TileTransparencies?, TileOpacities?)&gt;
+      &lt;!-- Transparency information --&gt; 
+
+      &lt;!ELEMENT &#34;Alpha&#34; EMPTY&gt;
+        &lt;!-- The type of alpha information contained in the image --&gt; 
+        &lt;!ATTLIST &#34;Alpha&#34; &#34;value&#34; (&#34;none&#34; | &#34;premultiplied&#34; | 
+          &#34;nonpremultiplied&#34;) &#34;none&#34;&gt;
+
+      &lt;!ELEMENT &#34;TransparentIndex&#34; EMPTY&gt;
+        &lt;!-- A palette index to be treated as transparent --&gt; 
+        &lt;!ATTLIST &#34;TransparentIndex&#34; &#34;value&#34; #CDATA #REQUIRED&gt;
+          &lt;!-- Data type: Integer --&gt;
+
+      &lt;!ELEMENT &#34;TransparentColor&#34; EMPTY&gt;
+        &lt;!-- An RGB color to be treated as transparent --&gt; 
+        &lt;!ATTLIST &#34;TransparentColor&#34; &#34;value&#34; #CDATA #REQUIRED&gt;
+          &lt;!-- Data type: List of Integer --&gt;
+
+      &lt;!ELEMENT &#34;TileTransparencies&#34; (TransparentTile)*&gt;
+        &lt;!-- A list of completely transparent tiles --&gt; 
+
+        &lt;!ELEMENT &#34;TransparentTile&#34; EMPTY&gt;
+          &lt;!-- The index of a completely transparent tile --&gt; 
+          &lt;!ATTLIST &#34;TransparentTile&#34; &#34;x&#34; #CDATA #REQUIRED&gt;
+            &lt;!-- The tile&#39;s X index --&gt; 
+            &lt;!-- Data type: Integer --&gt;
+          &lt;!ATTLIST &#34;TransparentTile&#34; &#34;y&#34; #CDATA #REQUIRED&gt;
+            &lt;!-- The tile&#39;s Y index --&gt; 
+            &lt;!-- Data type: Integer --&gt;
+
+      &lt;!ELEMENT &#34;TileOpacities&#34; (OpaqueTile)*&gt;
+        &lt;!-- A list of completely opaque tiles --&gt; 
+
+        &lt;!ELEMENT &#34;OpaqueTile&#34; EMPTY&gt;
+          &lt;!-- The index of a completely opaque tile --&gt; 
+          &lt;!ATTLIST &#34;OpaqueTile&#34; &#34;x&#34; #CDATA #REQUIRED&gt;
+            &lt;!-- The tile&#39;s X index --&gt; 
+            &lt;!-- Data type: Integer --&gt;
+          &lt;!ATTLIST &#34;OpaqueTile&#34; &#34;y&#34; #CDATA #REQUIRED&gt;
+            &lt;!-- The tile&#39;s Y index --&gt; 
+            &lt;!-- Data type: Integer --&gt;
+]&gt;
+</pre>  
+ 
+</body></html>

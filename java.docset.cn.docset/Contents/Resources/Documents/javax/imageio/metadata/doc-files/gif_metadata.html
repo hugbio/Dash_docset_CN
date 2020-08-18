@@ -1,0 +1,399 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><html><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/> 
+  <!--
+Copyright (c) 2000, 2012, Oracle and/or its affiliates. All rights reserved.
+ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> 
+  <a class="dashingAutolink" name="autolink-104875"></a><a class="dashAnchor" name="//apple_ref/cpp/Package/GIF%20Metadata%20Format%20Specification"></a><title>GIF Metadata Format Specification</title>
+ </head> 
+ <body bgcolor="white"> 
+  <center> 
+   <h1> GIF Metadata Format Specification </h1> 
+  </center> 
+  <a name="gif_stream_metadata_format"> 
+   <center> 
+    <h2> GIF Stream Metadata Format Specification </h2> 
+   </center> </a> 
+  <p> The GIF stream metadata format encodes the information stored in the per-file header, namely the file version, logical screen descriptor, and the global color table. </p> 
+  <p> The logical screen descriptor describes the overall width and height of an animated file, as well as information about the color resolution (number of bits per pixel) and pixel aspect ratio. </p> 
+  <p> The global color table contains a color lookup table that is used for images that do not have their own local color table. </p> 
+  <pre>&lt;!DOCTYPE &#34;javax_imageio_gif_stream_1.0&#34; [
+
+  &lt;!ELEMENT &#34;javax_imageio_gif_stream_1.0&#34; (Version?, 
+    LogicalScreenDescriptor?, GlobalColorTable?)&gt;
+
+    &lt;!ELEMENT &#34;Version&#34; EMPTY&gt;
+      &lt;!-- The file version, either 87a or 89a --&gt;
+      &lt;!ATTLIST &#34;Version&#34; &#34;value&#34; (&#34;87a&#34; | &#34;89a&#34;) #REQUIRED&gt;
+        &lt;!-- The version string --&gt;
+
+    &lt;!ELEMENT &#34;LogicalScreenDescriptor&#34; EMPTY&gt;
+      &lt;!-- The logical screen descriptor, except for the global color table --&gt;
+      &lt;!ATTLIST &#34;LogicalScreenDescriptor&#34; &#34;logicalScreenWidth&#34; #CDATA
+         #REQUIRED&gt;
+        &lt;!-- The width in pixels of the whole picture --&gt;
+        &lt;!-- Data type: Integer --&gt;
+        &lt;!-- Min value: 1 (inclusive) --&gt;
+        &lt;!-- Max value: 65535 (inclusive) --&gt;
+      &lt;!ATTLIST &#34;LogicalScreenDescriptor&#34; &#34;logicalScreenHeight&#34; #CDATA
+         #REQUIRED&gt;
+        &lt;!-- The height in pixels of the whole picture --&gt;
+        &lt;!-- Data type: Integer --&gt;
+        &lt;!-- Min value: 1 (inclusive) --&gt;
+        &lt;!-- Max value: 65535 (inclusive) --&gt;
+      &lt;!ATTLIST &#34;LogicalScreenDescriptor&#34; &#34;colorResolution&#34; #CDATA
+         #REQUIRED&gt;
+        &lt;!-- The number of bits of color resolution, beteen 1 and 8 --&gt;
+        &lt;!-- Data type: Integer --&gt;
+        &lt;!-- Min value: 1 (inclusive) --&gt;
+        &lt;!-- Max value: 8 (inclusive) --&gt;
+      &lt;!ATTLIST &#34;LogicalScreenDescriptor&#34; &#34;pixelAspectRatio&#34; #CDATA
+         #REQUIRED&gt;
+        &lt;!-- If 0, indicates square pixels, else W/H = (value + 15)/64 --&gt;
+        &lt;!-- Data type: Integer --&gt;
+        &lt;!-- Min value: 0 (inclusive) --&gt;
+        &lt;!-- Max value: 255 (inclusive) --&gt;
+
+    &lt;!ELEMENT &#34;GlobalColorTable&#34; (ColorTableEntry)*&gt;
+      &lt;!-- The global color table --&gt;
+      &lt;!-- Min children: 2 --&gt;
+      &lt;!-- Max children: 256 --&gt;
+      &lt;!ATTLIST &#34;GlobalColorTable&#34; &#34;sizeOfGlobalColorTable&#34; (&#34;2&#34; | 
+        &#34;4&#34; | &#34;8&#34; | &#34;16&#34; | &#34;32&#34; | &#34;64&#34; | &#34;128&#34; | &#34;256&#34;) #REQUIRED&gt;
+        &lt;!-- The number of entries in the global color table --&gt;
+      &lt;!ATTLIST &#34;GlobalColorTable&#34; &#34;backgroundColorIndex&#34; #CDATA
+         #REQUIRED&gt;
+        &lt;!-- The index of the color table entry to be used as a background --&gt;
+        &lt;!-- Data type: Integer --&gt;
+        &lt;!-- Min value: 0 (inclusive) --&gt;
+        &lt;!-- Max value: 255 (inclusive) --&gt;
+      &lt;!ATTLIST &#34;GlobalColorTable&#34; &#34;sortFlag&#34; (&#34;TRUE&#34; | &#34;FALSE&#34;)
+         #REQUIRED&gt;
+        &lt;!-- True if the global color table is sorted by frequency --&gt;
+
+      &lt;!ELEMENT &#34;ColorTableEntry&#34; EMPTY&gt;
+        &lt;!-- A global color table entry --&gt;
+        &lt;!ATTLIST &#34;ColorTableEntry&#34; &#34;index&#34; #CDATA #REQUIRED&gt;
+          &lt;!-- The index of the color table entry --&gt;
+          &lt;!-- Data type: Integer --&gt;
+          &lt;!-- Min value: 0 (inclusive) --&gt;
+          &lt;!-- Max value: 255 (inclusive) --&gt;
+        &lt;!ATTLIST &#34;ColorTableEntry&#34; &#34;red&#34; #CDATA #REQUIRED&gt;
+          &lt;!-- The red value for the color table entry --&gt;
+          &lt;!-- Data type: Integer --&gt;
+          &lt;!-- Min value: 0 (inclusive) --&gt;
+          &lt;!-- Max value: 255 (inclusive) --&gt;
+        &lt;!ATTLIST &#34;ColorTableEntry&#34; &#34;green&#34; #CDATA #REQUIRED&gt;
+          &lt;!-- The green value for the color table entry --&gt;
+          &lt;!-- Data type: Integer --&gt;
+          &lt;!-- Min value: 0 (inclusive) --&gt;
+          &lt;!-- Max value: 255 (inclusive) --&gt;
+        &lt;!ATTLIST &#34;ColorTableEntry&#34; &#34;blue&#34; #CDATA #REQUIRED&gt;
+          &lt;!-- The blue value for the color table entry --&gt;
+          &lt;!-- Data type: Integer --&gt;
+          &lt;!-- Min value: 0 (inclusive) --&gt;
+          &lt;!-- Max value: 255 (inclusive) --&gt;
+]&gt;
+</pre> 
+  <a name="gif_image_metadata_format"> 
+   <center> 
+    <h2> GIF Image Metadata Format Specification </h2> 
+   </center> </a> 
+  <p> The GIF image metadata format encodes the image descriptor, local color table, and extension information assciated with a single image within a GIF file, typically a frame of an animation. </p> 
+  <p> The image description contains the offset of the frame within the logical screen described in the stream metadata, as well as the width and height of the frame and whether it is used interlaced encoding. </p> 
+  <p> The local color table, if present, supersedes the global color table for the frame at hand. </p> 
+  <p> The graphic control extension contains information on how the frame is to be incorporated into the animation. The disposal method indicates whether the current frame should remain in place (<code>doNotDispose</code>), be restored to the backgound color as specified in the stream metadata (<code>restoreToBackgroundColor</code>), or be restored to the previous frame contents (<code>restoreToPrevious</code>) prior to displaying the subsequent frame. </p> 
+  <p> The user input flag indicates whether the animation should pause for user input before advancing to the next frame. The transparent color flag and index indicate a color index for which pixels of the frame should not be drawn. The delay time indicates how long the frame should be displayed, in hundredths of a second. If the user input flag is set and the delay time is 0, the frame is intended to be advanced only on user input. </p> 
+  <pre>&lt;!DOCTYPE &#34;javax_imageio_gif_image_1.0&#34; [
+
+  &lt;!ELEMENT &#34;javax_imageio_gif_image_1.0&#34; (ImageDescriptor?, 
+    LocalColorTable?, GraphicControlExtension?, PlainTextExtension?, 
+    ApplicationExtensions?, CommentExtensions?)&gt;
+
+    &lt;!ELEMENT &#34;ImageDescriptor&#34; EMPTY&gt;
+      &lt;!-- The image descriptor --&gt;
+      &lt;!ATTLIST &#34;ImageDescriptor&#34; &#34;imageLeftPosition&#34; #CDATA #REQUIRED&gt;
+        &lt;!-- The X offset of the image relative to the screen origin --&gt;
+        &lt;!-- Data type: Integer --&gt;
+        &lt;!-- Min value: 0 (inclusive) --&gt;
+        &lt;!-- Max value: 65535 (inclusive) --&gt;
+      &lt;!ATTLIST &#34;ImageDescriptor&#34; &#34;imageTopPosition&#34; #CDATA #REQUIRED&gt;
+        &lt;!-- The Y offset of the image relative to the screen origin --&gt;
+        &lt;!-- Data type: Integer --&gt;
+        &lt;!-- Min value: 0 (inclusive) --&gt;
+        &lt;!-- Max value: 65535 (inclusive) --&gt;
+      &lt;!ATTLIST &#34;ImageDescriptor&#34; &#34;imageWidth&#34; #CDATA #REQUIRED&gt;
+        &lt;!-- The width of the image --&gt;
+        &lt;!-- Data type: Integer --&gt;
+        &lt;!-- Min value: 1 (inclusive) --&gt;
+        &lt;!-- Max value: 65535 (inclusive) --&gt;
+      &lt;!ATTLIST &#34;ImageDescriptor&#34; &#34;imageHeight&#34; #CDATA #REQUIRED&gt;
+        &lt;!-- The height of the image --&gt;
+        &lt;!-- Data type: Integer --&gt;
+        &lt;!-- Min value: 1 (inclusive) --&gt;
+        &lt;!-- Max value: 65535 (inclusive) --&gt;
+      &lt;!ATTLIST &#34;ImageDescriptor&#34; &#34;interlaceFlag&#34; (&#34;TRUE&#34; | &#34;FALSE&#34;)
+         #REQUIRED&gt;
+        &lt;!-- True if the image is stored using interlacing --&gt;
+
+    &lt;!ELEMENT &#34;LocalColorTable&#34; (ColorTableEntry)*&gt;
+      &lt;!-- The local color table --&gt;
+      &lt;!-- Min children: 2 --&gt;
+      &lt;!-- Max children: 256 --&gt;
+      &lt;!ATTLIST &#34;LocalColorTable&#34; &#34;sizeOfLocalColorTable&#34; (&#34;2&#34; | 
+        &#34;4&#34; | &#34;8&#34; | &#34;16&#34; | &#34;32&#34; | &#34;64&#34; | &#34;128&#34; | &#34;256&#34;) #REQUIRED&gt;
+        &lt;!-- The number of entries in the local color table --&gt;
+      &lt;!ATTLIST &#34;LocalColorTable&#34; &#34;sortFlag&#34; (&#34;TRUE&#34; | &#34;FALSE&#34;)
+         #REQUIRED&gt;
+        &lt;!-- True if the local color table is sorted by frequency --&gt;
+
+      &lt;!ELEMENT &#34;ColorTableEntry&#34; EMPTY&gt;
+        &lt;!-- A local color table entry --&gt;
+        &lt;!ATTLIST &#34;ColorTableEntry&#34; &#34;index&#34; #CDATA #REQUIRED&gt;
+          &lt;!-- The index of the color table entry --&gt;
+          &lt;!-- Data type: Integer --&gt;
+          &lt;!-- Min value: 0 (inclusive) --&gt;
+          &lt;!-- Max value: 255 (inclusive) --&gt;
+        &lt;!ATTLIST &#34;ColorTableEntry&#34; &#34;red&#34; #CDATA #REQUIRED&gt;
+          &lt;!-- The red value for the color table entry --&gt;
+          &lt;!-- Data type: Integer --&gt;
+          &lt;!-- Min value: 0 (inclusive) --&gt;
+          &lt;!-- Max value: 255 (inclusive) --&gt;
+        &lt;!ATTLIST &#34;ColorTableEntry&#34; &#34;green&#34; #CDATA #REQUIRED&gt;
+          &lt;!-- The green value for the color table entry --&gt;
+          &lt;!-- Data type: Integer --&gt;
+          &lt;!-- Min value: 0 (inclusive) --&gt;
+          &lt;!-- Max value: 255 (inclusive) --&gt;
+        &lt;!ATTLIST &#34;ColorTableEntry&#34; &#34;blue&#34; #CDATA #REQUIRED&gt;
+          &lt;!-- The blue value for the color table entry --&gt;
+          &lt;!-- Data type: Integer --&gt;
+          &lt;!-- Min value: 0 (inclusive) --&gt;
+          &lt;!-- Max value: 255 (inclusive) --&gt;
+
+    &lt;!ELEMENT &#34;GraphicControlExtension&#34; EMPTY&gt;
+      &lt;!-- A graphic control extension --&gt;
+      &lt;!ATTLIST &#34;GraphicControlExtension&#34; &#34;disposalMethod&#34; (&#34;none&#34; | 
+        &#34;doNotDispose&#34; | &#34;restoreToBackgroundColor&#34; | 
+        &#34;restoreToPrevious&#34; | &#34;undefinedDisposalMethod4&#34; | 
+        &#34;undefinedDisposalMethod5&#34; | &#34;undefinedDisposalMethod6&#34; | 
+        &#34;undefinedDisposalMethod7&#34;) #REQUIRED&gt;
+        &lt;!-- The disposal method for this frame --&gt;
+      &lt;!ATTLIST &#34;GraphicControlExtension&#34; &#34;userInputFlag&#34; (&#34;TRUE&#34; | 
+        &#34;FALSE&#34;) #REQUIRED&gt;
+        &lt;!-- True if the frame should be advanced based on user input --&gt;
+      &lt;!ATTLIST &#34;GraphicControlExtension&#34; &#34;transparentColorFlag&#34; (
+        &#34;TRUE&#34; | &#34;FALSE&#34;) #REQUIRED&gt;
+        &lt;!-- True if a transparent color exists --&gt;
+      &lt;!ATTLIST &#34;GraphicControlExtension&#34; &#34;delayTime&#34; #CDATA #REQUIRED&gt;
+        &lt;!-- The time to delay between frames, in hundredths of a second --&gt;
+        &lt;!-- Data type: Integer --&gt;
+        &lt;!-- Min value: 0 (inclusive) --&gt;
+        &lt;!-- Max value: 65535 (inclusive) --&gt;
+      &lt;!ATTLIST &#34;GraphicControlExtension&#34; &#34;transparentColorIndex&#34;
+         #CDATA #REQUIRED&gt;
+        &lt;!-- The transparent color, if transparentColorFlag is true --&gt;
+        &lt;!-- Data type: Integer --&gt;
+        &lt;!-- Min value: 0 (inclusive) --&gt;
+        &lt;!-- Max value: 255 (inclusive) --&gt;
+
+    &lt;!ELEMENT &#34;PlainTextExtension&#34; EMPTY&gt;
+      &lt;!-- A plain text (text grid) extension --&gt;
+      &lt;!ATTLIST &#34;PlainTextExtension&#34; &#34;textGridLeft&#34; #CDATA #REQUIRED&gt;
+        &lt;!-- The X offset of the text grid --&gt;
+        &lt;!-- Data type: Integer --&gt;
+        &lt;!-- Min value: 0 (inclusive) --&gt;
+        &lt;!-- Max value: 65535 (inclusive) --&gt;
+      &lt;!ATTLIST &#34;PlainTextExtension&#34; &#34;textGridTop&#34; #CDATA #REQUIRED&gt;
+        &lt;!-- The Y offset of the text grid --&gt;
+        &lt;!-- Data type: Integer --&gt;
+        &lt;!-- Min value: 0 (inclusive) --&gt;
+        &lt;!-- Max value: 65535 (inclusive) --&gt;
+      &lt;!ATTLIST &#34;PlainTextExtension&#34; &#34;textGridWidth&#34; #CDATA #REQUIRED&gt;
+        &lt;!-- The number of columns in the text grid --&gt;
+        &lt;!-- Data type: Integer --&gt;
+        &lt;!-- Min value: 1 (inclusive) --&gt;
+        &lt;!-- Max value: 65535 (inclusive) --&gt;
+      &lt;!ATTLIST &#34;PlainTextExtension&#34; &#34;textGridHeight&#34; #CDATA #REQUIRED&gt;
+        &lt;!-- The number of rows in the text grid --&gt;
+        &lt;!-- Data type: Integer --&gt;
+        &lt;!-- Min value: 1 (inclusive) --&gt;
+        &lt;!-- Max value: 65535 (inclusive) --&gt;
+      &lt;!ATTLIST &#34;PlainTextExtension&#34; &#34;characterCellWidth&#34; #CDATA
+         #REQUIRED&gt;
+        &lt;!-- The width of a character cell --&gt;
+        &lt;!-- Data type: Integer --&gt;
+        &lt;!-- Min value: 1 (inclusive) --&gt;
+        &lt;!-- Max value: 65535 (inclusive) --&gt;
+      &lt;!ATTLIST &#34;PlainTextExtension&#34; &#34;characterCellHeight&#34; #CDATA
+         #REQUIRED&gt;
+        &lt;!-- The height of a character cell --&gt;
+        &lt;!-- Data type: Integer --&gt;
+        &lt;!-- Min value: 1 (inclusive) --&gt;
+        &lt;!-- Max value: 65535 (inclusive) --&gt;
+      &lt;!ATTLIST &#34;PlainTextExtension&#34; &#34;textForegroundColor&#34; #CDATA
+         #REQUIRED&gt;
+        &lt;!-- The text foreground color index --&gt;
+        &lt;!-- Data type: Integer --&gt;
+        &lt;!-- Min value: 0 (inclusive) --&gt;
+        &lt;!-- Max value: 255 (inclusive) --&gt;
+      &lt;!ATTLIST &#34;PlainTextExtension&#34; &#34;textBackgroundColor&#34; #CDATA
+         #REQUIRED&gt;
+        &lt;!-- The text background color index --&gt;
+        &lt;!-- Data type: Integer --&gt;
+        &lt;!-- Min value: 0 (inclusive) --&gt;
+        &lt;!-- Max value: 255 (inclusive) --&gt;
+
+    &lt;!ELEMENT &#34;ApplicationExtensions&#34; (ApplicationExtension)*&gt;
+      &lt;!-- A set of application extensions --&gt;
+      &lt;!-- Min children: 1 --&gt;
+      &lt;!-- Max children: 2147483647 --&gt;
+
+      &lt;!ELEMENT &#34;ApplicationExtension&#34; EMPTY&gt;
+        &lt;!-- An application extension --&gt;
+        &lt;!-- User object: array of byte --&gt;
+        &lt;!-- Min length: 0 --&gt;
+        &lt;!-- Max length: 2147483647 --&gt;
+        &lt;!ATTLIST &#34;ApplicationExtension&#34; &#34;applicationID&#34; #CDATA
+           #REQUIRED&gt;
+          &lt;!-- The application ID --&gt;
+          &lt;!-- Data type: String --&gt;
+        &lt;!ATTLIST &#34;ApplicationExtension&#34; &#34;authenticationCode&#34; #CDATA
+           #REQUIRED&gt;
+          &lt;!-- The authentication code --&gt;
+          &lt;!-- Data type: String --&gt;
+
+    &lt;!ELEMENT &#34;CommentExtensions&#34; (CommentExtension)*&gt;
+      &lt;!-- A set of comments --&gt;
+      &lt;!-- Min children: 1 --&gt;
+      &lt;!-- Max children: 2147483647 --&gt;
+
+      &lt;!ELEMENT &#34;CommentExtension&#34; EMPTY&gt;
+        &lt;!-- A comment --&gt;
+        &lt;!ATTLIST &#34;CommentExtension&#34; &#34;value&#34; #CDATA #REQUIRED&gt;
+          &lt;!-- The comment --&gt;
+          &lt;!-- Data type: String --&gt;
+]&gt;
+</pre> 
+  <p> <a name="mapping"> </a></p> 
+  <center> 
+   <a name="mapping"> 
+    <table border="1"> 
+     <caption> 
+      <b>Mapping of Standard to GIF Native Stream Metadata</b> 
+     </caption> 
+     <tbody> 
+      <tr> 
+       <th>Standard Metadata Component</th> 
+       <th>GIF Native Stream Metadata Component</th> 
+      </tr> 
+      <tr> 
+       <td>/Chroma/Palette/PaletteEntry@index</td> 
+       <td>/GlobalColorTable/ColorTableEntry@index</td> 
+      </tr> 
+      <tr> 
+       <td>/Chroma/Palette/PaletteEntry@red</td> 
+       <td>/GlobalColorTable/ColorTableEntry@red</td> 
+      </tr> 
+      <tr> 
+       <td>/Chroma/Palette/PaletteEntry@green</td> 
+       <td>/GlobalColorTable/ColorTableEntry@green</td> 
+      </tr> 
+      <tr> 
+       <td>/Chroma/Palette/PaletteEntry@blue</td> 
+       <td>/GlobalColorTable/ColorTableEntry@blue</td> 
+      </tr> 
+      <tr> 
+       <td>/Chroma/BackgroundIndex@value</td> 
+       <td>/GlobalColorTable@backgroundColorIndex</td> 
+      </tr> 
+      <tr> 
+       <td>/Data/BitsPerSample@value</td> 
+       <td>/LogicalScreenDescriptor@colorResolution</td> 
+      </tr> 
+      <tr> 
+       <td>/Dimension/PixelAspectRatio@value</td> 
+       <td>/LogicalScreenDescriptor@pixelAspectRatio</td> 
+      </tr> 
+      <tr> 
+       <td>/Dimension/HorizontalScreenSize@value</td> 
+       <td>/LogicalScreenDescriptor@logicalScreenWidth</td> 
+      </tr> 
+      <tr> 
+       <td>/Dimension/VerticalScreenSize@value</td> 
+       <td>/LogicalScreenDescriptor@logicalScreenHeight</td> 
+      </tr> 
+      <tr> 
+       <td>/Document/FormatVersion@value</td> 
+       <td>/Version@value</td> 
+      </tr> 
+     </tbody> 
+    </table> </a> 
+  </center> 
+  <a name="mapping"> <p></p> <p> </p> 
+   <center> 
+    <table border="1"> 
+     <caption> 
+      <b>Mapping of Standard to GIF Native Image Metadata</b> 
+     </caption> 
+     <tbody> 
+      <tr> 
+       <th>Standard Metadata Component</th> 
+       <th>GIF Native Image Metadata Component</th> 
+      </tr> 
+      <tr> 
+       <td>/Chroma/Palette/PaletteEntry@index</td> 
+       <td>/LocalColorTable/ColorTableEntry@index</td> 
+      </tr> 
+      <tr> 
+       <td>/Chroma/Palette/PaletteEntry@red</td> 
+       <td>/LocalColorTable/ColorTableEntry@red</td> 
+      </tr> 
+      <tr> 
+       <td>/Chroma/Palette/PaletteEntry@green</td> 
+       <td>/LocalColorTable/ColorTableEntry@green</td> 
+      </tr> 
+      <tr> 
+       <td>/Chroma/Palette/PaletteEntry@blue</td> 
+       <td>/LocalColorTable/ColorTableEntry@blue</td> 
+      </tr> 
+      <tr> 
+       <td>/Dimension/HorizontalPixelOffset@value</td> 
+       <td>/ImageDescriptor@imageLeftPosition</td> 
+      </tr> 
+      <tr> 
+       <td>/Dimension/VerticalPixelOffset@value</td> 
+       <td>/ImageDescriptor@imageTopPosition</td> 
+      </tr> 
+      <tr> 
+       <td>/Text/TextEntry@value</td> 
+       <td>/CommentExtensions/CommentExtension@value</td> 
+      </tr> 
+      <tr> 
+       <td>/Transparency/TransparentIndex@value</td> 
+       <td>/GraphicControlExtension@transparentColorIndex (/GraphicControlExtension@transparentColorFlag is also set to &#34;TRUE&#34;)</td> 
+      </tr> 
+     </tbody> 
+    </table> 
+   </center> </a>  
+ 
+</body></html>

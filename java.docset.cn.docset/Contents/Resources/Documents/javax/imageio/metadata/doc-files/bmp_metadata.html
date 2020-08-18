@@ -1,0 +1,157 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><html><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/> 
+  <!--
+Copyright (c) 2003, Oracle and/or its affiliates. All rights reserved.
+ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> 
+  <a class="dashingAutolink" name="autolink-104874"></a><a class="dashAnchor" name="//apple_ref/cpp/Package/BMP%20Metadata%20Format%20Specification"></a><title>BMP Metadata Format Specification</title>
+ </head> 
+ <body> 
+  <center> 
+   <h1> BMP Metadata Format Specification </h1> 
+  </center> The XML schema for the native image metadata format is as follows: 
+  <pre>&lt;?xml version=&#34;1.0&#34; encoding=&#34;UTF-8&#34;?&gt;
+
+&lt;!-- Schema for BMP native image metadata format. --&gt;
+
+&lt;xsd:schema xmlns:xsd=&#34;http://www.w3.org/2001/XMLSchema&#34;
+            xmlns=&#34;http://javax.imageio.plugins&#34;
+            targetNamespace=&#34;http://javax.imageio.plugins&#34;&gt;
+
+  &lt;!-- Coordinates of a point in the CIE XYZ color space. --&gt;
+  &lt;xsd:complexType name=&#34;XYZPoint&#34;&gt;
+    &lt;xsd:sequence&gt;
+      &lt;xsd:element name=&#34;X&#34; type=&#34;xsd:double&#34;/&gt;
+      &lt;xsd:element name=&#34;Y&#34; type=&#34;xsd:double&#34;/&gt;
+      &lt;xsd:element name=&#34;Z&#34; type=&#34;xsd:double&#34;/&gt;
+    &lt;/xsd:sequence&gt;
+  &lt;/xsd:complexType&gt;
+
+  &lt;!-- BMP Schema 1.0 root element. --&gt;
+  &lt;xsd:element name=&#34;javax_imageio_bmp_1.0&#34;&gt;
+    &lt;xsd:complexType&gt;
+      &lt;xsd:sequence&gt;
+
+        &lt;!-- BMP version string --&gt;
+        &lt;xsd:element name=&#34;BMPVersion&#34; type=&#34;xsd:string&#34;/&gt;
+
+        &lt;!-- Bitmap width --&gt;
+        &lt;xsd:element name=&#34;Width&#34; type=&#34;xsd:unsignedInt&#34;/&gt;
+
+        &lt;!-- Bitmap height --&gt;
+        &lt;xsd:element name=&#34;Height&#34; type=&#34;xsd:unsignedInt&#34;/&gt;
+
+        &lt;!-- Number of bits per pixel --&gt;
+        &lt;xsd:element name=&#34;BitsPerPixel&#34; type=&#34;xsd:unsignedShort&#34;/&gt;
+
+        &lt;!-- Compression type --&gt;
+        &lt;xsd:element name=&#34;Compression&#34; type=&#34;xsd:unsignedInt&#34; minOccurs=&#34;0&#34;/&gt;
+
+        &lt;!-- Image size in bytes --&gt;
+        &lt;xsd:element name=&#34;ImageSize&#34; type=&#34;xsd:unsignedInt&#34; minOccurs=&#34;0&#34;/&gt;
+
+	&lt;!-- Resolution in pixels per unit distance --&gt;
+        &lt;xsd:element name=&#34;PixelsPerMeter&#34; minOccurs=&#34;0&#34;&gt;
+	  &lt;xsd:complexType&gt;
+            &lt;xsd:sequence&gt;
+              &lt;xsd:element name=&#34;X&#34; type=&#34;xsd:unsignedInt&#34;/&gt;
+              &lt;xsd:element name=&#34;Y&#34; type=&#34;xsd:unsignedInt&#34;/&gt;
+            &lt;/xsd:sequence&gt;
+	  &lt;/xsd:complexType&gt;
+        &lt;/xsd:element&gt; &lt;!-- PixelsPerMeter --&gt;
+
+
+	&lt;!-- Number of color indexes in the color table actually used --&gt;
+        &lt;xsd:element name=&#34;ColorsUsed&#34; type=&#34;xsd:unsignedInt&#34; minOccurs=&#34;0&#34;/&gt;
+
+	&lt;!-- Number of color indexes considered important for display --&gt;
+        &lt;xsd:element name=&#34;ColorsImportant&#34; type=&#34;xsd:unsignedInt&#34;
+		     minOccurs=&#34;0&#34;/&gt;
+
+	&lt;!-- Color masks; present for BI_BITFIELDS compression only --&gt;
+        &lt;xsd:element name=&#34;Mask&#34; minOccurs=&#34;0&#34;&gt;
+	  &lt;xsd:complexType&gt;
+            &lt;xsd:sequence&gt;
+              &lt;xsd:element name=&#34;Red&#34; type=&#34;xsd:unsignedInt&#34;/&gt;
+              &lt;xsd:element name=&#34;Green&#34; type=&#34;xsd:unsignedInt&#34;/&gt;
+              &lt;xsd:element name=&#34;Blue&#34; type=&#34;xsd:unsignedInt&#34;/&gt;
+              &lt;xsd:element name=&#34;Alpha&#34; type=&#34;xsd:unsignedInt&#34; minOccurs=&#34;0&#34;/&gt;
+            &lt;/xsd:sequence&gt;
+	  &lt;/xsd:complexType&gt;
+	&lt;/xsd:element&gt;
+
+        &lt;!-- Color space  --&gt;
+        &lt;xsd:element name=&#34;ColorSpaceType&#34; type=&#34;xsd:unsignedInt&#34; 
+		     minOccurs=&#34;0&#34;/&gt;
+
+	&lt;!-- CIE XYZ for the LCS_CALIBRATED_RGB color space --&gt;
+        &lt;xsd:element name=&#34;CIEXYZEndpoints&#34; minOccurs=&#34;0&#34;&gt;
+	  &lt;xsd:complexType&gt;
+            &lt;xsd:sequence&gt;
+              &lt;xsd:element name=&#34;Red&#34; type=&#34;XYZPoint&#34;/&gt;
+              &lt;xsd:element name=&#34;Green&#34; type=&#34;XYZPoint&#34;/&gt;
+              &lt;xsd:element name=&#34;Blue&#34; type=&#34;XYZPoint&#34;/&gt;
+            &lt;/xsd:sequence&gt;
+	  &lt;/xsd:complexType&gt;
+        &lt;/xsd:element&gt;
+
+	&lt;!-- Gamma values for the LCS_CALIBRATED_RGB color space --&gt;
+        &lt;xsd:element name=&#34;Gamma&#34; minOccurs=&#34;0&#34;&gt;
+	  &lt;xsd:complexType&gt;
+            &lt;xsd:sequence&gt;
+              &lt;xsd:element name=&#34;Red&#34; type=&#34;xsd:unsignedInt&#34;/&gt;
+              &lt;xsd:element name=&#34;Green&#34; type=&#34;xsd:unsignedInt&#34;/&gt;
+              &lt;xsd:element name=&#34;Blue&#34; type=&#34;xsd:unsignedInt&#34;/&gt;
+            &lt;/xsd:sequence&gt;
+	  &lt;/xsd:complexType&gt;
+	&lt;/xsd:element&gt;
+
+	&lt;!-- Rendering intent --&gt;
+        &lt;xsd:element name=&#34;Intent&#34; type=&#34;xsd:unsignedInt&#34; minOccurs=&#34;0&#34;/&gt;
+
+	&lt;!-- The image colormap --&gt;
+        &lt;xsd:element name=&#34;Palette&#34; minOccurs=&#34;0&#34;&gt;
+	  &lt;xsd:complexType&gt;
+            &lt;xsd:sequence&gt;
+              &lt;xsd:element name=&#34;PaletteEntry&#34;&gt;
+	        &lt;xsd:complexType&gt;
+                  &lt;xsd:sequence&gt;
+                    &lt;xsd:element name=&#34;Red&#34; type=&#34;xsd:unsignedByte&#34;/&gt;
+                    &lt;xsd:element name=&#34;Green&#34; type=&#34;xsd:unsignedByte&#34;/&gt;
+                    &lt;xsd:element name=&#34;Blue&#34; type=&#34;xsd:unsignedByte&#34;/&gt;
+                    &lt;xsd:element name=&#34;Alpha&#34; type=&#34;xsd:unsignedByte&#34; minOccurs=&#34;0&#34;/&gt;
+                  &lt;/xsd:sequence&gt;
+	        &lt;/xsd:complexType&gt;
+              &lt;/xsd:element&gt;
+            &lt;/xsd:sequence&gt;
+	  &lt;/xsd:complexType&gt;
+	&lt;/xsd:element&gt;
+
+      &lt;/xsd:sequence&gt;
+    &lt;/xsd:complexType&gt;
+  &lt;/xsd:element&gt; &lt;!-- bmp_image_1.0 --&gt;
+
+&lt;/xsd:schema&gt;
+</pre> @since 1.5  
+ 
+</body></html>
